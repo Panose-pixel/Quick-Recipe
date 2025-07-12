@@ -1,0 +1,108 @@
+/* Colores */
+:root {
+  --color-fondo: #000000;
+  --color-panel: #262323;
+  --color-input: white;
+  --color-texto: #D8AA6F;
+  --color-boton: #D8AA6F;
+  --color-boton-hover: #c29b69;
+}
+
+input{
+  color: black;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fondo general */
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  min-height: 100vh;
+  background-image: url(/static/IMAGENES/ingrediente_cover.webp);
+  background-size: cover;
+}
+
+/* Barra de navegación */
+.barra_nav_principal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-panel);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+.barra_nav_principal a {
+  color: var(--color-texto);
+  text-decoration: none;
+  margin: 0 1rem;
+  transition: color 0.3s ease;
+}
+
+.barra_nav_principal a:hover {
+  color: var(--color-boton);
+}
+
+.barra_nav_principal_izquierda {
+  display: flex;
+  align-items: center;
+}
+
+/* Contenedor del formulario */
+.registro-container {
+  background-color: var(--color-panel);
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00000088;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+
+input {
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color-input);
+  color: black;
+}
+
+input::placeholder {
+  color: #cccccc;
+}
+
+button {
+  padding: 0.7rem;
+  background-color: var(--color-boton);
+  border: none;
+  border-radius: 5px;
+  color: var(--color-fondo);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--color-boton-hover);
+}

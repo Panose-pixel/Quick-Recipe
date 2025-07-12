@@ -1,0 +1,14 @@
+body{
+  background-image: url(/static/IMAGENES/madera.webp);
+  background-size: cover;
+  text-align: center;
+}
+
+h1, h2{
+  font-family: sans-serif;
+  color: white;
+}
+
+a {
+  color: white;
+}

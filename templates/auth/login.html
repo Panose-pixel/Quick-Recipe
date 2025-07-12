@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='Estilos/login.css') }}">
+</head>
+<body>
+  <div class="barra_nav_principal">
+    <div class="barra_nav_principal_izquierda">
+      <a href="./Registro">Crear una cuenta</a>
+    </div>
+  </div>
+
+  <div class="registro-container">
+    {% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+    <br />
+    {% for message in messages %}
+    <div class="alert alert-primary alert-dismissible" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% endwith %}
+
+
+      <h2>Iniciar Sesión</h2>
+      <form action="/login" method="POST">
+        <label for="username">Ingrese su Usuario</label>
+        <input type="text" id="username" name="username" placeholder="Username">
+
+        <label for="password">Ingrese su Contraseña</label>
+        <input type="password" name="password" placeholder="Password">
+
+        <button type="submit">Iniciar Sesión</button>
+      </form>
+  </div>
+</body>
+</html>
