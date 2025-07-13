@@ -18,26 +18,27 @@ body {
   background-color: #000000;
   height: 61px;
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
   padding: 12px;
-  border-radius: 10px;
+}
+
+.navegacion h2{
+  justify-content:start;
+}
+
+.navegacion a{
+  padding: 20px;
+  text-align: end;
+  color: #d8aa6f;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .logo {
   margin-top: 10px;
   display: flex;
-}
-
-.logo img {
-  height: 50px;
-  width: 160px;
-}
-
-.nav_option {
-  text-decoration: none;
-  color: #d8aa6f;
-  gap: 15px;
 }
 
 .navegacion nav a {

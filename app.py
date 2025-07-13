@@ -1,6 +1,6 @@
 import pymysql
 pymysql.install_as_MySQLdb()
-from flask import Flask, render_template, request, redirect, url_for, session, Response
+from flask import Flask, render_template, request, redirect, url_for, session, Response, abort, current_app
 from flask_mysqldb import MySQL
 
 import requests # esto de de Jhosep
@@ -52,9 +52,28 @@ def login():
 
 
 
-@app.route('/Registro')
+@app.route('/Registro', methods=['GET', 'POST'])
 def registro():
     return render_template('Registro.html')
+
+# Registro conectado con formulario
+@app.route('/crear_registro', methods=['POST'])
+def crear_registro():
+    username = request.form['txtusername']
+    password = request.form['txtpassword']
+
+    cur = mysql.connection.cursor()
+
+    cur.execute('SELECT usuario FROM usuarios WHERE usuario = %s', (username,))
+    usuario_existente = cur.fetchone()
+
+    if usuario_existente:
+        return render_template('Registro.html', mensaje='El usuario que ingresó ya se encuentra registrado')
+
+    cur.execute('INSERT INTO usuarios (usuario, contraseña) VALUES (%s, %s)',(username, password))
+    mysql.connection.commit()
+    return render_template('login.html', mensaje='Usuario y contraseña registrados correctamente')
+
 
 
 
@@ -83,9 +102,9 @@ def QuickRecipe():
 def status_401(error):
     return redirect(url_for('login'))
 
-
+@app.errorhandler(404)
 def status_404(error):
-    return render_template('404.html')
+    return render_template('404.html'), 404
 
 
 if __name__ == '__main__':

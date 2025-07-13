@@ -21,8 +21,10 @@
 
   <body>
     <div class="navegacion">
+      <h2 class="mensaje_de_bienvenida">Bienvenido {{ session['usuario'] }}</h2>
+      <a href="/">
+        <h3>Cerrar Sesión</h3>
       </a>
-      <h2 class="mensaje_de_bienvenida">Bienvenido, {{ session['usuario'] }}</h2>
     </div>
 
 <div class="barra_navegacion-color">

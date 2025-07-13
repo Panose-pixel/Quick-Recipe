@@ -15,20 +15,20 @@
 
   <div class="registro-container">
 
-    {% if mensaje %}
-        <div class="alert alert-danger" role="alert">
-            {{ mensaje}}
-          </div>
-          {% endif %}
 
 
       <h2>Iniciar Sesión</h2>
+      {% if mensaje %}
+        <div class="alert-danger" role="alert">
+            <strong> {{ mensaje}} </strong>
+          </div>
+          {% endif %}
       <form action="/login" method="POST">
         <label for="Usuario">Ingrese su Usuario</label>
-        <input type="text" id="username" name="txtusername" placeholder="Username">
+        <input type="text" name="txtusername" placeholder="Usuario"> <!--El placeholder es el texto que aparece dentro del input-->
 
         <label for="Contraseña">Ingrese su Contraseña</label>
-        <input type="password" name="txtpassword" placeholder="Password">
+        <input type="password" name="txtpassword" placeholder="Contraseña">
 
         <button type="submit">Iniciar Sesión</button>
       </form>

@@ -24,7 +24,7 @@ body {
   background-color: var(--color-fondo);
   color: var(--color-texto);
   min-height: 100vh;
-  background-image: url(/static/IMAGENES/ingrediente_cover2.jpg);
+  background-image: url(/static/IMAGENES/ingrediente_cover.jpg);
   background-size: cover;
 }
 
