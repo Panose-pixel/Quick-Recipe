@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='Estilos/login.css') }}">
+</head>
+<body>
+  <div class="barra_nav_principal">
+    <div class="barra_nav_principal_izquierda">
+      <a href="./Registro">Crear una cuenta</a>
+    </div>
+  </div>
+
+  <div class="registro-container">
+
+    {% if mensaje %}
+        <div class="alert alert-danger" role="alert">
+            {{ mensaje}}
+          </div>
+          {% endif %}
+
+
+      <h2>Iniciar Sesión</h2>
+      <form action="/login" method="POST">
+        <label for="Usuario">Ingrese su Usuario</label>
+        <input type="text" id="username" name="txtusername" placeholder="Username">
+
+        <label for="Contraseña">Ingrese su Contraseña</label>
+        <input type="password" name="txtpassword" placeholder="Password">
+
+        <button type="submit">Iniciar Sesión</button>
+      </form>
+  </div>
+</body>
+</html>

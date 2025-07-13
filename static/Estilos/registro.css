@@ -106,3 +106,8 @@ button {
 button:hover {
   background-color: var(--color-boton-hover);
 }
+
+
+.alert alert-primary alert-dismissible{
+  color: white;
+}

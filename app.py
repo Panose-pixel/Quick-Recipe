@@ -1,57 +1,54 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
-import requests
-from deep_translator import GoogleTranslator
-#
-from flask_wtf.csrf import CSRFProtect
 import pymysql
-pymysql.install_as_MySQLdb()  # Agrega esto
+pymysql.install_as_MySQLdb()
+from flask import Flask, render_template, request, redirect, url_for, session, Response
 from flask_mysqldb import MySQL
-from flask_login import LoginManager, login_user, logout_user, login_required
 
-from config import config
+import requests # esto de de Jhosep
+from deep_translator import GoogleTranslator
 
 
-# Modelos:
-from models.ModelUser import ModelUser
 
-# Entities:
-from models.entities.User import User
+
 
 
 
 app = Flask(__name__)
 
-csrf = CSRFProtect()
-db = MySQL(app)
-login_manager_app = LoginManager(app)
+app.config['MYSQL_HOST']='localhost'
+app.config['MYSQL_USER']='root'
+app.config['MYSQL_PASSWORD']='panose0506'
+app.config['MYSQL_DB']='flask_app'
+app.config['MYSQL_CURSORCLASS']='DictCursor'
+mysql=MySQL(app)
 
-@login_manager_app.user_loader
-def load_user(id):
-    return ModelUser.get_by_id(db, id)
+
+
 
 @app.route('/')
 def index():
     return redirect(url_for('login'))
 
+
 @app.route('/login', methods=['GET','POST'])
 def login():
-    if request.method == 'POST':
-        # print(request.form['username'])
-        # print(request.form['password'])
-        user = User(0, request.form['username'], request.form['password'])
-        logged_user = ModelUser.login(db, user)
-        if logged_user != None:
-            if logged_user.password:
-                login_user(logged_user)
-                return redirect(url_for('QuickRecipe'))
-            else:
-                flash("La contraseña que ingresó no es correcta")
-                return render_template('auth/login.html')
+    if request.method == 'POST' and 'txtusername' in request.form and 'txtpassword' in request.form:
+        _username = request.form['txtusername']
+        _password = request.form['txtpassword']
+
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM usuarios WHERE usuario = %s AND contraseña = %s', (_username, _password))
+        account = cur.fetchone()
+
+        if account:
+            session['logueado'] = True
+            session['id'] = account.get('id')
+            nombre = account.get('usuario', _username)
+            session['usuario'] = nombre
+            return redirect(url_for('QuickRecipe'))
+        
         else:
-            flash("Usuario no encontrado")
-            return render_template('auth/login.html')
-    else:
-        return render_template('auth/login.html')
+            return render_template("login.html", mensaje="Usuario o contraseña incorrectos")
+    return render_template("login.html")
 
 
 
@@ -59,15 +56,10 @@ def login():
 def registro():
     return render_template('Registro.html')
 
-@app.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('login'))
-
 
 
 @app.route('/QuickRecipe', methods=["GET", "POST"])
-def index2():
+def QuickRecipe():
     recetas = []
     if request.method == "POST":
         ingrediente = request.form.get("ingrediente")
@@ -87,11 +79,6 @@ def index2():
 
 
 
-@app.route('/protected')
-@login_required
-def protected():
-    return "<h1>Esta es una vista protegida, solo para usuarios autenticados.</h1>"
-
 
 def status_401(error):
     return redirect(url_for('login'))
@@ -102,9 +89,6 @@ def status_404(error):
 
 
 if __name__ == '__main__':
-    app.config.from_object(config['development'])
-    csrf.init_app(app)
-    app.register_error_handler(401, status_401)
-    app.register_error_handler(404, status_404)
-    app.run()
+    app.secret_key = "pinchellave"
+    app.run(debug=True, threaded=True)
 
