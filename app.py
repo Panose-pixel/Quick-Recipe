@@ -2,6 +2,8 @@ import pymysql
 pymysql.install_as_MySQLdb()
 from flask import Flask, render_template, request, redirect, url_for, session, Response, abort, current_app
 from flask_mysqldb import MySQL
+from functools import wraps
+
 
 import requests # esto de de Jhosep
 from deep_translator import GoogleTranslator
@@ -22,6 +24,15 @@ app.config['MYSQL_CURSORCLASS']='DictCursor'
 mysql=MySQL(app)
 
 
+
+# Decorador para verificar si el usuario está logueado
+def login_requerido(f):
+    @wraps(f)
+    def decorada(*args, **kwargs):
+        if not session.get('logueado'):
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorada
 
 
 @app.route('/')
@@ -78,6 +89,7 @@ def crear_registro():
 
 
 @app.route('/QuickRecipe', methods=["GET", "POST"])
+@login_requerido
 def QuickRecipe():
     recetas = []
     if request.method == "POST":
@@ -110,4 +122,3 @@ def status_404(error):
 if __name__ == '__main__':
     app.secret_key = "pinchellave"
     app.run(debug=True, threaded=True)
-
