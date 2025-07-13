@@ -47,6 +47,11 @@ body {
   }
 }
 
+.mensaje_de_bienvenida{
+  color : #d8aa6f;
+  font-family:serif;
+}
+
 /* PAGINA PRINCIPAL */
 
 .barra_navegacion-color {
