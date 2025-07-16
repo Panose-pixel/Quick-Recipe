@@ -109,6 +109,32 @@ def QuickRecipe():
     return render_template("Mipgn.html", recetas=recetas)
 
 
+@app.route('/comentarios', methods=['GET', 'POST'])
+def comentarios():
+
+    cur = mysql.connection.cursor()
+
+    if request.method == 'POST':
+        comentario = request.form.get('comentario')
+        usuario_id = session.get('id')
+        usuario = session.get('usuario')
+
+        if comentario:
+            cur.execute('INSERT INTO comentarios (usuario_id, usuario, comentario) VALUES (%s, %s, %s)', (usuario_id, usuario, comentario))
+            mysql.connection.commit()
+            mensaje = "Comentario enviado correctamente, gracias por ayudarnos a mejorar"
+            return redirect(url_for('comentarios'))
+
+    # Obtener comentarios con nombre del usuario
+    cur.execute('''
+        SELECT comentarios.comentario, usuarios.usuario 
+        FROM comentarios 
+        JOIN usuarios ON comentarios.usuario_id = usuarios.id
+    ''')
+    comentarios = cur.fetchall()
+
+    return render_template('comentarios.html', comentarios=comentarios)
+
 
 
 def status_401(error):

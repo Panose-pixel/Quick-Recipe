@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentarios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Estilos/comentarios.css') }}">
+</head>
+<body>
+    <div class="barra_nav_principal">
+        <div class="barra_nav_principal_izquierda">
+            <a href="./QuickRecipe">
+                <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/back.png" alt="back"/>
+            </a>
+        </div>
+    </div>
+    <div class="registro-container">
+
+
+
+      <h2>Coméntanos tu experiencia</h2>
+      {% if mensaje %}
+        <div class="alert-danger" role="alert">
+            <strong> {{ mensaje}} </strong>
+          </div>
+          {% endif %}
+      <form action="/comentarios" method="POST">
+        <label for="Usuario">Danos tu comentario</label>
+        <textarea name="comentario" placeholder="Comenta"></textarea> <!--El placeholder es el texto que aparece dentro del input-->
+
+        <button type="submit">Enviar</button>
+      </form>
+  </div>
+</body>
+</html>

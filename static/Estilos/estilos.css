@@ -448,3 +448,35 @@ svg {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
+
+.footer-container {
+  background-color: #493323ae;
+  padding: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+footer {
+  color: #d8aa6f;
+  font-family: serif;
+  font-size: 16px;
+  text-align: center;;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.comentarios {
+  color : #d8aa6f;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.comentarios a {
+  color: #d8aa6f;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
