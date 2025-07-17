@@ -122,8 +122,7 @@ def comentarios():
         if comentario:
             cur.execute('INSERT INTO comentarios (usuario_id, usuario, comentario) VALUES (%s, %s, %s)', (usuario_id, usuario, comentario))
             mysql.connection.commit()
-            mensaje = "Comentario enviado correctamente, gracias por ayudarnos a mejorar"
-            return redirect(url_for('comentarios'))
+            return render_template('comentarios.html', mensaje='Comentario enviado correctamente, gracias por ayudarnos a mejorar 💖')
 
     # Obtener comentarios con nombre del usuario
     cur.execute('''
