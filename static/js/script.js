@@ -25,11 +25,16 @@ document.getElementById("btnMenu").addEventListener("click",
   
     });
 
-    function mostrarInstrucciones(elemento) {
-    document.querySelectorAll('.receta').forEach(el => {
-        if (el !== elemento) el.classList.remove('activa');
+
+  function mostrarInstrucciones(elemento) {
+    // Oculta todas las instrucciones
+    document.querySelectorAll(".receta .instrucciones").forEach(el => {
+      if (el !== elemento.querySelector('.instrucciones')) {
+        el.classList.add("oculto");
+      }
     });
 
-    elemento.classList.toggle('activa');}
-
-    
+    // Alterna la actual
+    const actual = elemento.querySelector(".instrucciones");
+    actual.classList.toggle("oculto");
+  }

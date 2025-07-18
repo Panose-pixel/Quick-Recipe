@@ -27,30 +27,35 @@
       </a>
     </div>
 
-<div class="barra_navegacion-color">
-  <div class="barra_navegacion">
-    <div class="circulodellogo">
-      <div class="Rotacion">
-        <div class="quick2">Quick</div>
-        <div class="recipe2">Recipe</div>
+    <div class="barra_navegacion-color">
+      <div class="barra_navegacion">
+        <div class="circulodellogo">
+          <div class="Rotacion">
+            <div class="quick2">Quick</div>
+            <div class="recipe2">Recipe</div>
+          </div>
+        </div>
+        <div class="acciones-navegacion">
+          <button class="btnMenu" id="btnMenu">
+            <div class="fancy">
+              <span class="top-key"></span>
+              <span class="text">DESCUBRE</span>
+              <span class="bottom-key-1"></span>
+              <span class="bottom-key-2"></span>
+            </div>
+          </button>
+
+          <form method="POST" action="/QuickRecipe">
+              <input
+                class="barrabusqueda"
+                name="ingrediente"
+                type="ingrediente"
+                placeholder="Escribe un ingrediente"
+              />
+          </form>
+        </div>
       </div>
     </div>
-    <div class="acciones-navegacion">
-      <button class="btnMenu" id="btnMenu">
-        DESCUBRE
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
-            class="bi bi-basket-fill" viewBox="0 0 16 16">
-                <path class="imagen-boton"
-                d="M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0z" />
-        </svg>
-      </button>
-
-      <form method="POST" action="/QuickRecipe">
-        <input class="busqueda" type="text" name="ingrediente" placeholder="Escribe un ingrediente" />
-      </form>
-    </div>
-  </div>
-</div>
     <div class="fondo">
       <div class="cuadrologo">
         <div>
@@ -79,24 +84,27 @@
       </form>
     </div>
 
-    {% if recetas %}
-    <div class="ordenRecetas">
-      {% for receta in recetas %}
-      <div class="receta" onclick="mostrarInstrucciones(this)">
-        <h2>{{ receta.strMeal }}</h2>
-        <img class="imgRecetas" src="{{ receta.strMealThumb }}"/>
-        <p>Categoría: {{ receta.strCategory }}</p>
-        <p class="instrucciones">
-          Instrucciones: <br />
-          {{ receta.strInstructions }}
-        </p>
-      </div>
-      {% endfor %}
+ {% if recetas %}
+<div class="ordenRecetas">
+  {% for receta in recetas %}
+  <div class="receta" onclick="mostrarInstrucciones(this)">
+    <div class="contenido">
+      <h2>{{ receta.strMeal }}</h2>
+      <img class="imgRecetas" src="{{ receta.strMealThumb }}" />
+      <p>Categoría: {{ receta.strCategory }}</p>
     </div>
-    {% else %}
-    <p>No se encontraron recetas.</p>
-    {% endif %}
-
+    <div class="instrucciones oculto">
+      <strong>Instrucciones:</strong>
+      <div class="scroll-texto">
+        {{ receta.strInstructions }}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p>No se encontraron recetas.</p>
+{% endif %}
     <div class="detalles-Programadores">
       <div class="container">
         <div class="card">
@@ -138,10 +146,12 @@
     </div>
     <div class="comentarios">
       <h3>
-        <a href="/comentarios">Déjanos un comentario AQUÍ para ayudarnos a mejorar</a>
+        <a href="/comentarios"
+          >Déjanos un comentario AQUÍ para ayudarnos a mejorar</a
+        >
       </h3>
     </div>
-  <hr>
+    <hr />
     <div clas="footer-container">
       <footer class="footer">
         <p>© 2023 QuickRecipe. Todos los derechos reservados.</p>
