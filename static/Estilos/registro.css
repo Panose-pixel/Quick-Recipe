@@ -111,3 +111,19 @@ button:hover {
 .alert alert-primary alert-dismissible{
   color: white;
 }
+
+.footer-container {
+  background-color: #493323ae;
+  padding: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+footer {
+  color: #d8aa6f;
+  font-family: serif;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

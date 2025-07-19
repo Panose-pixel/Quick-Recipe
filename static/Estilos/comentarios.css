@@ -75,19 +75,20 @@ body {
 
   width: 2px;
   height: 90%;
-  background-color: white; /* Color que combine con tu diseño */
+  background-color: #D8AA6F; /* Color que combine con tu diseño */
   border: 0.1rem solid white;
   margin: 2rem auto;
+  box-shadow: 0 0 20px #cdad82;
 }
 
 .comentarios-container {
-  height: 280px;
+  height: 260px;
   width: 350px;
   background-color: var(--color-panel);
   margin: 2rem auto;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 0 10px #00000088;
+  box-shadow: 0 0 10px #cdad82;
 }
 
 .comentario {
@@ -154,4 +155,20 @@ form textarea {
 
 .barra_nav_principal_izquierda a {
     padding: none;
+}
+
+.footer-container {
+  background-color: #493323ae;
+  padding: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+footer {
+  color: #d8aa6f;
+  font-family: serif;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

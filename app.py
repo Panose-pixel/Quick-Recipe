@@ -116,7 +116,7 @@ def comentarios():
     cur = mysql.connection.cursor()
 
     if request.method == 'POST':
-        comentario = request.form.get('comentario')
+        comentario = request.form.get('comentario').capitalize() # Coloca en mayúscula la primera letra del comentario
         usuario_id = session.get('id')
         usuario = session.get('usuario')
         fecha_comentario = datetime.datetime.now()
@@ -132,7 +132,8 @@ def comentarios():
             JOIN usuarios ON comentarios.usuario_id = usuarios.id
             ''')
             comentarios = cur.fetchall()
-        return render_template('comentarios.html', mensaje='Comentario enviado correctamente, gracias por ayudarnos a mejorar 💖', comentarios=comentarios)
+        return redirect(url_for('comentarios',  mensaje='Comentario enviado correctamente, gracias por ayudarnos a mejorar 💖'))
+    #render_template('comentarios.html', mensaje='Comentario enviado correctamente, gracias por ayudarnos a mejorar 💖', comentarios=comentarios)
 
     # Obtener comentarios con nombre del usuario
     cur.execute('''
