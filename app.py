@@ -3,6 +3,7 @@ pymysql.install_as_MySQLdb()
 from flask import Flask, render_template, request, redirect, url_for, session, Response, abort, current_app
 from flask_mysqldb import MySQL
 from functools import wraps
+import datetime
 
 
 import requests # esto de de Jhosep
@@ -118,15 +119,24 @@ def comentarios():
         comentario = request.form.get('comentario')
         usuario_id = session.get('id')
         usuario = session.get('usuario')
+        fecha_comentario = datetime.datetime.now()
+        fecha_comentario = fecha_comentario.strftime('%Y-%m-%d %H:%M:%S')
 
         if comentario:
-            cur.execute('INSERT INTO comentarios (usuario_id, usuario, comentario) VALUES (%s, %s, %s)', (usuario_id, usuario, comentario))
+            cur.execute('INSERT INTO comentarios (usuario_id, usuario, comentario, fecha) VALUES (%s, %s, %s, %s)', (usuario_id, usuario, comentario, fecha_comentario))
             mysql.connection.commit()
-            return render_template('comentarios.html', mensaje='Comentario enviado correctamente, gracias por ayudarnos a mejorar 💖')
+
+            cur.execute('''
+            SELECT comentarios.comentario, usuarios.usuario, comentarios.fecha
+            FROM comentarios 
+            JOIN usuarios ON comentarios.usuario_id = usuarios.id
+            ''')
+            comentarios = cur.fetchall()
+        return render_template('comentarios.html', mensaje='Comentario enviado correctamente, gracias por ayudarnos a mejorar 💖', comentarios=comentarios)
 
     # Obtener comentarios con nombre del usuario
     cur.execute('''
-        SELECT comentarios.comentario, usuarios.usuario 
+        SELECT comentarios.comentario, usuarios.usuario, comentarios.fecha 
         FROM comentarios 
         JOIN usuarios ON comentarios.usuario_id = usuarios.id
     ''')

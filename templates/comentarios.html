@@ -10,26 +10,37 @@
     <div class="barra_nav_principal">
         <div class="barra_nav_principal_izquierda">
             <a href="./QuickRecipe">
-                <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/back.png" alt="back"/>
+              <div class="flecha">&lsaquo;</div>
             </a>
         </div>
     </div>
-    <div class="registro-container">
-
-
-
-      <h2>Cuéntanos tu experiencia</h2>
-      {% if mensaje %}
-        <div class="alert-danger" role="alert">
-            <strong> {{ mensaje}} </strong>
-          </div>
+    <section class="comentarios">
+      <div class="comentarios-container">
+        <h2>Cuéntanos tu experiencia</h2>
+        {% if mensaje %}
+          <div class="alert-danger" role="alert">
+              <strong> {{ mensaje}} </strong>
+            </div>
           {% endif %}
-      <form action="/comentarios" method="POST">
-        <label for="Usuario">Danos tu comentario</label>
-        <textarea name="comentario" placeholder="Comenta"></textarea> <!--El placeholder es el texto que aparece dentro del input-->
+       <form action="/comentarios" method="POST">
+          <label for="Usuario">Danos tu comentario</label>
+          <textarea name="comentario" placeholder="Comenta"></textarea> <!--El placeholder es el texto que aparece dentro del input-->
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
 
-        <button type="submit">Enviar</button>
-      </form>
+      <hr class="linea-separadora">
+
+        <div class="lista-comentarios">
+          <h2 style="color: white;">Comentarios de Nuestros Usuarios</h2>
+          {% for comentario in comentarios %}
+            <div class="comentario">
+              <p><strong>{{ comentario.usuario }}:</strong> <span style="color: white;">{{ comentario.comentario }}</span></p>
+              <p style="font-size: 0.8rem;";">Fecha de publicacion: {{ comentario.fecha }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
   </div>
 </body>
 </html>

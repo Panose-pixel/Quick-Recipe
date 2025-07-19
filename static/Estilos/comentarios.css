@@ -34,7 +34,8 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: var(--color-panel);
-  padding: 1rem 2rem;
+  padding: 0.5rem 0.5rem;
+  padding-bottom: 0.5rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
 }
 
@@ -54,15 +55,49 @@ body {
   align-items: center;
 }
 
+.flecha{
+  font-size: 2.3rem;
+}
+
 /* Contenedor del formulario */
-.registro-container {
+
+.comentarios{
+  display: grid;
+  grid-template-columns: 40% 10% 50%; /* Esta es la distancia de las columnas del display-grid  */
+}
+
+.lista-comentarios {
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+.linea-separadora {
+
+  width: 2px;
+  height: 90%;
+  background-color: white; /* Color que combine con tu diseño */
+  border: 0.1rem solid white;
+  margin: 2rem auto;
+}
+
+.comentarios-container {
+  height: 280px;
+  width: 350px;
   background-color: var(--color-panel);
-  max-width: 400px;
-  margin: 3rem auto;
+  margin: 2rem auto;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 0 10px #00000088;
 }
+
+.comentario {
+  margin-bottom: 1rem;
+  padding: 0.7rem;
+  border-radius: 5px;
+  background-color: #262323;
+}
+
+/*Aqui termina la seccion de comentarios*/
 
 h2 {
   text-align: center;
