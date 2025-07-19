@@ -120,7 +120,7 @@ def comentarios():
         usuario_id = session.get('id')
         usuario = session.get('usuario')
         fecha_comentario = datetime.datetime.now()
-        fecha_comentario = fecha_comentario.strftime('%Y-%m-%d %H:%M:%S')
+        fecha_comentario = fecha_comentario.strftime('%Y-%m-%d %H:%M:%S') #fecha del comentario
 
         if comentario:
             cur.execute('INSERT INTO comentarios (usuario_id, usuario, comentario, fecha) VALUES (%s, %s, %s, %s)', (usuario_id, usuario, comentario, fecha_comentario))
