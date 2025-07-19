@@ -94,7 +94,7 @@ def crear_registro():
 def QuickRecipe():
     recetas = []
     if request.method == "POST":
-        ingrediente = GoogleTranslator(source='es', target='en').translate(request.form.get("ingrediente"))
+        ingrediente = GoogleTranslator(source='es', target='en').translate(request.form.get("ingrediente"))# ingles a español
         url = f"https://www.themealdb.com/api/json/v1/1/search.php?s={ingrediente}"
         response = requests.get(url)
         data = response.json()
