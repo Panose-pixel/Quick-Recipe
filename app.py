@@ -1,6 +1,6 @@
 import pymysql
 pymysql.install_as_MySQLdb()
-from flask import Flask, render_template, request, redirect, url_for, session, Response, abort, current_app
+from flask import Flask, render_template, request, redirect, url_for, session, flash, get_flashed_messages
 from flask_mysqldb import MySQL
 from functools import wraps
 import datetime
@@ -132,9 +132,8 @@ def comentarios():
             JOIN usuarios ON comentarios.usuario_id = usuarios.id
             ''')
             comentarios = cur.fetchall()
-        return redirect(url_for('comentarios',  mensaje='Comentario enviado correctamente, gracias por ayudarnos a mejorar 💖'))
-    #render_template('comentarios.html', mensaje='Comentario enviado correctamente, gracias por ayudarnos a mejorar 💖', comentarios=comentarios)
-
+            flash('Comentario enviado correctamente, gracias por ayudarnos a mejorar 💖')
+        return redirect(url_for('comentarios'))
     # Obtener comentarios con nombre del usuario
     cur.execute('''
         SELECT comentarios.comentario, usuarios.usuario, comentarios.fecha 

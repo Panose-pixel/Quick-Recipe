@@ -82,7 +82,8 @@ body {
 }
 
 .comentarios-container {
-  height: 260px;
+  height: 16.8rem;
+  max-height: 285px;
   width: 350px;
   background-color: var(--color-panel);
   margin: 2rem auto;
