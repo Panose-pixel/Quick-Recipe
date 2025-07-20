@@ -9,7 +9,7 @@
 <body>
   <div class="barra_nav_principal">
     <div class="barra_nav_principal_izquierda">
-      <a href="/">Iniciar Sesión</a>
+      <a class="subrayado" href="/login">Iniciar Sesión</a>
     </div>
   </div>
 
@@ -22,7 +22,7 @@
     {% endif %}
     
     <form action="/crear_registro" method="POST">
-      <label for="Usuario">Usuario</label>
+      <label for="Usuario">Usuario (usa tu nombre real)</label>
       <input type="text" name="txtusername" placeholder="Usuario" required>
 
       <label for="Contraseña">Contraseña</label>

@@ -72,13 +72,12 @@ body {
 }
 
 .linea-separadora {
-
   width: 2px;
   height: 90%;
-  background-color: #D8AA6F; /* Color que combine con tu diseño */
-  border: 0.1rem solid white;
+  background-color: #D8AA6F;
+  border: 0.122rem solid white;
   margin: 2rem auto;
-  box-shadow: 0 0 20px #cdad82;
+  box-shadow: 0 0 22px #cdad82;
 }
 
 .comentarios-container {
@@ -93,6 +92,8 @@ body {
 }
 
 .comentario {
+  margin: 0 auto;
+  max-width: 350px;
   margin-bottom: 1rem;
   padding: 0.7rem;
   border-radius: 5px;
@@ -172,4 +173,10 @@ footer {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.titulo_seccioncomentarios {
+  color: white;
+  font-family: "Winky Rough", sans-serif;
+  font-optical-sizing: auto;
 }

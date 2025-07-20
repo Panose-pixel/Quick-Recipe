@@ -44,7 +44,7 @@ def index():
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == 'POST' and 'txtusername' in request.form and 'txtpassword' in request.form:
-        _username = request.form['txtusername']
+        _username = request.form['txtusername'].capitalize()
         _password = request.form['txtpassword']
 
         cur = mysql.connection.cursor()
@@ -71,7 +71,7 @@ def registro():
 # Registro conectado con formulario
 @app.route('/crear_registro', methods=['POST'])
 def crear_registro():
-    username = request.form['txtusername']
+    username = request.form['txtusername'].capitalize()
     password = request.form['txtpassword']
 
     cur = mysql.connection.cursor()
