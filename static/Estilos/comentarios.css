@@ -8,7 +8,7 @@
   --color-boton-hover: #c29b69;
 }
 
-input{
+input {
   color: black;
 }
 
@@ -21,6 +21,8 @@ input{
 
 /* Fondo general */
 body {
+  display: flex;
+  flex-direction: column;
   background-color: var(--color-fondo);
   color: var(--color-texto);
   min-height: 100vh;
@@ -55,20 +57,28 @@ body {
   align-items: center;
 }
 
-.flecha{
+.flecha {
   font-size: 2.3rem;
 }
 
 /* Contenedor del formulario */
 
-.comentarios{
+.comentarios {
   display: grid;
-  grid-template-columns: 40% 10% 50%; /* Esta es la distancia de las columnas del display-grid  */
+  grid-template-columns: 40% 10% 50%;
+  border-bottom: solid white 3px;
 }
 
 .lista-comentarios {
   margin: 0 auto;
+  padding: 30px;
   margin-top: 1rem;
+  margin-bottom: 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 22px #cdad82;
+  border-radius: 10px;
 }
 
 .linea-separadora {
@@ -98,7 +108,13 @@ body {
   padding: 0.7rem;
   border-radius: 5px;
   background-color: #262323;
+  border-radius: 10px;
 }
+
+.Linea-separadora {
+  border-left: solid white 3px;
+}
+
 
 /*Aqui termina la seccion de comentarios*/
 
@@ -156,14 +172,17 @@ form textarea {
 }
 
 .barra_nav_principal_izquierda a {
-    padding: none;
+  padding: none;
 }
 
 .footer-container {
-  background-color: #493323ae;
-  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 22px #cdad82;
+  padding: 10px;
   text-align: center;
-  width: 100%;
+  margin-top: auto;
 }
 
 footer {
@@ -177,6 +196,4 @@ footer {
 
 .titulo_seccioncomentarios {
   color: white;
-  font-family: "Winky Rough", sans-serif;
-  font-optical-sizing: auto;
 }
