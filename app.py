@@ -138,7 +138,7 @@ def comentarios():
     cur.execute('''
         SELECT comentarios.comentario, usuarios.usuario, comentarios.fecha 
         FROM comentarios 
-        JOIN usuarios ON comentarios.usuario_id = usuarios.id
+        JOIN usuarios ON comentarios.usuario_id = usuarios.id order by comentarios.fecha DESC 
     ''')
     comentarios = cur.fetchall()
 
