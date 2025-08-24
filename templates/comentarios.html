@@ -19,17 +19,16 @@
     </div>
     <section class="comentarios">
       <div class="comentarios-container">
-        <h2>Cuéntanos tu experiencia</h2>
+        <h2 style="margin-bottom: 0;">Cuéntanos tu experiencia</h2>
         {% with mensajes = get_flashed_messages() %}
           {% if mensajes %}
-              <br>
             {% for m in mensajes %}
               <strong>{{ m }}</strong>
              {% endfor %}
-          {% else %}
-
+             
           {% endif %}
         {% endwith %}
+        <br><br>
        <form action="/comentarios" method="POST">
           <label for="Usuario">Danos tu comentario</label>
           <textarea name="comentario" placeholder="Comenta"></textarea> <!--El placeholder es el texto que aparece dentro del input-->
