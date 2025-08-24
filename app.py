@@ -1,6 +1,6 @@
 import pymysql
 pymysql.install_as_MySQLdb()
-from flask import Flask, render_template, request, redirect, url_for, session, flash, get_flashed_messages
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_mysqldb import MySQL
 from functools import wraps
 import datetime

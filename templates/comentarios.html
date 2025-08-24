@@ -22,9 +22,12 @@
         <h2>Cuéntanos tu experiencia</h2>
         {% with mensajes = get_flashed_messages() %}
           {% if mensajes %}
+              <br>
             {% for m in mensajes %}
               <strong>{{ m }}</strong>
              {% endfor %}
+          {% else %}
+
           {% endif %}
         {% endwith %}
        <form action="/comentarios" method="POST">
@@ -47,10 +50,12 @@
         </div>
       </section>
   </div>
-  <hr />
+  
+
+  
     <div clas="footer-container">
       <footer class="footer">
-        <p>© 2023 QuickRecipe. Todos los derechos reservados.</p>
+        <p>© 2025 QuickRecipe. Todos los derechos reservados.</p>
         <p>Desarrollado por Jhosef Alejandro y Juanangel Alvarado</p>
       </footer>
     </div>

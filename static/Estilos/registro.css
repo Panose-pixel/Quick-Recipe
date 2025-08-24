@@ -5,26 +5,27 @@
   --color-input: white;
   --color-texto: #D8AA6F;
   --color-boton: #D8AA6F;
-  --color-boton-hover: #c29b69;
+  --color-boton-hover: #bf9154;
 }
 
 input{
   color: black;
 }
 
-/* Reset */
+
 * {
-  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 /* Fondo general */
 body {
+  overflow-y: hidden;
+  margin: 0;
   background-color: var(--color-fondo);
   color: var(--color-texto);
   min-height: 100vh;
-  background-image: url(/static/IMAGENES/ingrediente_cover.jpg);
+  background-image: url(/static/IMAGENES/ingrediente_cover.webp);
   background-size: cover;
 }
 
@@ -67,6 +68,7 @@ body {
 h2 {
   text-align: center;
   margin-bottom: 1.5rem;
+  margin-top: 0;
 }
 
 form {
@@ -107,29 +109,29 @@ button:hover {
   background-color: var(--color-boton-hover);
 }
 
-
-.alert alert-primary alert-dismissible{
-  color: white;
-}
-
 .footer-container {
+  margin-bottom: 0%;
   background-color: #493323ae;
   padding: 30px;
   text-align: center;
   width: 100%;
 }
 
+
 footer {
+  box-shadow: inset 0 8px 10px -6px #231e1e;
+  margin-top: 10px;
+  background-color: #262323;
+  padding: 5px;
   color: #d8aa6f;
   font-family: serif;
   font-size: 16px;
   text-align: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 .subrayado {
   &:hover {
-    text-decoration: underline;
+    text-decoration: underline
   }
 }
