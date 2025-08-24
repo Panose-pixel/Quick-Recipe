@@ -28,6 +28,12 @@ body {
   background-size: cover;
 }
 
+.contenedor_principal{
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
 /* Barra de navegación */
 .barra_nav_principal {
   display: flex;
@@ -64,7 +70,7 @@ body {
 
 .comentarios{
   margin:0 auto;
-  max-width: 80%;
+  max-width: 85%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(18.6rem, 1fr));
   align-items: start; /* evita que los hijos se estiren */
@@ -87,7 +93,7 @@ body {
 }
 
 .comentarios-container {
-  width: 350px;
+  width: 24rem;
   background-color: var(--color-panel);
   margin: 2rem auto;
   padding: 2rem;
@@ -96,7 +102,6 @@ body {
 
   height: auto;       /* que se ajuste automáticamente */
   min-height: 200px;  /* si quieres que tenga un mínimo */
-  width: fit-content; /* opcional si quieres que se ajuste al contenido */
   max-width: 600px;   /* límite para pantallas grandes */
 }
 
@@ -113,11 +118,12 @@ textarea {
 
 .comentario {
   margin: 0 auto;
-  max-width: 350px;
+  max-width: 28rem;
   margin-bottom: 1rem;
   padding: 0.7rem;
   border-radius: 5px;
   background-color: #262323;
+  box-shadow: white 0px 1px 2px;
 }
 
 /*Aqui termina la seccion de comentarios*/
@@ -191,9 +197,9 @@ form textarea {
 
 footer {
   box-shadow: inset 0 8px 10px -6px #231e1e;
-  margin-top: 2.7rem;
+  margin-top: 10px;
   background-color: #262323;
-  padding: 20px;
+  padding: 1.4rem;
   color: #d8aa6f;
   font-family: serif;
   font-size: 16px;
@@ -205,4 +211,23 @@ footer {
   color: white;
   font-family: "Winky Rough", sans-serif;
   font-optical-sizing: auto;
+}
+
+@media (max-width: 768px) {
+  section {
+    width: 100%;
+  }
+
+  .comentarios-container {
+    width: 95%;
+    padding: 1.3rem;
+  }
+
+  .linea-separadora {
+    height: 4px;
+    width: 93%;
+    color: white;
+    margin: 1rem auto;
+    background-color: white;
+  }
 }

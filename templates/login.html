@@ -7,43 +7,44 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='Estilos/login.css') }}">
 </head>
 <body>
-  <div class="barra_nav_principal">
-    <div class="barra_nav_principal_izquierda">
-      <a class="subrayado" href="./Registro">Crear una cuenta gratis</a>
-    </div>
-  </div>
+  <div class="contenedor_principal">
+    <header>
+      <div class="barra_nav_principal">
+        <div class="barra_nav_principal_izquierda">
+          <a class="subrayado" href="./Registro">Crear una cuenta gratis</a>
+        </div>
+      </div>
+    </header>
 
-  <div class="registro-container">
+    <main>
+      <div class="registro-container">
 
-
-
-      <h2>Iniciar Sesión</h2>
+        <h2>Iniciar Sesión</h2>
       
-      {% if mensaje %}
-        <div class="alert-danger" role="alert">
-            <strong> {{ mensaje}} </strong>
+        {% if mensaje %}
+          <div class="alert-danger" role="alert">
+              <strong> {{ mensaje}} </strong>
           </div>
-          {% endif %}
-      <form action="/login" method="POST">
-        <label for="Usuario">Ingrese su Usuario</label>
-        <input type="text" name="txtusername" placeholder="Usuario"> <!--El placeholder es el texto que aparece dentro del input-->
+            {% endif %}
+        <form action="/login" method="POST">
+          <label for="Usuario">Ingrese su Usuario</label>
+          <input type="text" name="txtusername" placeholder="Usuario"> <!--El placeholder es el texto que aparece dentro del input-->
 
-        <label for="Contraseña">Ingrese su Contraseña</label>
-        <input type="password" name="txtpassword" placeholder="Contraseña">
+          <label for="Contraseña">Ingrese su Contraseña</label>
+          <input type="password" name="txtpassword" placeholder="Contraseña">
 
-        <button type="submit">Iniciar Sesión</button>
-      </form>
-  </div>
+          <button type="submit">Iniciar Sesión</button>
+        </form>
 
-  <br>
-
-  <div clas="footer-container">
-    <footer>
-      <p>© 2025 QuickRecipe. Todos los derechos reservados.</p>
-      <p>Desarrollado por Jhosef Alejandro y Juanangel Alvarado</p>
-    </footer>
-  </div>
-  </body>
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+      </div>
+    </main>
+  
+    <div clas="footer-container">
+      <footer>
+        <p>© 2025 QuickRecipe. Todos los derechos reservados.</p>
+        <p>Desarrollado por Jhosef Alejandro y Juanangel Alvarado</p>
+      </footer>
+    </div>
 </body>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </html>

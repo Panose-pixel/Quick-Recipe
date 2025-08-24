@@ -10,55 +10,63 @@
     <link href="https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="barra_nav_principal">
+  <div class="contenedor_principal">
+    <header>
+      <div class="barra_nav_principal">
         <div class="barra_nav_principal_izquierda">
             <a href="./QuickRecipe">
               <div class="flecha">&lsaquo;</div>
             </a>
         </div>
-    </div>
-    <section class="comentarios">
-      <div class="comentarios-container">
-        <h2 style="margin-bottom: 0;">Cuéntanos tu experiencia</h2>
-        {% with mensajes = get_flashed_messages() %}
-          {% if mensajes %}
-            {% for m in mensajes %}
-              <strong>{{ m }}</strong>
-             {% endfor %}
-             
-          {% endif %}
-        {% endwith %}
-        <br><br>
-       <form action="/comentarios" method="POST">
-          <label for="Usuario">Danos tu comentario</label>
-          <textarea name="comentario" placeholder="Comenta"></textarea> <!--El placeholder es el texto que aparece dentro del input-->
-          <button type="submit">Enviar</button>
-        </form>
       </div>
+    </header>
+    
 
-      <hr class="linea-separadora">
+    <main>
+      <section class="comentarios">
+        <div class="comentarios-container">
+          <h2 style="margin-bottom: 0;">Cuéntanos tu experiencia</h2>
+          {% with mensajes = get_flashed_messages() %}
+            {% if mensajes %}
+              {% for m in mensajes %}
+                <strong>{{ m }}</strong>
+               {% endfor %}
 
-        <div class="lista-comentarios">
-          <h2 class="titulo_seccioncomentarios">Observa los Comentarios de Nuestros Usuarios</h2>
-          {% for comentario in comentarios %}
-            <div class="comentario">
-              <p><strong>{{ comentario.usuario }}:</strong> <span style="color: white;">{{ comentario.comentario }}</span></p>
-              <p style="font-size: 0.8rem;";">Fecha de publicacion: {{ comentario.fecha }}</p>
-            </div>
-          {% endfor %}
+            {% endif %}
+          {% endwith %}
+          <br><br>
+         <form action="/comentarios" method="POST">
+            <label for="Usuario">Danos tu comentario</label>
+            <textarea name="comentario" placeholder="Comenta"></textarea> <!--El placeholder es el texto que aparece dentro del input-->
+            <button type="submit">Enviar</button>
+          </form>
         </div>
+
+        <hr class="linea-separadora">
+
+          <div class="lista-comentarios">
+            <h2 class="titulo_seccioncomentarios">Observa los Comentarios de Nuestros Usuarios</h2>
+            {% for comentario in comentarios %}
+              <div class="comentario">
+                <p><strong>{{ comentario.usuario }}:</strong> <span style="color: white;">{{ comentario.comentario }}</span></p>
+                <p style="font-size: 0.8rem;";">Fecha de publicacion: {{ comentario.fecha }}</p>
+              </div>
+            {% endfor %}
+          </div>
       </section>
-  </div>
-  
+    </main>
 
   
     <div clas="footer-container">
-      <footer class="footer">
+      <footer>
         <p>© 2025 QuickRecipe. Todos los derechos reservados.</p>
         <p>Desarrollado por Jhosef Alejandro y Juanangel Alvarado</p>
       </footer>
     </div>
-  </body>
+
+
+  </div>
+</body>
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

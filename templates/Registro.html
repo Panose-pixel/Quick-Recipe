@@ -7,40 +7,45 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='Estilos/registro.css') }}">
 </head>
 <body>
-  <div class="barra_nav_principal">
-    <div class="barra_nav_principal_izquierda">
-      <a class="subrayado" href="/login">Iniciar Sesión</a>
+
+  <div class="contenedor_principal">
+    <header>
+      <div class="barra_nav_principal">
+        <div class="barra_nav_principal_izquierda">
+          <a class="subrayado" href="/login">Iniciar Sesión</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="registro-container">
+        <h2>Crea una cuenta</h2>
+        {% if mensaje %}
+         <div class="alert-danger" role="alert">
+          <strong>{{ mensaje }}</strong>
+         </div>
+        {% endif %}
+    
+        <form action="/crear_registro" method="POST">
+          <label for="Usuario">Usuario (usa tu nombre real)</label>
+          <input type="text" name="txtusername" placeholder="Usuario" required>
+
+          <label for="Contraseña">Contraseña</label>
+          <input type="password" name="txtpassword" placeholder="Contraseña">
+
+          <button type="submit">Registrarse</button>
+        </form>
+      </div>
+    </main>
+
+    <div clas="footer-container">
+      <footer class="footer">
+        <p>© 2025 QuickRecipe. Todos los derechos reservados.</p>
+        <p>Desarrollado por Jhosef Alejandro y Juanangel Alvarado</p>
+      </footer>
     </div>
   </div>
 
-  <div class="registro-container">
-    <h2>Crea una cuenta</h2>
-    {% if mensaje %}
-      <div class="alert-danger" role="alert">
-        <strong>{{ mensaje }}</strong>
-      </div>
-    {% endif %}
-    
-    <form action="/crear_registro" method="POST">
-      <label for="Usuario">Usuario (usa tu nombre real)</label>
-      <input type="text" name="txtusername" placeholder="Usuario" required>
-
-      <label for="Contraseña">Contraseña</label>
-      <input type="password" name="txtpassword" placeholder="Contraseña">
-
-      <button type="submit">Registrarse</button>
-    </form>
-  </div>
-
-    <br>
-
-  <div clas="footer-container">
-    <footer class="footer">
-      <p>© 2025 QuickRecipe. Todos los derechos reservados.</p>
-      <p>Desarrollado por Jhosef Alejandro y Juanangel Alvarado</p>
-    </footer>
-  </div>
-  </body>
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </html>

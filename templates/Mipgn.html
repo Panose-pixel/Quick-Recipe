@@ -1,164 +1,174 @@
 <!DOCTYPE html>
 <html lang="es">
-  <!-- This is a comment -->
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QUICK RECIPE</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='estilos/estilos.css') }}"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300i,400"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+<!-- This is a comment -->
 
-  <body>
-    <div class="navegacion">
-      <h2 class="mensaje_de_bienvenida">Bienvenido {{ session['usuario'] }}</h2>
-      <a href="/login">
-        <h3>Cerrar Sesión</h3>
-      </a>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QUICK RECIPE</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilos/estilos.css') }}" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300i,400" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+</head>
 
-    <div class="barra_navegacion-color">
-      <div class="barra_navegacion">
-        <div class="circulodellogo">
-          <div class="Rotacion">
-            <div class="quick2">Quick</div>
-            <div class="recipe2">Recipe</div>
-          </div>
-        </div>
-        <div class="acciones-navegacion">
-          <button class="btnMenu" id="btnMenu">
-            <div class="fancy">
-              <span class="top-key"></span>
-              <span class="text">DESCUBRE</span>
-              <span class="bottom-key-1"></span>
-              <span class="bottom-key-2"></span>
+<body>
+  <div class="contenedor_principal">
+
+    <header>
+      <div class="navegacion">
+        <h2 class="mensaje_de_bienvenida">Bienvenido {{ session['usuario'] }}</h2>
+        <a href="/login" class="cerrar_sesion">
+          <h3>Cerrar Sesión</h3>
+        </a>
+      </div>
+
+      <div class="barra_navegacion-color">
+        <div class="barra_navegacion">
+          <div class="circulodellogo">
+            <div class="Rotacion">
+              <div class="quick2">Quick</div>
+              <div class="recipe2">Recipe</div>
             </div>
-          </button>
+          </div>
+          <div style="display: flex; gap: 40px; align-items: center;">
+            <select class="Descubre">
+              <option class="text" value="" disabled selected>Descubre</option>
+              <option value="Carne">Carne</option>
+              <option value="Pollo">Pollo</option>
+              <option value="Pescado">Pescado</option>
+              <option value="Cerdo">Cerdo</option>
+              <option value="Arroces">Arroces</option>
+              <option value="Sopas">Sopas</option>
+            </select>
+            <form method="POST" action="/QuickRecipe">
+              <input class="barrabusqueda" name="ingrediente" type="text" placeholder="Escribe un ingrediente" />
+            </form>
+          </div>
+        </div>
+    </header>
 
-          <form method="POST" action="/QuickRecipe">
-              <input
-                class="barrabusqueda"
-                name="ingrediente"
-                type="ingrediente"
-                placeholder="Escribe un ingrediente"
-              />
-          </form>
+    <main>
+      <div class="fondo">
+        <div class="cuadrologo">
+          <div>
+            <img class="imagen-principal" src="{{ url_for('static', filename='imagenes/comida_deliciosa.jpg') }}"
+              alt="" />
+          </div>
+          <div class="Rotacion">
+            <div class="quick">Quick</div>
+            <div class="recipe">Recipe</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="fondo">
-      <div class="cuadrologo">
-        <div>
-          <img
-            class="imagen-principal"
-            src="{{ url_for('static', filename='imagenes/comida_deliciosa.jpg') }}"
-            alt=""
-          />
-        </div>
-        <div class="Rotacion">
-          <div class="quick">Quick</div>
-          <div class="recipe">Recipe</div>
-        </div>
-      </div>
-    </div>
-    <div class="no_navbar" id="navbar">
-      <form class="recetas">
-        <button class="Botones">Carne</button>
-        <button class="Botones">Pollo</button>
-        <button class="Botones">Pescado</button>
-        <button class="Botones">Cerdo</button>
-        <button class="Botones">Arroces</button>
-        <button class="Botones">Sopas</button>
-      </form>
-    </div>
 
- {% if recetas %}
-<div class="ordenRecetas">
-  {% for receta in recetas %}
-  <div class="receta" onclick="mostrarInstrucciones(this)">
-    <div class="contenido">
-      <h2>{{ receta.strMeal }}</h2>
-      <img class="imgRecetas" src="{{ receta.strMealThumb }}" />
-      <p>Categoría: {{ receta.strCategory }}</p>
-    </div>
-    <div class="instrucciones oculto">
-      <strong>Instrucciones:</strong>
-      <div class="scroll-texto">
-        {{ receta.strInstructions }}
+
+
+
+      {% if recetas %}
+      <div class="ordenRecetas">
+        {% for receta in recetas %}
+        <div class="receta" onclick="mostrarInstrucciones(this)">
+          <div class="contenido">
+            <h2>{{ receta.strMeal }}</h2>
+            <img class="imgRecetas" src="{{ receta.strMealThumb }}" />
+            <p>Categoría: {{ receta.strCategory }}</p>
+          </div>
+          <div class="instrucciones oculto">
+            <strong>Instrucciones:</strong>
+            <div class="scroll-texto">
+              {{ receta.strInstructions }}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
       </div>
+      {% else %}
+      <p>No se encontraron recetas.</p>
+      {% endif %}
+    </main>
+
+<div class="div1">
+    <div class="carrusel">
+        <div class="atras">
+            <img id="atras" src="{{ url_for('static', filename='imagenes/atras.svg') }}" alt="atras" loading="lazy">
+        </div>
+        <div class="imagenes">
+            <div id="img"></div>
+            <div id="texto" class="texto"></div>
+        </div>
+        <div class="adelante">
+            <img id="adelante" src="{{ url_for('static', filename='imagenes/adelante.svg') }}" alt="adelante" loading="lazy">
+        </div>
     </div>
-  </div>
-  {% endfor %}
+    <div class="puntos" id="puntos"></div>
 </div>
-{% else %}
-<p>No se encontraron recetas.</p>
-{% endif %}
-    <div class="detalles-Programadores">
-      <div class="container">
-        <div class="card">
-          <h3 class="title">Jhosef Alejandro</h3>
-          <div class="bar">
-            <div class="emptybar"></div>
-            <div class="filledbar"><p></p></div>
-          </div>
-          <div class="circle"></div>
-        </div>
-        <div class="card">
-          <h3 class="title">Juanangel Alvarado</h3>
-          <div class="bar">
-            <div class="emptybar"></div>
-            <div class="filledbar"></div>
-          </div>
-          <div class="circle"></div>
-        </div>
-        <div class="card">
-          <h3 class="title">Card 3</h3>
-          <div class="bar">
-            <div class="emptybar"></div>
-            <div class="filledbar"></div>
-          </div>
-          <div class="circle"></div>
-        </div>
-        <div class="card">
-          <h3 class="title">Card 4</h3>
-          <div class="bar">
-            <div class="emptybar"></div>
-            <div class="filledbar"></div>
-          </div>
-          <div class="circle"></div>
-        </div>
-      </div>
-      <div>
-        <p class="texto">HOLA</p>
-      </div>
-    </div>
-    <div class="comentarios">
-      <button class="button-56" role="button">
-        <h3>
-        <a href="/comentarios"
-          >Déjanos un comentario AQUÍ para ayudarnos a mejorar</a>
-        </h3>
-      </button>
-    </div>
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="apartado-informacion">
+      <div class="detalles-Programadores">
+        <div class="descripcion-Programadores">
+          <h2 class="titulo-Programadores">Programadores</h2>
+          <p class="texto-Programadores">Somos dos estudiantes del SENA en programación apasionados por la tecnología y el
+            desarrollo web. Este proyecto es una muestra de nuestras habilidades y dedicación en el campo de la programación.
+          </p>
+          <p class="texto-Programadores">Creo en el poder del código como herramienta para transformar ideas en soluciones reales. Cada reto es una oportunidad para crecer, innovar y aportar valor. Mi objetivo no es solo desarrollar software, sino también construir experiencias que impacten positivamente a las personas. La motivación, disciplina y creatividad son la base de cada línea que escribo. "El futuro se crea, no se espera. Y el mejor momento para empezar a construirlo es ahora."</p>
+        </div>
+        <div class="container">
+          <div class="card">
+            <h3 class="title">Jhosef Alejandro</h3>
+            <div class="bar">
+              <div class="emptybar"></div>
+              <div class="filledbar">
+                <img src="{{ url_for('static', filename='IMAGENES/Jhosep.jpg')}}" alt="" class="fotos_programadores" />
+                <p></p>
+              </div>
+            </div>
+            <div class="circle"></div>
+          </div>
+          <div class="card">
+            <h3 class="title">Juanangel Alvarado</h3>
+            <div class="bar">
+              <div class="emptybar"></div>
+              <div class="filledbar"></div>
+              <img src="{{ url_for('static', filename='IMAGENES/Juancho.jpg') }}" alt="" class="fotos_programadores">
+            </div>
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="comentarios">
+        <a href="/comentarios">
+          <button class="button-56" role="button">
+            <h3>
+              Déjanos un comentario AQUÍ para ayudarnos a mejorar
+            </h3>
+          </button>
+        </a>
+      </div>
+    </div>
+
     <div clas="footer-container">
-      <footer class="footer">
-        <p>© 2025 QuickRecipe. Todos los derechos reservados.</p>
-        <p>Desarrollado por Jhosef Alejandro y Juanangel Alvarado</p>
-      </footer>
+      <div clas="footer-container">
+        <footer class="footer">
+          <p>© 2025 QuickRecipe. Todos los derechos reservados.</p>
+          <p>Desarrollado por Jhosef Alejandro y Juanangel Alvarado</p>
+        </footer>
+      </div>
     </div>
-  </body>
+
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
 </html>
