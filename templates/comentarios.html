@@ -16,11 +16,13 @@
 
         <div class="barra_nav_principal_izquierda">
             <a href="./QuickRecipe">
-              <div class="flecha">&lsaquo;</div>
+              <div class="flecha">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 16 16" fill="#D8AA6F"><path fill="#D8AA6F" fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75z" clip-rule="evenodd"/></svg>
+              </div>
             </a>
         </div>
         <div clas="barra_nav_derecha">
-          <h3>Promedio de calificación actual: <span style="font-size: larger; color: greenyellow; margin-right: 1rem;">{{ media }} puntos</span></h3>
+          <h3>Promedio de calificación actual: {% if media %}<span style="font-size: larger; color: greenyellow; margin-right: 1rem;">{{ media }} puntos</span>{% endif %}</h3>
         </div>
 
 
@@ -49,39 +51,37 @@
             <div class="contenedor_estrellas">
                 <label style="font-size: large;" for="estrellas">Califícanos del 1 al 10</label>
 
-                <!-- Input numérico (oculto visualmente pero accesible) -->
 
-
-                <!-- Nuevo sistema de estrellas visual -->
+                <!-- Sistema de estrellas -->
                 <div class="sistema_estrellas">
-                    <input type="radio" id="estrella10" name="rating" value="10">
+                    <input type="radio" id="estrella10" name="rating" value="10" required>
                     <label for="estrella10" title="10 estrellas"></label>
 
-                    <input type="radio" id="estrella9" name="rating" value="9">
+                    <input type="radio" id="estrella9" name="rating" value="9" required>
                     <label for="estrella9" title="9 estrellas"></label>
 
-                    <input type="radio" id="estrella8" name="rating" value="8">
+                    <input type="radio" id="estrella8" name="rating" value="8" required>
                     <label for="estrella8" title="8 estrellas"></label>
 
-                    <input type="radio" id="estrella7" name="rating" value="7">
+                    <input type="radio" id="estrella7" name="rating" value="7" required>
                     <label for="estrella7" title="7 estrellas"></label>
 
-                    <input type="radio" id="estrella6" name="rating" value="6">
+                    <input type="radio" id="estrella6" name="rating" value="6" required>
                     <label for="estrella6" title="6 estrellas"></label>
 
-                    <input type="radio" id="estrella5" name="rating" value="5">
+                    <input type="radio" id="estrella5" name="rating" value="5" required>
                     <label for="estrella5" title="5 estrellas"></label>
 
-                    <input type="radio" id="estrella4" name="rating" value="4">
+                    <input type="radio" id="estrella4" name="rating" value="4" required>
                     <label for="estrella4" title="4 estrellas"></label>
 
-                    <input type="radio" id="estrella3" name="rating" value="3">
+                    <input type="radio" id="estrella3" name="rating" value="3" required>
                     <label for="estrella3" title="3 estrellas"></label>
 
-                    <input type="radio" id="estrella2" name="rating" value="2">
+                    <input type="radio" id="estrella2" name="rating" value="2" required>
                     <label for="estrella2" title="2 estrellas"></label>
 
-                    <input type="radio" id="estrella1" name="rating" value="1">
+                    <input type="radio" id="estrella1" name="rating" value="1" requiredcl>
                     <label for="estrella1" title="1 estrella"></label>
                 </div>
 
@@ -133,6 +133,92 @@
 
 
   </div>
+  <script>
+// Efecto de partículas de nieve que suben
+document.addEventListener('DOMContentLoaded', function() {
+    const snowContainer = document.createElement('div');
+    snowContainer.id = 'snow-container';
+    document.body.appendChild(snowContainer);
+    
+    // Estilos para el contenedor de nieve
+    const snowStyles = `
+        #snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .snowflake {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: rise linear infinite;
+        }
+        
+        @keyframes rise {
+            from {
+                transform: translateY(100vh);
+            }
+            to {
+                transform: translateY(-100px);
+            }
+        }
+    `;
+    
+    // Agregar estilos al documento
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = snowStyles;
+    document.head.appendChild(styleSheet);
+    
+    // Crear partículas de nieve
+    function createSnowflake() {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        
+        // Tamaño aleatorio entre 2px y 5px
+        const size = Math.random() * 3 + 2;
+        snowflake.style.width = `${size}px`;
+        snowflake.style.height = `${size}px`;
+        
+        // Posición horizontal aleatoria
+        const left = Math.random() * window.innerWidth;
+        snowflake.style.left = `${left}px`;
+        
+        // Opacidad aleatoria
+        snowflake.style.opacity = (Math.random() * 0.5 + 0.3).toString();
+        
+        // Duración de la animación (velocidad)
+        const duration = Math.random() * 10 + 8; // 8-18 segundos
+        snowflake.style.animationDuration = `${duration}s`;
+        
+        // Retraso inicial aleatorio
+        snowflake.style.animationDelay = `${Math.random() * 5}s`;
+        
+        snowContainer.appendChild(snowflake);
+        
+        // Remover el copo cuando termine la animación
+        snowflake.addEventListener('animationend', () => {
+            snowflake.remove();
+        });
+    }
+    
+    // Crear copos iniciales
+    for (let i = 0; i < 40; i++) {
+        setTimeout(() => createSnowflake(), Math.random() * 2000);
+    }
+    
+    // Crear nuevos copos periódicamente
+    setInterval(() => {
+        createSnowflake();
+    }, 500);
+});
+</script>
 </body>
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

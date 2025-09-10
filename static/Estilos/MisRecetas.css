@@ -1,0 +1,146 @@
+/* Colores */
+:root {
+  --color-fondo: #000000;
+  --color-panel: #262323;
+  --color-input: white;
+  --color-texto: #D8AA6F;
+  --color-boton: #D8AA6F;
+  --color-boton-hover: #bf9154;
+}
+
+input{
+  color: black;
+}
+
+
+* {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fondo general */
+body {
+  overflow-y: hidden;
+  margin: 0;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  min-height: 100vh;
+  background-image: url(/static/IMAGENES/fondo_registro.avif);
+  background-size: cover;
+}
+
+.contenedor_principal{
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* Barra de navegación */
+.barra_nav_principal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-panel);
+  padding: 1rem 2rem;
+}
+
+main{
+    background-color:  rgba(60, 59, 59, 0.4);
+}
+
+.barra_nav_principal a {
+  color: var(--color-texto);
+  text-decoration: none;
+  margin: 0 1rem;
+  transition: color 0.3s ease;
+}
+
+.barra_nav_principal a:hover {
+  color: var(--color-boton);
+}
+
+.barra_nav_principal_izquierda {
+  display: flex;
+  align-items: center;
+}
+
+/* Contenedor de Recetas */
+
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+}
+
+
+.footer-container {
+  margin-bottom: 0%;
+  background-color: #493323ae;
+  padding: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+
+footer {
+  box-shadow: inset 0 8px 10px -6px #231e1e;
+  margin-top: 10px;
+  background-color: #262323;
+  padding: 1.4rem;
+  color: #d8aa6f;
+  font-family: serif;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+p {
+  margin: 0;
+}
+.subrayado {
+  &:hover {
+    text-decoration: underline
+  }
+}
+
+@media (max-width: 600px) {
+  .registro-container {
+    width: 70%;
+    padding: 1rem;
+    margin: 1rem auto;
+    justify-items: center;
+  }
+  main {
+    padding: 1rem;
+  }
+  form {
+    padding: 1rem;
+    width: 73%;
+  }
+  h2{
+    font-size: 23px;
+  }
+  label {
+    font-size: 0.9rem;
+    width: 100%;
+  }
+  button {
+    padding: 0.5rem;
+    width: 100%;
+  }
+  input {
+    padding: 0.5rem;
+    width: 100%;
+  }
+  .subrayado {
+    font-size: 1rem;
+  }
+  .contenedor_footer{
+    margin-top: 1rem;
+    padding: 0;
+  }
+  footer {
+    font-size: 12px;
+  }
+}

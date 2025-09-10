@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/Estilos/MisRecetas.css">
+    <title>Document</title>
+</head>
+<body>
+      <div class="contenedor_principal">
+    <header>
+      <div class="barra_nav_principal">
+        <div class="barra_nav_principal_izquierda">
+          <h2>Bienvenido {{ nombre }}, aquí encontrarás tu recetas guardadas</h2>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="registro-container">
+
+        {% if not recetas %}
+            <h2 style="text-align: center; color:white">No se encontraron recetas</h2>
+        {% endif %}
+
+        
+
+      </div>
+    </main>
+
+    <div clas="footer-container">
+      <footer class="footer">
+        <p>© 2025 QuickRecipe. Todos los derechos reservados.</p>
+        <p>Desarrollado por Jhosef Alejandro y Juanangel Alvarado</p>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

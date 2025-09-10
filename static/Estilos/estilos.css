@@ -512,7 +512,10 @@ footer {
   transform: translate(0, 0);
 }
 .button-56:active {
-  background-color: #ffdeda;
+  box-shadow: inset 0 0 6px rgba(202, 154, 92, 0.8),
+            0 0 8px rgba(141, 108, 64, 0.6),
+            0 0 16px rgba(115, 87, 51, 0.4),
+            0 0 24px rgba(59, 45, 27, 0.2);
   outline: 0;
 }
 
@@ -627,11 +630,22 @@ footer {
   color: white;
   font-weight: bold;
 }
+
+.Contenedor_enlace_mis_recetas{
+  text-align: end;
+  margin-right: 1.5rem;
+  margin-top: 0.4rem;
+}
+
+.recetas_guadadas{
+  text-decoration: none;
+  color: #ca9a5c;
+  &:hover{
+    text-decoration: underline;
+  }
+}
 /* Estilos responsivos */
 
-/* Estilos responsivos corregidos */
-/* Estilos responsivos corregidos */
-/* Estilos responsivos corregidos */
 @media (max-width: 600px) {
   body {
     overflow-x: hidden;

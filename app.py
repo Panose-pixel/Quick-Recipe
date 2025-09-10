@@ -81,9 +81,12 @@ def crear_registro():
 
     if usuario_existente:
         return render_template('Registro.html', mensaje='El usuario que ingresó ya se encuentra registrado')
+    else:
+        cur.execute('INSERT INTO usuarios (usuario, contraseña) VALUES (%s, %s)',(username, password))
+        mysql.connection.commit()
+        redirect(url_for('login'))
 
-    cur.execute('INSERT INTO usuarios (usuario, contraseña) VALUES (%s, %s)',(username, password))
-    mysql.connection.commit()
+
     return render_template('login.html', mensaje='Usuario y contraseña registrados correctamente')
 
 
@@ -100,7 +103,6 @@ def QuickRecipe():
         data = response.json()
         comidas = data.get("meals")
 
-        
 
         if comidas:
             for comida in comidas:
@@ -112,7 +114,18 @@ def QuickRecipe():
     return render_template("Mipgn.html", recetas=recetas)
 
 
+@app.route('/Mis_Recetas')
+@login_requerido
+def mis_recetas():
+    nombre_usuario = session.get('usuario')
+    
+    return render_template('MisRecetas.html', nombre=nombre_usuario)
+
+
+
+
 @app.route('/comentarios', methods=['GET', 'POST'])
+@login_requerido
 def comentarios():
 
     cur = mysql.connection.cursor()
@@ -148,27 +161,29 @@ def comentarios():
     
     comentarios = cur.fetchall()
 
+    if comentarios:
+        media_app = cur.execute('SELECT estrellas FROM comentarios')
+        media_app = cur.fetchall()
 
-    media_app = cur.execute('SELECT estrellas FROM comentarios')
-    media_app = cur.fetchall()
-
-    print(media_app)
+        print(media_app)
     
-    cantidad_de_comentarios = len(media_app)
+        cantidad_de_comentarios = len(media_app)
 
-    nota = 0
-    for calificacion in media_app:
-        nota = nota + calificacion['estrellas']
+        nota = 0
+        for i in media_app:
+            nota = nota + i['estrellas']
+            print(i)
 
-    print(nota)
-    media = (nota/cantidad_de_comentarios)
+        print(nota)
+        media = (nota/cantidad_de_comentarios)
 
-    print(media)
+        print(media)
+
+    if not media:
+        media = 0
 
 
-
-
-    return render_template('comentarios.html', comentarios=comentarios, media=round(media, 3))
+    return render_template('comentarios.html', comentarios=comentarios, media=round(media, 2))
 
 
 
