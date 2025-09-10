@@ -144,12 +144,33 @@ def procesador():
         categoria = request.form['strCategory']
         instruciones = request.form['strInstructions']
         nombre_usuario = session.get('usuario')
-        print(titulo,imagen,categoria,instruciones, nombre_usuario)
+        
+        cur.execute(f"SELECT * FROM recetas_guardadas WHERE titulo = '{titulo}' and nombre_usuario = '{nombre_usuario}';")
+        receta_ya_guardada = cur.fetchone()
 
-        cur.execute('INSERT INTO recetas_guardadas (titulo, imagen, categoria, instrucciones, nombre_usuario) VALUES (%s, %s, %s, %s, %s)', (titulo, imagen, categoria, instruciones, nombre_usuario))
+        if receta_ya_guardada:
+            mensaje_de_duplicacion = "Ya has guardado antes esta receta"
+            return render_template('/Mipgn.html', mensaje_de_duplicacion=mensaje_de_duplicacion)
+        else:
+            cur.execute('INSERT INTO recetas_guardadas (titulo, imagen, categoria, instrucciones, nombre_usuario) VALUES (%s, %s, %s, %s, %s)', (titulo, imagen, categoria, instruciones, nombre_usuario))
         mysql.connection.commit()
 
     return redirect(url_for('QuickRecipe'))
+
+
+@app.route('/eliminador', methods=['POST'])
+def eliminador():
+    cur = mysql.connection.cursor()
+    if request.method == 'POST':
+        titulo = request.form['strMeal']
+        nombre_usuario = session.get('usuario')
+
+        cur.execute(f"DELETE FROM recetas_guardadas WHERE titulo = '{titulo}' and nombre_usuario = '{nombre_usuario}';")
+        mysql.connection.commit()
+
+
+
+    return redirect(url_for('mis_recetas'))
 
 
 
@@ -207,15 +228,15 @@ def comentarios():
             print(i)
 
         print(nota)
-        media = (nota/cantidad_de_comentarios)
-
-        print(media)
+        if nota and cantidad_de_comentarios:
+            media = (nota/cantidad_de_comentarios)
+            media = round(media, 2)
 
     if not media:
-        media = 0
+        media = False
 
 
-    return render_template('comentarios.html', comentarios=comentarios, media=round(media, 2))
+    return render_template('comentarios.html', comentarios=comentarios, media=media)
 
 
 

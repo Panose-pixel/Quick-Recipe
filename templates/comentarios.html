@@ -21,9 +21,11 @@
               </div>
             </a>
         </div>
+        {% if media %}
         <div clas="barra_nav_derecha">
-          <h3>Promedio de calificación actual: {% if media %}<span style="font-size: larger; color: greenyellow; margin-right: 1rem;">{{ media }} puntos</span>{% endif %}</h3>
+          <h3>Promedio de calificación actual: {% if media %}<span class="media_app">{{ media }} puntos</span>{% endif %}</h3>
         </div>
+        {% endif %}
 
 
       </div>

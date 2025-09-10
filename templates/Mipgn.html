@@ -17,6 +17,13 @@
     <header>
       <div class="navegacion">
         <h2 class="mensaje_de_bienvenida">Bienvenido {{ session['usuario'] }}</h2>
+
+        {% if mensaje_de_duplicacion %}
+          <h3 style="color: white;">
+            <strong>¡{{ mensaje_de_duplicacion }}!</strong>
+          </h3>
+        {% endif %}
+
         <a href="/login" class="cerrar_sesion">
           <h3>Cerrar Sesión</h3>
         </a>
@@ -63,6 +70,8 @@
       </div>
 
 
+
+
         <!--Enlace a página de recetas guardadas-->
         <div class="Contenedor_enlace_mis_recetas">
           <div style="margin: auto auto;">
@@ -86,7 +95,6 @@
               <input type="hidden" name="strCategory" value="{{ receta.strCategory }}">
               <input type="hidden" name="strInstructions" value="{{ receta.strInstructions }}">
               <button style="border:none; background-color: #d2984c;" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="#000000"><path fill="#000000" d="M17 20.75H7A2.75 2.75 0 0 1 4.25 18V6A2.75 2.75 0 0 1 7 3.25h7.5a.75.75 0 0 1 .53.22L19.53 8a.75.75 0 0 1 .22.53V18A2.75 2.75 0 0 1 17 20.75Zm-10-16A1.25 1.25 0 0 0 5.75 6v12A1.25 1.25 0 0 0 7 19.25h10A1.25 1.25 0 0 0 18.25 18V8.81l-4.06-4.06Z"/><path fill="#000000" d="M16.75 20h-1.5v-6.25h-6.5V20h-1.5v-6.5a1.25 1.25 0 0 1 1.25-1.25h7a1.25 1.25 0 0 1 1.25 1.25ZM12.47 8.75H8.53a1.29 1.29 0 0 1-1.28-1.3V4h1.5v3.25h3.5V4h1.5v3.45a1.29 1.29 0 0 1-1.28 1.3Z"/></svg></button>
-
             </form>
 
 

@@ -66,6 +66,12 @@ body {
   font-size: 2.5rem;
 }
 
+.media_app{
+  font-size: larger;
+  color: greenyellow;
+  margin-right: 1rem;
+}
+
 /* Contenedor del formulario */
 
 .comentarios{
@@ -320,5 +326,13 @@ footer {
     color: white;
     margin: 1rem auto;
     background-color: white;
+  }
+
+  h3{
+    font-size: medium;
+  }
+
+  .media_app{
+    font-size: medium;
   }
 }
