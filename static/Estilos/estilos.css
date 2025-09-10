@@ -637,12 +637,13 @@ footer {
   margin-top: 0.4rem;
 }
 
+
 .recetas_guadadas{
+  background-color: none;
+  border: none;
   text-decoration: none;
   color: #ca9a5c;
-  &:hover{
-    text-decoration: underline;
-  }
+
 }
 /* Estilos responsivos */
 

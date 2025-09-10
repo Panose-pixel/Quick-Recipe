@@ -28,10 +28,10 @@
             {% endif %}
         <form action="/login" method="POST">
           <label for="Usuario">Ingrese su Usuario</label>
-          <input type="text" name="txtusername" placeholder="Usuario"> <!--El placeholder es el texto que aparece dentro del input-->
+          <input type="text" name="txtusername" placeholder="Usuario" required> <!--El placeholder es el texto que aparece dentro del input-->
 
           <label for="Contraseña">Ingrese su Contraseña</label>
-          <input type="password" name="txtpassword" placeholder="Contraseña">
+          <input type="password" name="txtpassword" placeholder="Contraseña" required>
 
           <button type="submit">Iniciar Sesión</button>
         </form>

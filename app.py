@@ -114,12 +114,44 @@ def QuickRecipe():
     return render_template("Mipgn.html", recetas=recetas)
 
 
+
+
+
+
 @app.route('/Mis_Recetas')
 @login_requerido
 def mis_recetas():
     nombre_usuario = session.get('usuario')
+    cur = mysql.connection.cursor()
+
+    cur.execute(f'SELECT titulo, imagen, categoria, instrucciones, nombre_usuario FROM recetas_guardadas where nombre_usuario = "{nombre_usuario}"')
     
-    return render_template('MisRecetas.html', nombre=nombre_usuario)
+    recetas_guardadas = cur.fetchall()
+
+    
+    return render_template('MisRecetas.html', nombre=nombre_usuario, recetas_guardadas=recetas_guardadas)
+
+
+
+@app.route('/procesador', methods=['POST'])
+def procesador():
+    
+    cur = mysql.connection.cursor()
+    
+    if request.method == 'POST':
+        titulo = request.form['strMeal']
+        imagen = request.form['strMealThumb']
+        categoria = request.form['strCategory']
+        instruciones = request.form['strInstructions']
+        nombre_usuario = session.get('usuario')
+        print(titulo,imagen,categoria,instruciones, nombre_usuario)
+
+        cur.execute('INSERT INTO recetas_guardadas (titulo, imagen, categoria, instrucciones, nombre_usuario) VALUES (%s, %s, %s, %s, %s)', (titulo, imagen, categoria, instruciones, nombre_usuario))
+        mysql.connection.commit()
+
+    return redirect(url_for('QuickRecipe'))
+
+
 
 
 

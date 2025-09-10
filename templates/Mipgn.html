@@ -65,15 +65,31 @@
 
         <!--Enlace a página de recetas guardadas-->
         <div class="Contenedor_enlace_mis_recetas">
-          <a class="recetas_guadadas" href="/Mis_Recetas">Recetas Guardadas <svg style="margin-top: 0.4rem" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 480 496" fill="#D8AA6F"><path fill="#D8AA6F" d="M69 5Q42 5 23.5 23.5T5 69v342q0 27 18.5 45.5T69 475h342q27 0 45.5-18.5T475 411V170L357 5H69zm150 43v64h42V48h22v85H133V48h86zm-86 384V304h214v128H133zm299-21q0 9-6 15t-15 6h-22V304q0-17-12.5-30T347 261H133q-17 0-29.5 13T91 304v128H69q-9 0-15-6t-6-15V69q0-9 6-15t15-6h22v85q0 18 12.5 30.5T133 176h150q17 0 29.5-12.5T325 133V48h11l96 134v229z"/></svg></a>
+          <div style="margin: auto auto;">
+            <a class="recetas_guadadas" href="/Mis_Recetas">Recetas Guardadas <svg style="margin-top: 0.4rem" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 480 496" fill="#D8AA6F"><path fill="#D8AA6F" d="M69 5Q42 5 23.5 23.5T5 69v342q0 27 18.5 45.5T69 475h342q27 0 45.5-18.5T475 411V170L357 5H69zm150 43v64h42V48h22v85H133V48h86zm-86 384V304h214v128H133zm299-21q0 9-6 15t-15 6h-22V304q0-17-12.5-30T347 261H133q-17 0-29.5 13T91 304v128H69q-9 0-15-6t-6-15V69q0-9 6-15t15-6h22v85q0 18 12.5 30.5T133 176h150q17 0 29.5-12.5T325 133V48h11l96 134v229z"/></svg></a>
+          </div>
         </div>
 
 
       {% if recetas %}
       <div class="ordenRecetas">
         {% for receta in recetas %}
+
         <div class="receta" onclick="mostrarInstrucciones(this)">
           <div class="contenido">
+
+
+
+            <form action="/procesador" method="POST">
+              <input type="hidden" name="strMeal" value="{{ receta.strMeal }}">
+              <input type="hidden" name="strMealThumb" value="{{ receta.strMealThumb }}">
+              <input type="hidden" name="strCategory" value="{{ receta.strCategory }}">
+              <input type="hidden" name="strInstructions" value="{{ receta.strInstructions }}">
+              <button style="border:none; background-color: #d2984c;" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="#000000"><path fill="#000000" d="M17 20.75H7A2.75 2.75 0 0 1 4.25 18V6A2.75 2.75 0 0 1 7 3.25h7.5a.75.75 0 0 1 .53.22L19.53 8a.75.75 0 0 1 .22.53V18A2.75 2.75 0 0 1 17 20.75Zm-10-16A1.25 1.25 0 0 0 5.75 6v12A1.25 1.25 0 0 0 7 19.25h10A1.25 1.25 0 0 0 18.25 18V8.81l-4.06-4.06Z"/><path fill="#000000" d="M16.75 20h-1.5v-6.25h-6.5V20h-1.5v-6.5a1.25 1.25 0 0 1 1.25-1.25h7a1.25 1.25 0 0 1 1.25 1.25ZM12.47 8.75H8.53a1.29 1.29 0 0 1-1.28-1.3V4h1.5v3.25h3.5V4h1.5v3.45a1.29 1.29 0 0 1-1.28 1.3Z"/></svg></button>
+
+            </form>
+
+
             <h2>{{ receta.strMeal }}</h2>
             <img class="imgRecetas" src="{{ receta.strMealThumb }}" />
             <p>Categoría: {{ receta.strCategory }}</p>

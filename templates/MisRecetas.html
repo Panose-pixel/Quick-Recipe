@@ -4,24 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/Estilos/MisRecetas.css">
-    <title>Document</title>
+    <title>Recetas Guardadas</title>
 </head>
 <body>
-      <div class="contenedor_principal">
-    <header>
-      <div class="barra_nav_principal">
-        <div class="barra_nav_principal_izquierda">
-          <h2>Bienvenido {{ nombre }}, aquí encontrarás tu recetas guardadas</h2>
-        </div>
-      </div>
-    </header>
+  <div class="contenedor_principal">
+        <header>
+          <div class="barra_nav_principal">
+            <div class="izquierda">
+              <a href="/QuickRecipe"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 16 16" fill="#D8AA6F"><path fill="#D8AA6F" fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75z" clip-rule="evenodd"/></svg></a>
+            </div>
+
+            {% if recetas_guardadas %}
+              <div class="derecha">
+                <h2 style="margin: auto auto;">¡{{ nombre }}, que lo disfrutes!</h2>
+              </div>
+            {% endif %}
+
+          </div>
+        </header>
 
     <main>
       <div class="registro-container">
 
-        {% if not recetas %}
+        {% if not recetas_guardadas %}
             <h2 style="text-align: center; color:white">No se encontraron recetas</h2>
         {% endif %}
+
+        {% if recetas_guardadas %}
+        <div class="ordenRecetas">
+          {% for receta_guardada in recetas_guardadas %}
+
+
+            <div class="receta" onclick="mostrarInstrucciones(this)">
+              <div class="contenido">
+                <h2 style="color:black">{{ receta_guardada['titulo'] }}</h2>
+                <img class="imgRecetas" src="{{ receta_guardada['imagen'] }}" />
+                <p>Categoría: {{ receta_guardada['categoria'] }}</p>
+              </div>
+              <div class="instrucciones oculto">
+                <strong>Instrucciones:</strong>
+                <div class="scroll-texto">
+                  {{ receta_guardada['instrucciones'] }}
+                </div>
+              </div>
+            </div>
+
+
+
+
+          {% endfor %}
+        </div> 
+        {% endif %}
+
 
         
 
@@ -34,6 +68,9 @@
         <p>Desarrollado por Jhosef Alejandro y Juanangel Alvarado</p>
       </footer>
     </div>
+
+
   </div>
 </body>
+<script src="/static/js/script.js"></script>
 </html>
