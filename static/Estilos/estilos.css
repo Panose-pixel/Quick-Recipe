@@ -9,6 +9,7 @@ html {
 }
 body {
   background-color: black;
+  overflow-x: hidden; /* oculta la barra de desplazamiento de abajito*/
 }
 
 .contenedor_principal {

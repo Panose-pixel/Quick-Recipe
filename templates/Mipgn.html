@@ -31,15 +31,16 @@
             </div>
           </div>
           <div style="display: flex; gap: 40px; align-items: center;">
-            <select class="Descubre">
+              <select class="Descubre">
               <option class="text" value="" disabled selected>Descubre</option>
-              <option value="Carne">Carne</option>
-              <option value="Pollo">Pollo</option>
-              <option value="Pescado">Pescado</option>
-              <option value="Cerdo">Cerdo</option>
-              <option value="Arroces">Arroces</option>
-              <option value="Sopas">Sopas</option>
+              <option name="ingrediente" type="submit" value="Carne">Carne</option>
+              <option name="ingrediente" type="submit" value="Pollo">Pollo</option>
+              <option name="ingrediente" type="submit" value="Pescado">Pescado</option>
+              <option name="ingrediente" type="submit" value="Cerdo">Cerdo</option>
+              <option name="ingrediente" type="submit" value="Arroces">Arroces</option>
+              <option name="ingrediente" type="submit" value="Sopas">Sopas</option>
             </select>
+
             <form method="POST" action="/QuickRecipe">
               <input class="barrabusqueda" name="ingrediente" type="text" placeholder="Escribe un ingrediente" />
             </form>

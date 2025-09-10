@@ -100,6 +100,8 @@ def QuickRecipe():
         data = response.json()
         comidas = data.get("meals")
 
+        
+
         if comidas:
             for comida in comidas:
                 comida["strCategory"] = GoogleTranslator(source='auto', target='es').translate(comida["strCategory"])
@@ -121,13 +123,16 @@ def comentarios():
         usuario = session.get('usuario')
         fecha_comentario = datetime.datetime.now()
         fecha_comentario = fecha_comentario.strftime('%Y-%m-%d %H:%M:%S') #fecha del comentario
+        numero_estrellas = int(request.form.get('rating'))
+
+
 
         if comentario:
-            cur.execute('INSERT INTO comentarios (usuario_id, usuario, comentario, fecha) VALUES (%s, %s, %s, %s)', (usuario_id, usuario, comentario, fecha_comentario))
+            cur.execute('INSERT INTO comentarios (usuario_id, usuario, comentario, fecha, estrellas) VALUES (%s, %s, %s, %s, %s)', (usuario_id, usuario, comentario, fecha_comentario, numero_estrellas))
             mysql.connection.commit()
 
             cur.execute('''
-            SELECT comentarios.comentario, usuarios.usuario, comentarios.fecha
+            SELECT comentarios.comentario, usuarios.usuario, comentarios.fecha, comentarios.estrellas
             FROM comentarios 
             JOIN usuarios ON comentarios.usuario_id = usuarios.id
             ''')
@@ -136,13 +141,34 @@ def comentarios():
         return redirect(url_for('comentarios'))
     # Obtener comentarios con nombre del usuario
     cur.execute('''
-        SELECT comentarios.comentario, usuarios.usuario, comentarios.fecha 
+        SELECT comentarios.comentario, usuarios.usuario, comentarios.fecha, comentarios.estrellas
         FROM comentarios 
         JOIN usuarios ON comentarios.usuario_id = usuarios.id order by comentarios.fecha DESC 
     ''')
+    
     comentarios = cur.fetchall()
 
-    return render_template('comentarios.html', comentarios=comentarios)
+
+    media_app = cur.execute('SELECT estrellas FROM comentarios')
+    media_app = cur.fetchall()
+
+    print(media_app)
+    
+    cantidad_de_comentarios = len(media_app)
+
+    nota = 0
+    for calificacion in media_app:
+        nota = nota + calificacion['estrellas']
+
+    print(nota)
+    media = (nota/cantidad_de_comentarios)
+
+    print(media)
+
+
+
+
+    return render_template('comentarios.html', comentarios=comentarios, media=round(media, 3))
 
 
 
