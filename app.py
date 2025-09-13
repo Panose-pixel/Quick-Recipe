@@ -1,9 +1,9 @@
-import pymysql
-pymysql.install_as_MySQLdb()
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_mysqldb import MySQL
 from functools import wraps
 import datetime
+import pymysql
+pymysql.install_as_MySQLdb()
 
 
 import requests # esto de de Jhosep
@@ -19,7 +19,7 @@ app = Flask(__name__)
 
 app.config['MYSQL_HOST']='localhost'
 app.config['MYSQL_USER']='root'
-app.config['MYSQL_PASSWORD']='panose0506'
+app.config['MYSQL_PASSWORD']='root'
 app.config['MYSQL_DB']='flask_app'
 app.config['MYSQL_CURSORCLASS']='DictCursor'
 mysql=MySQL(app)
@@ -93,28 +93,38 @@ def crear_registro():
 
 
 @app.route('/QuickRecipe', methods=["GET", "POST"])
-@login_requerido
 def QuickRecipe():
     recetas = []
     if request.method == "POST":
-        ingrediente = GoogleTranslator(source='es', target='en').translate(request.form.get("ingrediente"))# ingles a español
-        url = f"https://www.themealdb.com/api/json/v1/1/search.php?s={ingrediente}"
-        response = requests.get(url)
-        data = response.json()
-        comidas = data.get("meals")
+        ingrediente = request.form.get("ingrediente")
+        if ingrediente:
+            # traducir a inglés para la API
+            ingrediente_en = GoogleTranslator(source='es', target='en').translate(ingrediente)
+            url = f"https://www.themealdb.com/api/json/v1/1/search.php?s={ingrediente_en}"
+            
+            try:
+                response = requests.get(url, timeout=5)
+                data = response.json()
+                comidas = data.get("meals")
+            except Exception as e:
+                print("Error al conectar con la API:", e)
+                comidas = None
 
+            if comidas:
+                recetas = []
+                for comida in comidas:
+                    # aseguramos que no rompa si algún campo viene None
+                    categoria = comida.get("strCategory") or ""
+                    instrucciones = comida.get("strInstructions") or ""
 
-        if comidas:
-            for comida in comidas:
-                comida["strCategory"] = GoogleTranslator(source='auto', target='es').translate(comida["strCategory"])
-                comida["strInstructions"] = GoogleTranslator(source='auto', target='es').translate(comida["strInstructions"])
-            recetas = comidas
-        else:
-            print("No se encontraron recetas para:", ingrediente)
+                    comida["strCategory"] = GoogleTranslator(source='auto', target='es').translate(categoria)
+                    comida["strInstructions"] = GoogleTranslator(source='auto', target='es').translate(instrucciones)
+
+                    recetas.append(comida)
+            else:
+                print("No se encontraron recetas para:", ingrediente)
+
     return render_template("Mipgn.html", recetas=recetas)
-
-
-
 
 
 
