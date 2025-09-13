@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Mostrar instrucciones receta
   window.mostrarInstrucciones = function (elemento) {
-    document.querySelectorAll(".receta .instrucciones").forEach(el => {
-      if (el !== elemento.querySelector('.instrucciones')) {
+    document.querySelectorAll(".receta .instrucciones").forEach((el) => {
+      if (el !== elemento.querySelector(".instrucciones")) {
         el.classList.add("oculto");
       }
     });
@@ -42,27 +42,30 @@ document.addEventListener("DOMContentLoaded", function () {
   // Carrusel
   let imagenes = [
     {
-      "url": "/static/imagenes/lasaña.jpg",
-      "nombre": "",
-      "descripcion": "De la cocina a tu mesa: experiencias culinarias que despiertan los sentidos."
+      url: "/static/imagenes/lasaña.jpg",
+      nombre: "",
+      descripcion:
+        "De la cocina a tu mesa: experiencias culinarias que despiertan los sentidos.",
     },
     {
-      "url": "/static/imagenes/plato.webp",
-      "nombre": "",
-      "descripcion": "Sabores que conquistan tu paladar: platos únicos preparados con pasión y frescura."
+      url: "/static/imagenes/plato.webp",
+      nombre: "",
+      descripcion:
+        "Sabores que conquistan tu paladar: platos únicos preparados con pasión y frescura.",
     },
     {
-      "url": "/static/imagenes/comida.jpg",
-      "nombre": "",
-      "descripcion": "Explora nuestra selección gastronómica: tradición, creatividad y mucho sabor en cada bocado."
+      url: "/static/imagenes/comida.jpg",
+      nombre: "",
+      descripcion:
+        "Explora nuestra selección gastronómica: tradición, creatividad y mucho sabor en cada bocado.",
     },
   ];
 
-  let atras = document.getElementById('atras');
-  let adelante = document.getElementById('adelante');
-  let imagen = document.getElementById('img');
-  let puntos = document.getElementById('puntos');
-  let texto = document.getElementById('texto');
+  let atras = document.getElementById("atras");
+  let adelante = document.getElementById("adelante");
+  let imagen = document.getElementById("img");
+  let puntos = document.getElementById("puntos");
+  let texto = document.getElementById("texto");
   let actual = 0;
   let intervaloCarrusel = null;
 
@@ -78,7 +81,9 @@ document.addEventListener("DOMContentLoaded", function () {
   function posicionCarrusel() {
     puntos.innerHTML = "";
     for (let i = 0; i < imagenes.length; i++) {
-      puntos.innerHTML += `<span class="${i === actual ? 'bold' : ''}">● </span>`;
+      puntos.innerHTML += `<span class="${
+        i === actual ? "bold" : ""
+      }">● </span>`;
     }
   }
 
@@ -88,13 +93,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   if (atras && adelante && imagen && texto && puntos) {
-    atras.addEventListener('click', function () {
+    atras.addEventListener("click", function () {
       actual = (actual - 1 + imagenes.length) % imagenes.length;
       mostrarCarrusel();
       reiniciarIntervalo();
     });
 
-    adelante.addEventListener('click', function () {
+    adelante.addEventListener("click", function () {
       avanzarCarrusel();
       reiniciarIntervalo();
     });
@@ -111,4 +116,9 @@ document.addEventListener("DOMContentLoaded", function () {
       intervaloCarrusel = setInterval(avanzarCarrusel, 3000);
     }
   }
+});
+
+window.addEventListener("scroll", function () {
+  var header = document.querySelector(".header");
+  header.classList.toggle("abajo", window.scrollY > 0);
 });
