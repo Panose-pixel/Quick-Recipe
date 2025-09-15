@@ -1,189 +1,285 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- This is a comment -->
+  <!-- This is a comment -->
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QUICK RECIPE</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='estilos/estilos.css') }}" />
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300i,400" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUICK RECIPE</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='estilos/estilos.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300i,400"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
-  <div class="contenedor_principal">
+  <body>
+    <div class="contenedor_principal">
+      <header class="header" id="navbar">
+        <!-- Logo circular -->
+        <div>
+          <div>
+            <p class="logo">QuickRecipe</p>
+          </div>
+        </div>
 
-    <header>
-      <div class="navegacion">
-        <h2 class="mensaje_de_bienvenida">Bienvenido {{ session['usuario'] }}</h2>
-
-        {% if mensaje_de_duplicacion %}
-          <h3 style="color: white;">
-            <strong>¡{{ mensaje_de_duplicacion }}!</strong>
-          </h3>
+        <!-- Navegación central -->
+        <nav>
+          <ul>
+            <li>
+              <form method="POST" action="/QuickRecipe">
+                <select
+                  class="Descubre"
+                  name="ingrediente"
+                  onchange="this.form.submit()"
+                >
+                  <option value="" disabled selected>Descubre</option>
+                  <option value="Carne">Carne</option>
+                  <option value="Pollo">Pollo</option>
+                  <option value="Pescado">Pescado</option>
+                  <option value="Cerdo">Cerdo</option>
+                  <option value="Arroces">Arroces</option>
+                  <option value="Sopas">Sopas</option>
+                </select>
+              </form>
+            </li>
+            <li>
+              <form method="POST" action="/QuickRecipe">
+                <input
+                  class="barrabusqueda"
+                  name="ingrediente"
+                  type="text"
+                  placeholder="Escribe un ingrediente"
+                />
+              </form>
+            </li>
+          </ul>
+        </nav>
+        
+        {% if session.get('admin?') %}
+        <a class="administracion" href="/administracion"><h3>ADMINISTRACION</h3></a>
         {% endif %}
 
-        <a href="/login" class="cerrar_sesion">
-          <h3>Cerrar Sesión</h3>
-        </a>
-      </div>
+        <!-- Usuario y cerrar sesión -->
+        <div class="usuario-info">
+          <h2 class="mensaje_de_bienvenida">
+            Bienvenido {{ session['usuario'] }} 
+            {% if session.get('admin?') %}
+              <span style="color: white">(</span><span style="color: #00FF00;">A</span><span style="color: #1BE7FF;">D</span><span style="color: #F3FF0B;">M</span><span style="color: #FFBB16;">I</span><span style="color: #FF5714;">N</span><span style="color: white">)</span>
+            {% endif %}
+          </h2>
 
-      <div class="barra_navegacion-color">
-        <div class="barra_navegacion">
-          <div class="circulodellogo">
+          {% if mensaje_de_duplicacion %}
+          <h3 style="color: white" class="alerta">
+            <strong>¡{{ mensaje_de_duplicacion }}!</strong>
+          </h3>
+          {% endif %}
+
+
+          <a href="/login" class="cerrar_sesion">
+            <h3>Cerrar Sesión</h3>
+          </a>
+        </div>
+      </header>
+
+      <main>
+        <div class="fondo">
+          <div class="cuadrologo">
+            <div>
+              <img
+                class="imagen-principal"
+                src="{{ url_for('static', filename='imagenes/comida_deliciosa.jpg') }}"
+                alt=""
+              />
+            </div>
             <div class="Rotacion">
-              <div class="quick2">Quick</div>
-              <div class="recipe2">Recipe</div>
+              <div class="quick">Quick</div>
+              <div class="recipe">Recipe</div>
             </div>
           </div>
-          <div style="display: flex; gap: 40px; align-items: center;">
-              <select class="Descubre">
-              <option class="text" value="" disabled selected>Descubre</option>
-              <option name="ingrediente" type="submit" value="Carne">Carne</option>
-              <option name="ingrediente" type="submit" value="Pollo">Pollo</option>
-              <option name="ingrediente" type="submit" value="Pescado">Pescado</option>
-              <option name="ingrediente" type="submit" value="Cerdo">Cerdo</option>
-              <option name="ingrediente" type="submit" value="Arroces">Arroces</option>
-              <option name="ingrediente" type="submit" value="Sopas">Sopas</option>
-            </select>
-
-            <form method="POST" action="/QuickRecipe">
-              <input class="barrabusqueda" name="ingrediente" type="text" placeholder="Escribe un ingrediente" />
-            </form>
-          </div>
         </div>
-    </header>
-
-    <main>
-      <div class="fondo">
-        <div class="cuadrologo">
-          <div>
-            <img class="imagen-principal" src="{{ url_for('static', filename='imagenes/comida_deliciosa.jpg') }}"
-              alt="" />
-          </div>
-          <div class="Rotacion">
-            <div class="quick">Quick</div>
-            <div class="recipe">Recipe</div>
-          </div>
-        </div>
-      </div>
-
-
-
 
         <!--Enlace a página de recetas guardadas-->
         <div class="Contenedor_enlace_mis_recetas">
-          <div style="margin: auto auto;">
-            <a class="recetas_guadadas" href="/Mis_Recetas">Recetas Guardadas <svg style="margin-top: 0.4rem" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 480 496" fill="#D8AA6F"><path fill="#D8AA6F" d="M69 5Q42 5 23.5 23.5T5 69v342q0 27 18.5 45.5T69 475h342q27 0 45.5-18.5T475 411V170L357 5H69zm150 43v64h42V48h22v85H133V48h86zm-86 384V304h214v128H133zm299-21q0 9-6 15t-15 6h-22V304q0-17-12.5-30T347 261H133q-17 0-29.5 13T91 304v128H69q-9 0-15-6t-6-15V69q0-9 6-15t15-6h22v85q0 18 12.5 30.5T133 176h150q17 0 29.5-12.5T325 133V48h11l96 134v229z"/></svg></a>
+          <div style="margin: auto auto">
+            <a class="recetas_guadadas" href="/Mis_Recetas"
+              >Recetas Guardadas
+              <svg
+                style="margin-top: 0.4rem"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 480 496"
+                fill="#D8AA6F"
+              >
+                <path
+                  fill="#D8AA6F"
+                  d="M69 5Q42 5 23.5 23.5T5 69v342q0 27 18.5 45.5T69 475h342q27 0 45.5-18.5T475 411V170L357 5H69zm150 43v64h42V48h22v85H133V48h86zm-86 384V304h214v128H133zm299-21q0 9-6 15t-15 6h-22V304q0-17-12.5-30T347 261H133q-17 0-29.5 13T91 304v128H69q-9 0-15-6t-6-15V69q0-9 6-15t15-6h22v85q0 18 12.5 30.5T133 176h150q17 0 29.5-12.5T325 133V48h11l96 134v229z"
+                />
+              </svg>
+            </a>
           </div>
         </div>
 
+        {% if recetas %}
+        <div class="ordenRecetas">
+          {% for receta in recetas %}
 
-      {% if recetas %}
-      <div class="ordenRecetas">
-        {% for receta in recetas %}
+          <div class="receta" onclick="mostrarInstrucciones(this)">
+            <div class="contenido">
+              <form action="/procesador" method="POST">
+                <input
+                  type="hidden"
+                  name="strMeal"
+                  value="{{ receta.strMeal }}"
+                />
+                <input
+                  type="hidden"
+                  name="strMealThumb"
+                  value="{{ receta.strMealThumb }}"
+                />
+                <input
+                  type="hidden"
+                  name="strCategory"
+                  value="{{ receta.strCategory }}"
+                />
+                <input
+                  type="hidden"
+                  name="strInstructions"
+                  value="{{ receta.strInstructions }}"
+                />
+                <button
+                  style="border: none; background-color: #d2984c"
+                  type="submit"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="35"
+                    height="35"
+                    viewBox="0 0 24 24"
+                    fill="#000000"
+                  >
+                    <path
+                      fill="#000000"
+                      d="M17 20.75H7A2.75 2.75 0 0 1 4.25 18V6A2.75 2.75 0 0 1 7 3.25h7.5a.75.75 0 0 1 .53.22L19.53 8a.75.75 0 0 1 .22.53V18A2.75 2.75 0 0 1 17 20.75Zm-10-16A1.25 1.25 0 0 0 5.75 6v12A1.25 1.25 0 0 0 7 19.25h10A1.25 1.25 0 0 0 18.25 18V8.81l-4.06-4.06Z"
+                    />
+                    <path
+                      fill="#000000"
+                      d="M16.75 20h-1.5v-6.25h-6.5V20h-1.5v-6.5a1.25 1.25 0 0 1 1.25-1.25h7a1.25 1.25 0 0 1 1.25 1.25ZM12.47 8.75H8.53a1.29 1.29 0 0 1-1.28-1.3V4h1.5v3.25h3.5V4h1.5v3.45a1.29 1.29 0 0 1-1.28 1.3Z"
+                    />
+                  </svg>
+                </button>
+              </form>
 
-        <div class="receta" onclick="mostrarInstrucciones(this)">
-          <div class="contenido">
-
-
-
-            <form action="/procesador" method="POST">
-              <input type="hidden" name="strMeal" value="{{ receta.strMeal }}">
-              <input type="hidden" name="strMealThumb" value="{{ receta.strMealThumb }}">
-              <input type="hidden" name="strCategory" value="{{ receta.strCategory }}">
-              <input type="hidden" name="strInstructions" value="{{ receta.strInstructions }}">
-              <button style="border:none; background-color: #d2984c;" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="#000000"><path fill="#000000" d="M17 20.75H7A2.75 2.75 0 0 1 4.25 18V6A2.75 2.75 0 0 1 7 3.25h7.5a.75.75 0 0 1 .53.22L19.53 8a.75.75 0 0 1 .22.53V18A2.75 2.75 0 0 1 17 20.75Zm-10-16A1.25 1.25 0 0 0 5.75 6v12A1.25 1.25 0 0 0 7 19.25h10A1.25 1.25 0 0 0 18.25 18V8.81l-4.06-4.06Z"/><path fill="#000000" d="M16.75 20h-1.5v-6.25h-6.5V20h-1.5v-6.5a1.25 1.25 0 0 1 1.25-1.25h7a1.25 1.25 0 0 1 1.25 1.25ZM12.47 8.75H8.53a1.29 1.29 0 0 1-1.28-1.3V4h1.5v3.25h3.5V4h1.5v3.45a1.29 1.29 0 0 1-1.28 1.3Z"/></svg></button>
-            </form>
-
-
-            <h2>{{ receta.strMeal }}</h2>
-            <img class="imgRecetas" src="{{ receta.strMealThumb }}" />
-            <p>Categoría: {{ receta.strCategory }}</p>
-          </div>
-          <div class="instrucciones oculto">
-            <strong>Instrucciones:</strong>
-            <div class="scroll-texto">
-              {{ receta.strInstructions }}
+              <h2>{{ receta.strMeal }}</h2>
+              <img class="imgRecetas" src="{{ receta.strMealThumb }}" />
+              <p>Categoría: {{ receta.strCategory }}</p>
+            </div>
+            <div class="instrucciones oculto">
+              <strong>Instrucciones:</strong>
+              <div class="scroll-texto">{{ receta.strInstructions }}</div>
             </div>
           </div>
+          {% endfor %}
         </div>
-        {% endfor %}
-      </div>
-      {% else %}
-      <p>No se encontraron recetas.</p>
-      {% endif %}
-    </main>
+        {% else %}
+        <p>No se encontraron recetas.</p>
+        {% endif %}
+      </main>
 
-<div class="div1">
-    <div class="carrusel">
-        <div class="atras">
-            <img id="atras" src="{{ url_for('static', filename='imagenes/atras.svg') }}" alt="atras" loading="lazy">
-        </div>
-        <div class="imagenes">
+      <div class="div1">
+        <div class="carrusel">
+          <div class="atras">
+            <img
+              id="atras"
+              src="{{ url_for('static', filename='imagenes/atras.svg') }}"
+              alt="atras"
+              loading="lazy"
+            />
+          </div>
+          <div class="imagenes">
             <div id="img"></div>
             <div id="texto" class="texto"></div>
-        </div>
-        <div class="adelante">
-            <img id="adelante" src="{{ url_for('static', filename='imagenes/adelante.svg') }}" alt="adelante" loading="lazy">
-        </div>
-    </div>
-    <div class="puntos" id="puntos"></div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="apartado-informacion">
-      <div class="detalles-Programadores">
-        <div class="descripcion-Programadores">
-          <h2 class="titulo-Programadores">Programadores</h2>
-          <p class="texto-Programadores">Somos dos estudiantes del SENA en programación apasionados por la tecnología y el
-            desarrollo web. Este proyecto es una muestra de nuestras habilidades y dedicación en el campo de la programación.
-          </p>
-          <p class="texto-Programadores">Creo en el poder del código como herramienta para transformar ideas en soluciones reales. Cada reto es una oportunidad para crecer, innovar y aportar valor. Mi objetivo no es solo desarrollar software, sino también construir experiencias que impacten positivamente a las personas. La motivación, disciplina y creatividad son la base de cada línea que escribo. "El futuro se crea, no se espera. Y el mejor momento para empezar a construirlo es ahora."</p>
-        </div>
-        <div class="container">
-          <div class="card">
-            <h3 class="title">Jhosef Alejandro</h3>
-            <div class="bar">
-              <div class="emptybar"></div>
-              <div class="filledbar">
-                <img src="{{ url_for('static', filename='IMAGENES/Jhosep.jpg')}}" alt="" class="fotos_programadores" />
-                <p></p>
-              </div>
-            </div>
-            <div class="circle"></div>
           </div>
-          <div class="card">
-            <h3 class="title">Juanangel Alvarado</h3>
-            <div class="bar">
-              <div class="emptybar"></div>
-              <div class="filledbar"></div>
-              <img src="{{ url_for('static', filename='IMAGENES/Juancho.jpg') }}" alt="" class="fotos_programadores">
+          <div class="adelante">
+            <img
+              id="adelante"
+              src="{{ url_for('static', filename='imagenes/adelante.svg') }}"
+              alt="adelante"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <div class="puntos" id="puntos"></div>
+      </div>
+
+      <div class="apartado-informacion">
+        <div class="detalles-Programadores">
+          <div class="descripcion-Programadores">
+            <h2 class="titulo-Programadores">Programadores</h2>
+            <p class="texto-Programadores">
+              Somos dos estudiantes del SENA en programación apasionados por la
+              tecnología y el desarrollo web. Este proyecto es una muestra de
+              nuestras habilidades y dedicación en el campo de la programación.
+            </p>
+            <p class="texto-Programadores">
+              Creo en el poder del código como herramienta para transformar
+              ideas en soluciones reales. Cada reto es una oportunidad para
+              crecer, innovar y aportar valor. Mi objetivo no es solo
+              desarrollar software, sino también construir experiencias que
+              impacten positivamente a las personas. La motivación, disciplina y
+              creatividad son la base de cada línea que escribo. "El futuro se
+              crea, no se espera. Y el mejor momento para empezar a construirlo
+              es ahora."
+            </p>
+          </div>
+          <div class="container">
+            <div class="card">
+              <h3 class="title">Jhosef Alejandro</h3>
+              <div class="bar">
+                <div class="emptybar"></div>
+                <div class="filledbar">
+                  <img
+                    src="{{ url_for('static', filename='IMAGENES/Jhosep.jpg')}}"
+                    alt=""
+                    class="fotos_programadores"
+                  />
+                  <p></p>
+                </div>
+              </div>
+              <div class="circle"></div>
             </div>
-            <div class="circle"></div>
+            <div class="card">
+              <h3 class="title">Juanangel Alvarado</h3>
+              <div class="bar">
+                <div class="emptybar"></div>
+                <div class="filledbar"></div>
+                <img
+                  src="{{ url_for('static', filename='IMAGENES/Juancho.jpg') }}"
+                  alt=""
+                  class="fotos_programadores"
+                />
+              </div>
+              <div class="circle"></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
       <div class="comentarios">
         <a href="/comentarios">
           <button class="button-56" role="button">
-            <h3>
-              Déjanos un comentario AQUÍ para ayudarnos a mejorar
-            </h3>
+            <h3>Déjanos un comentario AQUÍ para ayudarnos a mejorar</h3>
           </button>
         </a>
       </div>
@@ -198,6 +294,6 @@
       </div>
     </div>
 
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-</body>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
 </html>

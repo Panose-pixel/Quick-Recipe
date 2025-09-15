@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/Estilos/administracion.css">
+    <title>Recetas Guardadas</title>
+</head>
+<body>
+<div class="contenedor_principal">
+    <header>
+      <div class="barra_nav_principal">
+        <div class="izquierda">
+          <a href="/QuickRecipe"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 16 16" fill="#D8AA6F"><path fill="#D8AA6F" fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75z" clip-rule="evenodd"/></svg></a>
+        </div>
+
+        <div class="derecha">
+            <h2>Administrador: {{ session.get('usuario') }}</h2>
+        </div>
+
+        </div>
+    </header>
+
+    <main>
+        {% if Jhosep %}
+        <style>
+          body{
+              background-image: url(/static/IMAGENES/fondo_jhosep.jpg);
+          }
+        </style>
+        {% endif %}
+        
+        {% if Juanangel %}
+        <style>
+          body{
+              background-image: url(/static/IMAGENES/fondo_juanangel.png);
+          }
+        </style>
+        {% endif %}
+
+        <div style="margin-top: 2rem;" class="registro-container">
+
+            {% for comentario in comentarios %}
+              <div class="comentario">
+                <div class="estrellas_rincon">
+                    <div>
+                        <form action="/administracion" method="POST">
+                            <input type="hidden" value="{{comentario.comentario }}" name="contenido_comentario">
+                            <input type="hidden" value="{{comentario.usuario }}" name="autor_comentario">
+                            <button style="border: none; background-color: #262323;" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 26 26"><path fill="#D8AA6F" d="M11.5-.031c-1.958 0-3.531 1.627-3.531 3.594V4H4c-.551 0-1 .449-1 1v1H2v2h2v15c0 1.645 1.355 3 3 3h12c1.645 0 3-1.355 3-3V8h2V6h-1V5c0-.551-.449-1-1-1h-3.969v-.438c0-1.966-1.573-3.593-3.531-3.593h-3zm0 2.062h3c.804 0 1.469.656 1.469 1.531V4H10.03v-.438c0-.875.665-1.53 1.469-1.53zM6 8h5.125c.124.013.247.031.375.031h3c.128 0 .25-.018.375-.031H20v15c0 .563-.437 1-1 1H7c-.563 0-1-.437-1-1V8zm2 2v12h2V10H8zm4 0v12h2V10h-2zm4 0v12h2V10h-2z"/></svg>
+                            </button>
+                        </form>
+                    </div>
+                    <div>
+                        <div>
+                            {{ comentario.estrellas }}<svg style="margin-left: 4px;" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 36 36"><path fill="#FFAC33" d="M27.287 34.627c-.404 0-.806-.124-1.152-.371L18 28.422l-8.135 5.834a1.97 1.97 0 0 1-2.312-.008a1.971 1.971 0 0 1-.721-2.194l3.034-9.792l-8.062-5.681a1.98 1.98 0 0 1-.708-2.203a1.978 1.978 0 0 1 1.866-1.363L12.947 13l3.179-9.549a1.976 1.976 0 0 1 3.749 0L23 13l10.036.015a1.975 1.975 0 0 1 1.159 3.566l-8.062 5.681l3.034 9.792a1.97 1.97 0 0 1-.72 2.194a1.957 1.957 0 0 1-1.16.379z"/></svg>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div>
+                  <p><strong>{{ comentario.usuario }}
+                    {% if comentario.rol == 'admin' %}
+                        <span style="color: white">(</span><span style="color: #00FF00;">A</span><span style="color: #1BE7FF;">D</span><span style="color: #F3FF0B;">M</span><span style="color: #FFBB16;">I</span><span style="color: #FF5714;">N</span><span style="color: white">)</span>
+                    {% endif %} :
+                
+                
+                </strong> <span style="color: white;">{{ comentario.comentario }}</span></p>
+                  <p style="font-size: 0.8rem;">Fecha de publicacion: {{ comentario.fecha }}</p>
+                </div>
+
+              </div>
+            {% endfor %}
+
+        </div>
+    </main>
+
+    <div clas="footer-container">
+      <footer class="footer">
+        <p>© 2025 QuickRecipe. Todos los derechos reservados.</p>
+        <p>Desarrollado por Jhosef Alejandro y Juanangel Alvarado</p>
+      </footer>
+    </div>
+
+
+</div>
+</body>
+<script src="/static/js/script.js"></script>
+</html>

@@ -36,6 +36,50 @@ def login_requerido(f):
     return decorada
 
 
+
+
+def Admin_app(f):
+    @wraps(f)
+    def verificador_admin(*args, **kwargs):
+        if not session.get('admin?'):
+            return redirect(url_for('QuickRecipe'))
+        return f(*args, **kwargs)
+    return verificador_admin
+
+
+
+@app.route('/administracion', methods=['GET','POST'])
+@Admin_app
+def administracion():
+
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT comentarios.comentario, usuarios.usuario, comentarios.fecha, comentarios.estrellas, comentarios.rol FROM comentarios JOIN usuarios ON comentarios.usuario_id = usuarios.id order by comentarios.fecha DESC')
+    
+    comentarios = cur.fetchall()
+    
+    if request.method == 'POST':
+        nombre_del_que_hizo_el_comentario = str(request.form.get('autor_comentario'))
+        contenido_del_comentario = str(request.form.get('contenido_comentario'))
+
+        cur.execute('DELETE FROM comentarios WHERE usuario = (%s) and comentario = (%s)', (nombre_del_que_hizo_el_comentario, contenido_del_comentario))
+        
+        cur.execute('SELECT comentarios.comentario, usuarios.usuario, comentarios.fecha, comentarios.estrellas, comentarios.rol FROM comentarios JOIN usuarios ON comentarios.usuario_id = usuarios.id order by comentarios.fecha DESC')
+        comentarios = cur.fetchall()
+        mysql.connection.commit()
+
+
+    nombre_del_admin = session.get('usuario')
+    if nombre_del_admin == 'Juanangel':
+        Juanangel = True
+        Jhosep = False
+    else:
+        Jhosep = True
+        Juanangel = False
+
+    return render_template('administracion.html', Juanangel=Juanangel, Jhosep=Jhosep, comentarios=comentarios)
+
+
+
 @app.route('/')
 def index():
     return redirect(url_for('login'))
@@ -43,29 +87,45 @@ def index():
 
 @app.route('/login', methods=['GET','POST'])
 def login():
+    session.clear()
     if request.method == 'POST' and 'txtusername' in request.form and 'txtpassword' in request.form:
         _username = request.form['txtusername'].capitalize()
         _password = request.form['txtpassword']
 
         cur = mysql.connection.cursor()
         cur.execute('SELECT * FROM usuarios WHERE usuario = %s AND contraseña = %s', (_username, _password))
-        account = cur.fetchone()
+        account = cur.fetchone() 
+
+        cur.close()
+
 
         if account:
             session['logueado'] = True
             session['id'] = account.get('id')
             nombre = account.get('usuario', _username)
             session['usuario'] = nombre
+
+            rol = account['rol'] #captura el rol del ususario (si es admin o usuario corriente)
+            print(rol)
+
+            if rol == 'admin':
+                session['admin?'] = True #si el rol del usuario es admin, se almacenará en caché que su rol es admin y será usado
+                #en el decorador para entrar a la página administracion 
+                print(session['admin?'])
+                print(session.get('admin'))
+
             return redirect(url_for('QuickRecipe'))
         
         else:
             return render_template("login.html", mensaje="Usuario o contraseña incorrectos")
+        
     return render_template("login.html")
 
 
 
 @app.route('/Registro', methods=['GET', 'POST'])
 def registro():
+    session.clear()
     return render_template('Registro.html')
 
 # Registro conectado con formulario
@@ -82,11 +142,11 @@ def crear_registro():
     if usuario_existente:
         return render_template('Registro.html', mensaje='El usuario que ingresó ya se encuentra registrado')
     else:
-        cur.execute('INSERT INTO usuarios (usuario, contraseña) VALUES (%s, %s)',(username, password))
+        cur.execute('INSERT INTO usuarios (usuario, contraseña, rol) VALUES (%s, %s, %s)',(username, password, "usuario"))
         mysql.connection.commit()
         redirect(url_for('login'))
 
-
+    cur.close()
     return render_template('login.html', mensaje='Usuario y contraseña registrados correctamente')
 
 
@@ -97,24 +157,35 @@ def crear_registro():
 def QuickRecipe():
     recetas = []
     if request.method == "POST":
-        ingrediente = GoogleTranslator(source='es', target='en').translate(request.form.get("ingrediente"))# ingles a español
-        url = f"https://www.themealdb.com/api/json/v1/1/search.php?s={ingrediente}"
-        response = requests.get(url)
-        data = response.json()
-        comidas = data.get("meals")
+        ingrediente = request.form.get("ingrediente")
+        if ingrediente:
+            # traducir a inglés para la API
+            ingrediente_en = GoogleTranslator(source='es', target='en').translate(ingrediente)
+            url = f"https://www.themealdb.com/api/json/v1/1/search.php?s={ingrediente_en}"
+            
+            try:
+                response = requests.get(url, timeout=5)
+                data = response.json()
+                comidas = data.get("meals")
+            except Exception as e:
+                print("Error al conectar con la API:", e)
+                comidas = None
 
+            if comidas:
+                recetas = []
+                for comida in comidas:
+                    # aseguramos que no rompa si algún campo viene None
+                    categoria = comida.get("strCategory") or ""
+                    instrucciones = comida.get("strInstructions") or ""
 
-        if comidas:
-            for comida in comidas:
-                comida["strCategory"] = GoogleTranslator(source='auto', target='es').translate(comida["strCategory"])
-                comida["strInstructions"] = GoogleTranslator(source='auto', target='es').translate(comida["strInstructions"])
-            recetas = comidas
-        else:
-            print("No se encontraron recetas para:", ingrediente)
+                    comida["strCategory"] = GoogleTranslator(source='auto', target='es').translate(categoria)
+                    comida["strInstructions"] = GoogleTranslator(source='auto', target='es').translate(instrucciones)
+
+                    recetas.append(comida)
+            else:
+                print("No se encontraron recetas para:", ingrediente)
+
     return render_template("Mipgn.html", recetas=recetas)
-
-
-
 
 
 
@@ -124,7 +195,7 @@ def mis_recetas():
     nombre_usuario = session.get('usuario')
     cur = mysql.connection.cursor()
 
-    cur.execute(f'SELECT titulo, imagen, categoria, instrucciones, nombre_usuario FROM recetas_guardadas where nombre_usuario = "{nombre_usuario}"')
+    cur.execute('SELECT titulo, imagen, categoria, instrucciones, nombre_usuario FROM recetas_guardadas where nombre_usuario = (%s)', (nombre_usuario))
     
     recetas_guardadas = cur.fetchall()
 
@@ -190,24 +261,30 @@ def comentarios():
         fecha_comentario = datetime.datetime.now()
         fecha_comentario = fecha_comentario.strftime('%Y-%m-%d %H:%M:%S') #fecha del comentario
         numero_estrellas = int(request.form.get('rating'))
+        
+        if session.get('admin?'):
+            rol = 'admin'
+        else:
+            rol = 'usuario'
 
 
 
         if comentario:
-            cur.execute('INSERT INTO comentarios (usuario_id, usuario, comentario, fecha, estrellas) VALUES (%s, %s, %s, %s, %s)', (usuario_id, usuario, comentario, fecha_comentario, numero_estrellas))
+            cur.execute('INSERT INTO comentarios (usuario_id, usuario, comentario, fecha, estrellas, rol) VALUES (%s, %s, %s, %s, %s, %s)', (usuario_id, usuario, comentario, fecha_comentario, numero_estrellas, rol))
             mysql.connection.commit()
 
             cur.execute('''
-            SELECT comentarios.comentario, usuarios.usuario, comentarios.fecha, comentarios.estrellas
+            SELECT comentarios.comentario, usuarios.usuario, comentarios.fecha, comentarios.estrellas, comentarios.rol
             FROM comentarios 
-            JOIN usuarios ON comentarios.usuario_id = usuarios.id
+            JOIN usuarios ON comentarios.usuario_id = usuarios.id order by comentarios.fecha DESC
             ''')
             comentarios = cur.fetchall()
             flash('Comentario enviado correctamente, gracias por ayudarnos a mejorar 💖')
+
         return redirect(url_for('comentarios'))
     # Obtener comentarios con nombre del usuario
     cur.execute('''
-        SELECT comentarios.comentario, usuarios.usuario, comentarios.fecha, comentarios.estrellas
+        SELECT comentarios.comentario, usuarios.usuario, comentarios.fecha, comentarios.estrellas, comentarios.rol
         FROM comentarios 
         JOIN usuarios ON comentarios.usuario_id = usuarios.id order by comentarios.fecha DESC 
     ''')

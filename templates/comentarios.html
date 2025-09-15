@@ -115,7 +115,13 @@
 
 
                 <div>
-                  <p><strong>{{ comentario.usuario }}:</strong> <span style="color: white;">{{ comentario.comentario }}</span></p>
+                  <p><strong>{{ comentario.usuario }}
+                  {% if comentario.rol == 'admin' %}
+                    <span style="color: white">(</span><span style="color: #00FF00;">A</span><span style="color: #1BE7FF;">D</span><span style="color: #F3FF0B;">M</span><span style="color: #FFBB16;">I</span><span style="color: #FF5714;">N</span><span style="color: white">)</span>
+                  {% endif %}  :
+                  
+                  
+                  </strong> <span style="color: white;">{{ comentario.comentario }}</span></p>
                   <p style="font-size: 0.8rem;">Fecha de publicacion: {{ comentario.fecha }}</p>
                 </div>
 
