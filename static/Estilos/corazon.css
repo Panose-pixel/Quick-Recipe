@@ -1,0 +1,16 @@
+.btnCorazon {
+    background-color: transparent;
+}
+
+.navcoro {
+    background-image: url(/static/IMAGENES/corazon.svg);
+    background-repeat: no-repeat;
+}
+
+.no_navcoro {
+    background-image: url(/static/IMAGENES/corazonvacio.svg);
+    background-repeat: no-repeat;
+    &:hover{
+        background-image: url(/static/IMAGENES/corazon.svg);
+    }
+}

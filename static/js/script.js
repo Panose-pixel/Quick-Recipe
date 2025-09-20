@@ -122,3 +122,21 @@ window.addEventListener("scroll", function () {
   var header = document.querySelector(".header");
   header.classList.toggle("abajo", window.scrollY > 0);
 });
+
+
+
+  // Corazon
+  
+  const btnCorazon = document.getElementById("btnCorazon");
+  if (btnCorazon) {
+    btnCorazon.addEventListener("click", function () {
+      let elemento = document.getElementById("navcoro");
+      if (elemento.classList.contains("navcoro")) {
+        elemento.classList.remove("navcoro");
+        elemento.classList.add("no_navcoro");
+      } else {
+        elemento.classList.remove("no_navcoro");
+        elemento.classList.add("navcoro");
+      }
+    });
+  }

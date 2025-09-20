@@ -14,7 +14,6 @@ from deep_translator import GoogleTranslator
 
 
 
-
 app = Flask(__name__)
 
 app.config['MYSQL_HOST']='localhost'
@@ -36,8 +35,6 @@ def login_requerido(f):
     return decorada
 
 
-
-
 def Admin_app(f):
     @wraps(f)
     def verificador_admin(*args, **kwargs):
@@ -45,6 +42,24 @@ def Admin_app(f):
             return redirect(url_for('QuickRecipe'))
         return f(*args, **kwargs)
     return verificador_admin
+
+
+
+
+@app.route('/eliminador_recetas_totales', methods=['POST'])
+def eliminador_recetas_totales():
+    if request.method == 'POST':
+        cur = mysql.connection.cursor()
+        nombre_receta_eliminiar = request.form.get('nombre')
+        instrucciones_receta_eliminiar = request.form.get('instrucciones')
+
+        print(nombre_receta_eliminiar, instrucciones_receta_eliminiar)
+
+        cur.execute('DELETE FROM recetas_totales WHERE nombre = (%s) and instrucciones = (%s)', (nombre_receta_eliminiar, instrucciones_receta_eliminiar))
+        mysql.connection.commit()
+        cur.close()
+    return redirect(url_for('administracion'))
+
 
 
 
@@ -56,6 +71,11 @@ def administracion():
     cur.execute('SELECT comentarios.comentario, usuarios.usuario, comentarios.fecha, comentarios.estrellas, comentarios.rol FROM comentarios JOIN usuarios ON comentarios.usuario_id = usuarios.id order by comentarios.fecha DESC')
     
     comentarios = cur.fetchall()
+
+    #Para evitar borrar recetas importantes
+    cur.execute('SELECT * FROM recetas_totales limit 99999 OFFSET 26;') #sin limite y muestra recetas después de la 26
+    recetas = cur.fetchall()
+
     
     if request.method == 'POST':
         nombre_del_que_hizo_el_comentario = str(request.form.get('autor_comentario'))
@@ -76,7 +96,14 @@ def administracion():
         Jhosep = True
         Juanangel = False
 
-    return render_template('administracion.html', Juanangel=Juanangel, Jhosep=Jhosep, comentarios=comentarios)
+    return render_template('administracion.html', Juanangel=Juanangel, Jhosep=Jhosep, comentarios=comentarios, recetas=recetas)
+
+
+
+
+
+
+
 
 
 
@@ -154,85 +181,40 @@ def crear_registro():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @app.route('/QuickRecipe', methods=["GET", "POST"])
 @login_requerido
 def QuickRecipe():
     cur = mysql.connection.cursor()
-    if request.method == "POST":
-        ingrediente = request.form.get("ingrediente")
-        if ingrediente:
-
-            cur.execute('''
-                SELECT * FROM recetas_totales 
-                WHERE categoria LIKE %s
-                OR ingrediente1 LIKE %s
-                OR ingrediente2 LIKE %s
-                OR ingrediente3 LIKE %s
-                OR ingrediente4 LIKE %s
-                OR ingrediente5 LIKE %s
-                OR ingrediente6 LIKE %s
-                OR ingrediente7 LIKE %s
-                OR ingrediente8 LIKE %s
-                OR ingrediente9 LIKE %s
-                OR ingrediente10 LIKE %s
-                OR ingrediente11 LIKE %s
-                OR ingrediente12 LIKE %s
-                OR ingrediente13 LIKE %s
-                OR ingrediente14 LIKE %s
-                OR ingrediente15 LIKE %s
-                OR ingrediente16 LIKE %s
-                OR ingrediente17 LIKE %s
-                OR ingrediente18 LIKE %s
-                OR ingrediente19 LIKE %s
-                OR ingrediente20 LIKE %s
-            ''', (f"%{ingrediente}%",)*21)
-
-    
-        if ingrediente:
-            recetas = cur.fetchall()
-            return render_template("Mipgn.html", recetas=recetas)
-
-
-
-    return render_template("Mipgn.html")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    ingrediente = (request.args.get("ingrediente") or "").strip()
+    recetas = []
+    if ingrediente:
+        cur.execute('''
+            SELECT * FROM recetas_totales 
+            WHERE categoria LIKE %s
+            OR ingrediente1 LIKE %s
+            OR ingrediente2 LIKE %s
+            OR ingrediente3 LIKE %s
+            OR ingrediente4 LIKE %s
+            OR ingrediente5 LIKE %s
+            OR ingrediente6 LIKE %s
+            OR ingrediente7 LIKE %s
+            OR ingrediente8 LIKE %s
+            OR ingrediente9 LIKE %s
+            OR ingrediente10 LIKE %s
+            OR ingrediente11 LIKE %s
+            OR ingrediente12 LIKE %s
+            OR ingrediente13 LIKE %s
+            OR ingrediente14 LIKE %s
+            OR ingrediente15 LIKE %s
+            OR ingrediente16 LIKE %s
+            OR ingrediente17 LIKE %s
+            OR ingrediente18 LIKE %s
+            OR ingrediente19 LIKE %s
+            OR ingrediente20 LIKE %s
+        ''', (f"%{ingrediente}%",)*21)
+        recetas = cur.fetchall()
+    cur.close()
+    return render_template("Mipgn.html", recetas=recetas, ingrediente=ingrediente)
 
 
 
@@ -246,7 +228,7 @@ def mis_recetas():
     nombre_usuario = session.get('usuario')
     cur = mysql.connection.cursor()
 
-    cur.execute('SELECT titulo, img, categoria, instrucciones, video, nombre_usuario FROM recetas_guardadas where nombre_usuario = (%s)', (nombre_usuario))
+    cur.execute('SELECT id, titulo, img, categoria, instrucciones, video, nombre_usuario FROM recetas_guardadas where nombre_usuario = (%s)', (nombre_usuario))
     
     recetas_guardadas = cur.fetchall()
     
@@ -256,28 +238,28 @@ def mis_recetas():
 
 @app.route('/procesador', methods=['POST'])
 def procesador():
-    
     cur = mysql.connection.cursor()
-    
-    if request.method == 'POST':
-        titulo = request.form['nombre']
-        imagen = request.form['img']
-        categoria = request.form['categoria']
-        instruciones = request.form['instrucciones']
-        video = request.form['video']
-        nombre_usuario = session.get('usuario')
-        
-        cur.execute(f"SELECT * FROM recetas_guardadas WHERE titulo = (%s) and nombre_usuario = (%s);", (titulo, nombre_usuario))
-        receta_ya_guardada = cur.fetchone()
+    titulo = request.form['nombre']
+    imagen = request.form['img']
+    categoria = request.form['categoria']
+    instruciones = request.form['instrucciones']
+    video = request.form['video']
+    nombre_usuario = session.get('usuario')
+    ingrediente = (request.form.get('ingrediente') or '').strip()
 
-        if receta_ya_guardada:
-            mensaje_de_duplicacion = "Ya has guardado antes esta receta"
-            return render_template('/Mipgn.html', mensaje_de_duplicacion=mensaje_de_duplicacion)
-        else:
-            cur.execute('INSERT INTO recetas_guardadas (titulo, img, categoria, instrucciones, video, nombre_usuario) VALUES (%s, %s, %s, %s, %s, %s)', (titulo, imagen, categoria, instruciones, video, nombre_usuario))
-        mysql.connection.commit()
+    cur.execute("SELECT * FROM recetas_guardadas WHERE titulo = %s AND nombre_usuario = %s;", (titulo, nombre_usuario))
+    receta_ya_guardada = cur.fetchone()
 
-    return redirect(url_for('QuickRecipe'))
+    if receta_ya_guardada:
+        return redirect(url_for('QuickRecipe', ingrediente=ingrediente, mensaje_de_duplicacion="Ya has guardado antes esta receta"))
+
+    cur.execute(
+        'INSERT INTO recetas_guardadas (titulo, img, categoria, instrucciones, video, nombre_usuario) VALUES (%s, %s, %s, %s, %s, %s)',
+        (titulo, imagen, categoria, instruciones, video, nombre_usuario)
+    )
+    mysql.connection.commit()
+    return redirect(url_for('QuickRecipe', ingrediente=ingrediente, mensaje_exito="Receta guardada"))
+
 
 
 
@@ -288,7 +270,7 @@ def procesador():
 def eliminador():
     cur = mysql.connection.cursor()
     if request.method == 'POST':
-        titulo = request.form.get('strMeal')
+        titulo = request.form.get('nombre')
         nombre_usuario = session.get('usuario')
 
         cur.execute("DELETE FROM recetas_guardadas WHERE titulo = (%s) and nombre_usuario = (%s);", (titulo,nombre_usuario))
@@ -297,6 +279,67 @@ def eliminador():
 
 
     return redirect(url_for('mis_recetas'))
+
+
+@app.route('/sugerencias', methods=['GET','POST'])
+@login_requerido
+def sugerencias():
+    ingredientes = []
+    ingredientes_texto = str('ingrediente1')
+    for i in range(2, 21):
+        ingredientes.append(request.form.get(f"ingrediente{i}"))
+
+        ingredientes_texto = ingredientes_texto + ', '+ str(request.form.get(f"ingrediente{i}"))
+        
+    print(ingredientes_texto)
+
+    
+
+    if request.method == 'POST':
+        cur = mysql.connection.cursor()
+
+        nombre = request.form.get("nombre")
+        img = request.form.get("img")
+        instrucciones = request.form.get("instrucciones")
+        categoria = request.form.get("categoria")
+        video = request.form.get("video")
+        #ingredientes
+        ingrediente1 = request.form.get("ingrediente1")
+        ingrediente2 = request.form.get("ingrediente2")
+        ingrediente3 = request.form.get("ingrediente3")
+        ingrediente4 = request.form.get("ingrediente4")
+        ingrediente5 = request.form.get("ingrediente5")
+        ingrediente6 = request.form.get("ingrediente6")
+        ingrediente7 = request.form.get("ingrediente7")
+        ingrediente8 = request.form.get("ingrediente8")
+        ingrediente9 = request.form.get("ingrediente9")
+        ingrediente10 = request.form.get("ingrediente10")
+        ingrediente11 = request.form.get("ingrediente11")
+        ingrediente12 = request.form.get("ingrediente12")
+        ingrediente13 = request.form.get("ingrediente13")
+        ingrediente14 = request.form.get("ingrediente14")
+        ingrediente15 = request.form.get("ingrediente15")
+        ingrediente16 = request.form.get("ingrediente16")
+        ingrediente17 = request.form.get("ingrediente17")
+        ingrediente18 = request.form.get("ingrediente18")
+        ingrediente19 = request.form.get("ingrediente19")
+        ingrediente20 = request.form.get("ingrediente20")
+
+        cur.execute("""INSERT INTO recetas_totales (nombre, img, instrucciones, categoria, video, ingrediente1,ingrediente2, ingrediente3, ingrediente4, ingrediente5,ingrediente6, ingrediente7, ingrediente8, ingrediente9, ingrediente10,ingrediente11, ingrediente12, ingrediente13, ingrediente14, ingrediente15,ingrediente16, ingrediente17, ingrediente18, ingrediente19, ingrediente20) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", (nombre, img, instrucciones, categoria, video, ingrediente1, ingrediente2, ingrediente3, ingrediente4, ingrediente5, ingrediente6, ingrediente7, ingrediente8, ingrediente9, ingrediente10, ingrediente11, ingrediente12, ingrediente13, ingrediente14, ingrediente15, ingrediente16, ingrediente17, ingrediente18, ingrediente19, ingrediente20))
+
+        mysql.connection.commit()
+        cur.close()
+        return redirect(url_for('sugerencias'))
+
+    return render_template('sugerencias.html')
+
+
+
+
+
+
+
+
 
 
 

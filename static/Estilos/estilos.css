@@ -37,7 +37,7 @@ body {
 }
 
 .mensaje_de_bienvenida {
-  margin-right: 2rem;
+  margin-right: 3rem;
   color: #d8aa6f;
   font-family: serif;
 }
@@ -188,6 +188,13 @@ nav {
   align-items: center;
 }
 
+.alerta{
+  margin-top: 4rem;
+  text-align: center;
+  color: white;
+  margin: 0;
+}
+
 /* Inputs y selects */
 .Descubre,
 .barrabusqueda {
@@ -229,8 +236,10 @@ nav {
 .receta {
   display: flex;
   flex-direction: row;
-  background-color: #d2984c;
+  background-color: #000000ef;
+  background-image: linear-gradient(135deg, rgba(150, 150, 150, 0.107) 0%, rgb(0, 0, 0) 100%);
   border-radius: 12px;
+  color: white;
   box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
   padding: 15px;
   width: auto;
@@ -238,7 +247,7 @@ nav {
   transition: all 0.4s ease;
   overflow: visible;
   position: relative;
-  border: 6px solid #3a0b0b;
+  border: 6px solid #3a0b0b00;
 }
 
 .contenido {
@@ -626,7 +635,7 @@ footer {
   background-color: none;
   border: none;
   text-decoration: none;
-  color: #ca9a5c;
+  color: white;
   font-family: serif;
   font-size: 30px;
 }

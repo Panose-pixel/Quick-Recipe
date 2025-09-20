@@ -127,6 +127,74 @@ p {
 }
 
 
+
+
+
+
+
+.ordenRecetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.receta {
+  display: flex;
+  flex-direction: row;
+  background-color: #d2984c;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+  padding: 15px;
+  width: auto;
+  max-width: 100%;
+  transition: all 0.4s ease;
+  overflow: visible;
+  position: relative;
+  border: 6px solid #3a0b0b;
+}
+
+.contenido {
+  width: 300px;
+  flex-shrink: 0;
+}
+
+.imgRecetas {
+  border-radius: 8px;
+  margin: 10px;
+  height: 300px;
+  margin-right: 80px;
+  margin-left: 0%;
+}
+
+.form_eliminar{
+  display: flex;
+  margin: auto auto;
+  justify-content: center;
+}
+
+.instrucciones {
+  background-color: #2f0b0b;
+  color: #d8aa6f;
+  border-radius: 12px;
+  padding: 15px;
+  margin-left: 15px;
+  width: 300px;
+  opacity: 1;
+  max-height: 400px;
+  overflow-y: auto;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  animation: slideIn 0.3s ease forwards;
+}
+
+.scroll-texto {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+
 @media (max-width: 600px) {
   .registro-container {
     width: 95%;

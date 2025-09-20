@@ -3,256 +3,287 @@
 <!-- This is a comment -->
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QUICK RECIPE</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='estilos/estilos.css') }}" />
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300i,400" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUICK RECIPE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos/estilos.css') }}" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300i,400" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/estilos/corazon.css">
+
+    {% if session.get('admin?') %}
+    <style>
+        .margen_sugerencia {
+            margin-top: 180%;
+            margin-bottom: 0%;
+        }
+    </style>
+    {% endif %}
+
 </head>
 
 <body>
-  <div class="contenedor_principal">
-    <header class="header">
-      <!-- Logo circular -->
-      <div>
-        <div>
-          <p class="logo">QuickRecipe</p>
-        </div>
-      </div>
-
-      <!-- Navegación central -->
-      <nav>
-        <ul>
-          <li>
-            <form method="POST" action="/QuickRecipe">
-              <select class="Descubre" name="ingrediente" onchange="this.form.submit()">
-                <option value="" disabled selected>Descubre</option>
-                <option value="Carne">Carne</option>
-                <option value="Pollo">Pollo</option>
-                <option value="Pescado">Pescado</option>
-                <option value="Cerdo">Cerdo</option>
-                <option value="Arroces">Arroces</option>
-                <option value="Sopas">Sopas</option>
-              </select>
-            </form>
-          </li>
-          <li>
-            <form method="POST" action="/QuickRecipe">
-              <input class="barrabusqueda" name="ingrediente" type="text" placeholder="Escribe un ingrediente" />
-            </form>
-          </li>
-        </ul>
-      </nav>
-
-      <div>
-        <button class="btnMenu" id="btnMenu">
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 20 20">
-              <path fill="#d8aa6f" d="M1 3v2h18V3zm0 8h18V9H1zm0 6h18v-2H1z" />
-            </svg>
-          </div>
-        </button>
-
-        <div>
-
-          <!-- Usuario y cerrar sesión -->
-          <div class="usuario-info">
-            <h2 class="mensaje_de_bienvenida">
-              Bienvenido {{ session['usuario'] }} {% if session.get('admin?') %}
-              <span style="color: white">(</span><span style="color: #00ff00">A</span><span
-                style="color: #1be7ff">D</span><span style="color: #f3ff0b">M</span><span
-                style="color: #ffbb16">I</span><span style="color: #ff5714">N</span><span style="color: white">)</span>
-              {% endif %}
-            </h2>
-          </div>
-        </div>
-      </div>
-
-
-
-
-
-
-
-      <div class="no_navbar" id="navbar">
-        <div class="Ordenbarrahorizontal">
-          <div class="usuario-info">
-            {% if mensaje_de_duplicacion %}
-            <h3 class="alerta">
-              <strong>¡{{ mensaje_de_duplicacion }}!</strong>
-            </h3>
-            {% endif %}
-
-            <a href="/login" class="cerrar_sesion">
-              <h2>Cerrar Sesión</h2>
-            </a>
-          </div>
-
-
-          <div class="Contenedor_enlace_mis_recetas">
-            <div style="margin: auto auto">
-              <a class="recetas_guadadas" href="/Mis_Recetas">Recetas Guardadas</a>
+    <div class="contenedor_principal">
+        <header class="header">
+            <!-- Logo circular -->
+            <div>
+                <div>
+                    <p class="logo">QuickRecipe</p>
+                </div>
             </div>
-          </div>
 
-          {% if session.get('admin?') %}
+            <!-- Navegación central -->
+            <nav>
+                <ul>
+                    <li>
+                        <form method="POST" action="/QuickRecipe">
+                            <select class="Descubre" name="ingrediente" onchange="this.form.submit()">
+                                <option value="" disabled selected>Descubre</option>
+                                <option value="Carne">Carne</option>
+                                <option value="Pollo">Pollo</option>
+                                <option value="Pescado">Pescado</option>
+                                <option value="Cerdo">Cerdo</option>
+                                <option value="Arroces">Arroces</option>
+                                <option value="Sopas">Sopas</option>
+                            </select>
+                        </form>
+                    </li>
+                    <li>
+                        <form method="GET" action="/QuickRecipe">
+                            <input class="barrabusqueda" type="text" name="ingrediente" value="{{ ingrediente or '' }}"
+                                placeholder="Escribe un ingrediente" />
+                        </form>
+                    </li>
+                </ul>
+            </nav>
 
-          <div style="margin-top: 200%; margin-bottom: 0%;">
-            <a class="administracion" href="/administracion">
-              <h3>ADMINISTRACION</h3>
-            </a>
-          </div>
-
-          {% endif %}
-        </div>
-      </div>
-  </div>
+            <div>
+                <button class="btnMenu" id="btnMenu">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 20 20">
+                            <path fill="#d8aa6f" d="M1 3v2h18V3zm0 8h18V9H1zm0 6h18v-2H1z" />
+                        </svg>
+                    </div>
+                </button>
 
 
-  <main>
-    <div style="position: relative;">
-      <img class="imagenfondoprincipal" src="/static/IMAGENES/FONDOS/FONDOPRINCIPAL.webp" alt="">
-      <div class="cuadrologo">
-        <h1 class="Rotacion">
-          <span class="quick">Quick</span>
-          <span class="recipe">Recipe</span>
-        </h1>
-      </div>
+
+                <div>
+
+                    <!-- Usuario y cerrar sesión -->
+                    <div class="usuario-info">
+                        <h2 class="mensaje_de_bienvenida">
+                            Bienvenido {{ session['usuario'] }} {% if session.get('admin?') %}
+                            <span style="color: white">(</span><span style="color: #00ff00">A</span><span
+                                style="color: #1be7ff">D</span><span style="color: #f3ff0b">M</span><span
+                                style="color: #ffbb16">I</span><span style="color: #ff5714">N</span><span
+                                style="color: white">)</span>
+                            {% endif %}
+                        </h2>
+                    </div>
+                    {% if mensaje_de_duplicacion %}
+                    <h3 class="alerta">
+                        <strong>¡{{ mensaje_de_duplicacion }}!</strong>
+                    </h3>
+                    {% endif %}
+                </div>
+            </div>
+
+
+
+            <div class="no_navbar" id="navbar">
+                <div class="Ordenbarrahorizontal">
+                    <div class="usuario-info">
+                        <a href="/login" class="cerrar_sesion">
+                            <h2>Cerrar Sesión</h2>
+                        </a>
+                    </div>
+
+
+                    <div class="Contenedor_enlace_mis_recetas">
+                        <div style="margin: auto auto">
+                            <a class="recetas_guadadas" href="/Mis_Recetas">Recetas Guardadas</a>
+                        </div>
+                    </div>
+
+
+
+                    <div class="margen_sugerencia">
+                        {% if session.get('admin?') %}
+                        <div style="margin-bottom: 2rem;">
+                            <a class="administracion" href="/sugerencias">
+                                <h3>SUGERIR UNA RECETA</h3>
+                            </a>
+                        </div>
+
+                        <div>
+                            <a class="administracion" href="/administracion">
+                                <h3>ADMINISTRACION</h3>
+                            </a>
+                        </div>
+
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
     </div>
 
 
-    >
+    <main>
+        <div style="position: relative;">
+            <img class="imagenfondoprincipal" src="/static/IMAGENES/FONDOS/FONDOPRINCIPAL.webp" alt="">
+            <div class="cuadrologo">
+                <h1 class="Rotacion">
+                    <span class="quick">Quick</span>
+                    <span class="recipe">Recipe</span>
+                </h1>
+            </div>
+        </div>
 
-    {% if recetas %}
-    <div class="ordenRecetas">
-      {% for receta in recetas %}
 
-      <div class="receta" onclick="mostrarInstrucciones(this)">
-        <div class="contenido">
-          <form action="/procesador" method="POST">
-            <input type="hidden" name="nombre" value="{{ receta.nombre }}" />
-            <input type="hidden" name="img" value="{{ receta.img }}" />
-            <input type="hidden" name="categoria" value="{{ receta.categoria }}" />
-            <input type="hidden" name="instrucciones" value="{{ receta.instrucciones }}" />
-            <input type="hidden" name="video" value="{{ receta.video }}" />
-            <button style="border: none; background-color: #d2984c" type="submit">
-              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="#000000">
-                <path fill="#000000"
-                  d="M17 20.75H7A2.75 2.75 0 0 1 4.25 18V6A2.75 2.75 0 0 1 7 3.25h7.5a.75.75 0 0 1 .53.22L19.53 8a.75.75 0 0 1 .22.53V18A2.75 2.75 0 0 1 17 20.75Zm-10-16A1.25 1.25 0 0 0 5.75 6v12A1.25 1.25 0 0 0 7 19.25h10A1.25 1.25 0 0 0 18.25 18V8.81l-4.06-4.06Z" />
-                <path fill="#000000"
-                  d="M16.75 20h-1.5v-6.25h-6.5V20h-1.5v-6.5a1.25 1.25 0 0 1 1.25-1.25h7a1.25 1.25 0 0 1 1.25 1.25ZM12.47 8.75H8.53a1.29 1.29 0 0 1-1.28-1.3V4h1.5v3.25h3.5V4h1.5v3.45a1.29 1.29 0 0 1-1.28 1.3Z" />
-              </svg>
+
+        {% if recetas %}
+        <div class="ordenRecetas">
+            {% for receta in recetas %}
+
+            <div class="receta" onclick="mostrarInstrucciones(this)">
+                <div class="contenido">
+
+                    <h2>{{ receta.nombre }}</h2>
+                    <img class="imgRecetas" src="{{ receta.img }}" />
+                    <p>Categoría: {{ receta.categoria }}</p>
+                </div>
+                <div>
+                    <form action="{{ url_for('procesador') }}" method="POST">
+                        <input type="hidden" name="nombre" value="{{ receta.nombre }}">
+                        <input type="hidden" name="img" value="{{ receta.img }}">
+                        <input type="hidden" name="categoria" value="{{ receta.categoria }}">
+                        <input type="hidden" name="instrucciones" value="{{ receta.instrucciones }}">
+                        <input type="hidden" name="video" value="{{ receta.video }}">
+                        <input type="hidden" name="ingrediente" value="{{ ingrediente or '' }}">
+
+                        <button class="btnCorazon" id="btnCorazon" type="submit">
+                            <div class="{% if receta.id in recetas_guardadas %}navcoro{% else %}no_navcoro{% endif %}">      
+                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 1024 1024">
+                                    <path fill="#000000"
+                                        d="M287.984 114.16c31.376 0 88.094 15.008 180.094 105.616l45.616 44.912l44.928-45.632c63.872-64.896 131.84-105.2 177.376-105.2c61.408 0 109.809 21.008 157.009 68.096c44.464 44.368 68.992 103.36 68.992 166.112c.032 62.784-24.448 121.824-69.408 166.672c-3.664 3.712-196.992 212.304-358.96 387.104c-7.632 7.248-16.352 8.32-20.991 8.32c-4.576 0-13.2-1.024-20.8-8.096c-39.472-43.905-325.552-362-358.815-395.232C88.497 462.416 64 403.376 64 340.608c.015-62.752 24.511-121.728 69.04-166.144c43.295-43.264 93.984-60.304 154.944-60.304zm-.002-64c-76.528 0-144 22.895-200.176 79.008c-117.072 116.768-117.072 306.128 0 422.96c33.424 33.44 357.855 394.337 357.855 394.337c18.48 18.496 42.753 27.68 66.96 27.68c24.225 0 48.4-9.184 66.912-27.68c0 0 354.88-383.024 358.656-386.85c117.04-116.88 117.04-306.24 0-423.007c-58.112-58-123.024-86.784-202.208-86.784c-75.648 0-160 60.32-223.008 124.32C447.981 110.159 366.237 50.16 287.981 50.16z" />
+                                </svg>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+                <div class="instrucciones oculto">
+                    <strong>Instrucciones:</strong>
+                    <div class="scroll-texto">{{ receta.instrucciones }}</div>
+
+                    <div>
+                        <iframe width="187" height="105" src="{{ receta.video | replace('watch?v=', 'embed/') }}"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                        </iframe>
+
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>No se encontraron recetas.</p>
+        {% endif %}
+    </main>
+
+    <div class="div1">
+        <div class="carrusel">
+            <div class="atras">
+                <img id="atras" src="{{ url_for('static', filename='imagenes/atras.svg') }}" alt="atras"
+                    loading="lazy" />
+            </div>
+            <div class="imagenes">
+                <div id="img"></div>
+                <div id="texto" class="texto"></div>
+            </div>
+            <div class="adelante">
+                <img id="adelante" src="{{ url_for('static', filename='imagenes/adelante.svg') }}" alt="adelante"
+                    loading="lazy" />
+            </div>
+        </div>
+        <div class="puntos" id="puntos"></div>
+    </div>
+
+    <div class="apartado-informacion">
+        <div class="detalles-Programadores">
+            <div class="descripcion-Programadores">
+                <h2 class="titulo-Programadores">Programadores</h2>
+                <p class="texto-Programadores">
+                    Somos dos estudiantes del SENA en programación apasionados por la
+                    tecnología y el desarrollo web. Este proyecto es una muestra de
+                    nuestras habilidades y dedicación en el campo de la programación.
+                </p>
+                <p class="texto-Programadores">
+                    Creo en el poder del código como herramienta para transformar
+                    ideas en soluciones reales. Cada reto es una oportunidad para
+                    crecer, innovar y aportar valor. Mi objetivo no es solo
+                    desarrollar software, sino también construir experiencias que
+                    impacten positivamente a las personas. La motivación, disciplina y
+                    creatividad son la base de cada línea que escribo. "El futuro se
+                    crea, no se espera. Y el mejor momento para empezar a construirlo
+                    es ahora."
+                </p>
+            </div>
+            <div class="container">
+                <div class="card">
+                    <h3 class="title">Jhosef Alejandro</h3>
+                    <div class="bar">
+                        <div class="emptybar"></div>
+                        <div class="filledbar">
+                            <img src="{{ url_for('static', filename='IMAGENES/Jhosep.jpg')}}" alt=""
+                                class="fotos_programadores" />
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="circle"></div>
+                </div>
+                <div class="card">
+                    <h3 class="title">Juanangel Alvarado</h3>
+                    <div class="bar">
+                        <div class="emptybar"></div>
+                        <div class="filledbar"></div>
+                        <img src="{{ url_for('static', filename='IMAGENES/Juancho.jpg') }}" alt=""
+                            class="fotos_programadores" />
+                    </div>
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comentarios">
+        <a href="/comentarios">
+            <button class="button-56" role="button">
+                <h3>Déjanos un comentario AQUÍ para ayudarnos a mejorar</h3>
             </button>
-          </form>
-
-          <h2>{{ receta.nombre }}</h2>
-          <img class="imgRecetas" src="{{ receta.img }}" />
-          <p>Categoría: {{ receta.categoria }}</p>
-        </div>
-        <div class="instrucciones oculto">
-          <strong>Instrucciones:</strong>
-          <div class="scroll-texto">{{ receta.instrucciones }}</div>
-
-          <div>
-            <iframe width="187" height="105" src="{{ receta.video | replace('watch?v=', 'embed/') }}"
-              title="YouTube video player" frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-            </iframe>
-
-          </div>
-        </div>
-
-      </div>
-      {% endfor %}
+        </a>
     </div>
-    {% else %}
-    <p>No se encontraron recetas.</p>
-    {% endif %}
-  </main>
-
-  <div class="div1">
-    <div class="carrusel">
-      <div class="atras">
-        <img id="atras" src="{{ url_for('static', filename='imagenes/atras.svg') }}" alt="atras" loading="lazy" />
-      </div>
-      <div class="imagenes">
-        <div id="img"></div>
-        <div id="texto" class="texto"></div>
-      </div>
-      <div class="adelante">
-        <img id="adelante" src="{{ url_for('static', filename='imagenes/adelante.svg') }}" alt="adelante"
-          loading="lazy" />
-      </div>
     </div>
-    <div class="puntos" id="puntos"></div>
-  </div>
 
-  <div class="apartado-informacion">
-    <div class="detalles-Programadores">
-      <div class="descripcion-Programadores">
-        <h2 class="titulo-Programadores">Programadores</h2>
-        <p class="texto-Programadores">
-          Somos dos estudiantes del SENA en programación apasionados por la
-          tecnología y el desarrollo web. Este proyecto es una muestra de
-          nuestras habilidades y dedicación en el campo de la programación.
-        </p>
-        <p class="texto-Programadores">
-          Creo en el poder del código como herramienta para transformar
-          ideas en soluciones reales. Cada reto es una oportunidad para
-          crecer, innovar y aportar valor. Mi objetivo no es solo
-          desarrollar software, sino también construir experiencias que
-          impacten positivamente a las personas. La motivación, disciplina y
-          creatividad son la base de cada línea que escribo. "El futuro se
-          crea, no se espera. Y el mejor momento para empezar a construirlo
-          es ahora."
-        </p>
-      </div>
-      <div class="container">
-        <div class="card">
-          <h3 class="title">Jhosef Alejandro</h3>
-          <div class="bar">
-            <div class="emptybar"></div>
-            <div class="filledbar">
-              <img src="{{ url_for('static', filename='IMAGENES/Jhosep.jpg')}}" alt="" class="fotos_programadores" />
-              <p></p>
-            </div>
-          </div>
-          <div class="circle"></div>
-        </div>
-        <div class="card">
-          <h3 class="title">Juanangel Alvarado</h3>
-          <div class="bar">
-            <div class="emptybar"></div>
-            <div class="filledbar"></div>
-            <img src="{{ url_for('static', filename='IMAGENES/Juancho.jpg') }}" alt="" class="fotos_programadores" />
-          </div>
-          <div class="circle"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="comentarios">
-    <a href="/comentarios">
-      <button class="button-56" role="button">
-        <h3>Déjanos un comentario AQUÍ para ayudarnos a mejorar</h3>
-      </button>
-    </a>
-  </div>
-  </div>
-
-  <div clas="footer-container">
     <div clas="footer-container">
-      <footer class="footer">
-        <p>© 2025 QuickRecipe. Todos los derechos reservados.</p>
-        <p>Desarrollado por Jhosef Alejandro y Juanangel Alvarado</p>
-      </footer>
+        <div clas="footer-container">
+            <footer class="footer">
+                <p>© 2025 QuickRecipe. Todos los derechos reservados.</p>
+                <p>Desarrollado por Jhosef Alejandro y Juanangel Alvarado</p>
+            </footer>
+        </div>
     </div>
-  </div>
 
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 
 </html>
