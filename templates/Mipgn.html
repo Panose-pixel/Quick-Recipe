@@ -132,10 +132,11 @@
       <div class="receta" onclick="mostrarInstrucciones(this)">
         <div class="contenido">
           <form action="/procesador" method="POST">
-            <input type="hidden" name="strMeal" value="{{ receta.strMeal }}" />
-            <input type="hidden" name="strMealThumb" value="{{ receta.strMealThumb }}" />
-            <input type="hidden" name="strCategory" value="{{ receta.strCategory }}" />
-            <input type="hidden" name="strInstructions" value="{{ receta.strInstructions }}" />
+            <input type="hidden" name="nombre" value="{{ receta.nombre }}" />
+            <input type="hidden" name="img" value="{{ receta.img }}" />
+            <input type="hidden" name="categoria" value="{{ receta.categoria }}" />
+            <input type="hidden" name="instrucciones" value="{{ receta.instrucciones }}" />
+            <input type="hidden" name="video" value="{{ receta.video }}" />
             <button style="border: none; background-color: #d2984c" type="submit">
               <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="#000000">
                 <path fill="#000000"
@@ -146,14 +147,24 @@
             </button>
           </form>
 
-          <h2>{{ receta.strMeal }}</h2>
-          <img class="imgRecetas" src="{{ receta.strMealThumb }}" />
-          <p>Categoría: {{ receta.strCategory }}</p>
+          <h2>{{ receta.nombre }}</h2>
+          <img class="imgRecetas" src="{{ receta.img }}" />
+          <p>Categoría: {{ receta.categoria }}</p>
         </div>
         <div class="instrucciones oculto">
           <strong>Instrucciones:</strong>
-          <div class="scroll-texto">{{ receta.strInstructions }}</div>
+          <div class="scroll-texto">{{ receta.instrucciones }}</div>
+
+          <div>
+            <iframe width="187" height="105" src="{{ receta.video | replace('watch?v=', 'embed/') }}"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+            </iframe>
+
+          </div>
         </div>
+
       </div>
       {% endfor %}
     </div>

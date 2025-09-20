@@ -152,40 +152,91 @@ def crear_registro():
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @app.route('/QuickRecipe', methods=["GET", "POST"])
 @login_requerido
 def QuickRecipe():
-    recetas = []
+    cur = mysql.connection.cursor()
     if request.method == "POST":
         ingrediente = request.form.get("ingrediente")
         if ingrediente:
-            # traducir a inglés para la API
-            ingrediente_en = GoogleTranslator(source='es', target='en').translate(ingrediente)
-            url = f"https://www.themealdb.com/api/json/v1/1/search.php?s={ingrediente_en}"
-            
-            try:
-                response = requests.get(url, timeout=5)
-                data = response.json()
-                comidas = data.get("meals")
-            except Exception as e:
-                print("Error al conectar con la API:", e)
-                comidas = None
 
-            if comidas:
-                recetas = []
-                for comida in comidas:
-                    # aseguramos que no rompa si algún campo viene None
-                    categoria = comida.get("strCategory") or ""
-                    instrucciones = comida.get("strInstructions") or ""
+            cur.execute('''
+                SELECT * FROM recetas_totales 
+                WHERE categoria LIKE %s
+                OR ingrediente1 LIKE %s
+                OR ingrediente2 LIKE %s
+                OR ingrediente3 LIKE %s
+                OR ingrediente4 LIKE %s
+                OR ingrediente5 LIKE %s
+                OR ingrediente6 LIKE %s
+                OR ingrediente7 LIKE %s
+                OR ingrediente8 LIKE %s
+                OR ingrediente9 LIKE %s
+                OR ingrediente10 LIKE %s
+                OR ingrediente11 LIKE %s
+                OR ingrediente12 LIKE %s
+                OR ingrediente13 LIKE %s
+                OR ingrediente14 LIKE %s
+                OR ingrediente15 LIKE %s
+                OR ingrediente16 LIKE %s
+                OR ingrediente17 LIKE %s
+                OR ingrediente18 LIKE %s
+                OR ingrediente19 LIKE %s
+                OR ingrediente20 LIKE %s
+            ''', (f"%{ingrediente}%",)*21)
 
-                    comida["strCategory"] = GoogleTranslator(source='auto', target='es').translate(categoria)
-                    comida["strInstructions"] = GoogleTranslator(source='auto', target='es').translate(instrucciones)
+    
+        if ingrediente:
+            recetas = cur.fetchall()
+            return render_template("Mipgn.html", recetas=recetas)
 
-                    recetas.append(comida)
-            else:
-                print("No se encontraron recetas para:", ingrediente)
 
-    return render_template("Mipgn.html", recetas=recetas)
+
+    return render_template("Mipgn.html")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -195,10 +246,9 @@ def mis_recetas():
     nombre_usuario = session.get('usuario')
     cur = mysql.connection.cursor()
 
-    cur.execute('SELECT titulo, imagen, categoria, instrucciones, nombre_usuario FROM recetas_guardadas where nombre_usuario = (%s)', (nombre_usuario))
+    cur.execute('SELECT titulo, img, categoria, instrucciones, video, nombre_usuario FROM recetas_guardadas where nombre_usuario = (%s)', (nombre_usuario))
     
     recetas_guardadas = cur.fetchall()
-
     
     return render_template('MisRecetas.html', nombre=nombre_usuario, recetas_guardadas=recetas_guardadas)
 
@@ -210,33 +260,38 @@ def procesador():
     cur = mysql.connection.cursor()
     
     if request.method == 'POST':
-        titulo = request.form['strMeal']
-        imagen = request.form['strMealThumb']
-        categoria = request.form['strCategory']
-        instruciones = request.form['strInstructions']
+        titulo = request.form['nombre']
+        imagen = request.form['img']
+        categoria = request.form['categoria']
+        instruciones = request.form['instrucciones']
+        video = request.form['video']
         nombre_usuario = session.get('usuario')
         
-        cur.execute(f"SELECT * FROM recetas_guardadas WHERE titulo = '{titulo}' and nombre_usuario = '{nombre_usuario}';")
+        cur.execute(f"SELECT * FROM recetas_guardadas WHERE titulo = (%s) and nombre_usuario = (%s);", (titulo, nombre_usuario))
         receta_ya_guardada = cur.fetchone()
 
         if receta_ya_guardada:
             mensaje_de_duplicacion = "Ya has guardado antes esta receta"
             return render_template('/Mipgn.html', mensaje_de_duplicacion=mensaje_de_duplicacion)
         else:
-            cur.execute('INSERT INTO recetas_guardadas (titulo, imagen, categoria, instrucciones, nombre_usuario) VALUES (%s, %s, %s, %s, %s)', (titulo, imagen, categoria, instruciones, nombre_usuario))
+            cur.execute('INSERT INTO recetas_guardadas (titulo, img, categoria, instrucciones, video, nombre_usuario) VALUES (%s, %s, %s, %s, %s, %s)', (titulo, imagen, categoria, instruciones, video, nombre_usuario))
         mysql.connection.commit()
 
     return redirect(url_for('QuickRecipe'))
+
+
+
+
 
 
 @app.route('/eliminador', methods=['POST'])
 def eliminador():
     cur = mysql.connection.cursor()
     if request.method == 'POST':
-        titulo = request.form['strMeal']
+        titulo = request.form.get('strMeal')
         nombre_usuario = session.get('usuario')
 
-        cur.execute(f"DELETE FROM recetas_guardadas WHERE titulo = '{titulo}' and nombre_usuario = '{nombre_usuario}';")
+        cur.execute("DELETE FROM recetas_guardadas WHERE titulo = (%s) and nombre_usuario = (%s);", (titulo,nombre_usuario))
         mysql.connection.commit()
 
 
