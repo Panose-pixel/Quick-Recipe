@@ -1,123 +1,279 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/Estilos/MisRecetas.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/estilos/MisRecetas.css" />
     <title>Recetas Guardadas</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="contenedor_principal">
-        <header>
-            <div class="barra_nav_principal">
-                <div class="izquierda">
-                    <a href="/QuickRecipe"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                            viewBox="0 0 16 16" fill="#D8AA6F">
-                            <path fill="#D8AA6F" fill-rule="evenodd"
-                                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75z"
-                                clip-rule="evenodd" />
-                        </svg></a>
-                </div>
-            </div>
-        </header>
-
-        <main>
-            <div class="registro-container">
-                <form action="/sugerencias" method="POST">
-                    <label for="Nombre de tu Receta">Nombre de tu Receta</label>
-                    <input type="text" name="nombre" placeholder="Nombre de tu Receta" required>
-
-                    <label for="img">Dirección web de la IMG</label>
-                    <input type="text" name="img" placeholder="url de la imagen" required>
-
-                    <label for="instrucciones">Instrucciones</label>
-                    <textarea name="instrucciones" placeholder="Instrucciones claras"></textarea>
-
-                    <label for="categoria">Categoria</label>
-                    <input name="categoria" placeholder="Instrucciones claras">
-
-                    <label for="video">Video</label>
-                    <input name="video" placeholder="video (URL de Youtube)">
-
-                    <!-- Ingredientes -->
-                    <label for="ingrediente1">Ingrediente 1</label>
-                    <input type="text" name="ingrediente1" placeholder="Ingrediente 1">
-
-                    <label for="ingrediente2">Ingrediente 2</label>
-                    <input type="text" name="ingrediente2" placeholder="Ingrediente 2">
-
-                    <label for="ingrediente3">Ingrediente 3</label>
-                    <input type="text" name="ingrediente3" placeholder="Ingrediente 3">
-
-                    <label for="ingrediente4">Ingrediente 4</label>
-                    <input type="text" name="ingrediente4" placeholder="Ingrediente 4">
-
-                    <label for="ingrediente5">Ingrediente 5</label>
-                    <input type="text" name="ingrediente5" placeholder="Ingrediente 5">
-
-                    <label for="ingrediente6">Ingrediente 6</label>
-                    <input type="text" name="ingrediente6" placeholder="Ingrediente 6">
-
-                    <label for="ingrediente7">Ingrediente 7</label>
-                    <input type="text" name="ingrediente7" placeholder="Ingrediente 7">
-
-                    <label for="ingrediente8">Ingrediente 8</label>
-                    <input type="text" name="ingrediente8" placeholder="Ingrediente 8">
-
-                    <label for="ingrediente9">Ingrediente 9</label>
-                    <input type="text" name="ingrediente9" placeholder="Ingrediente 9">
-
-                    <label for="ingrediente10">Ingrediente 10</label>
-                    <input type="text" name="ingrediente10" placeholder="Ingrediente 10">
-
-                    <label for="ingrediente11">Ingrediente 11</label>
-                    <input type="text" name="ingrediente11" placeholder="Ingrediente 11">
-
-                    <label for="ingrediente12">Ingrediente 12</label>
-                    <input type="text" name="ingrediente12" placeholder="Ingrediente 12">
-
-                    <label for="ingrediente13">Ingrediente 13</label>
-                    <input type="text" name="ingrediente13" placeholder="Ingrediente 13">
-
-                    <label for="ingrediente14">Ingrediente 14</label>
-                    <input type="text" name="ingrediente14" placeholder="Ingrediente 14">
-
-                    <label for="ingrediente15">Ingrediente 15</label>
-                    <input type="text" name="ingrediente15" placeholder="Ingrediente 15">
-
-                    <label for="ingrediente16">Ingrediente 16</label>
-                    <input type="text" name="ingrediente16" placeholder="Ingrediente 16">
-
-                    <label for="ingrediente17">Ingrediente 17</label>
-                    <input type="text" name="ingrediente17" placeholder="Ingrediente 17">
-
-                    <label for="ingrediente18">Ingrediente 18</label>
-                    <input type="text" name="ingrediente18" placeholder="Ingrediente 18">
-
-                    <label for="ingrediente19">Ingrediente 19</label>
-                    <input type="text" name="ingrediente19" placeholder="Ingrediente 19">
-
-                    <label for="ingrediente20">Ingrediente 20</label>
-                    <input type="text" name="ingrediente20" placeholder="Ingrediente 20">
-
-                    <button type="submit">Subir</button>
-
-                </form>
-            </div>
-        </main>
-
-        <div clas="footer-container">
-            <footer class="footer">
-                <p>© 2025 QuickRecipe. Todos los derechos reservados.</p>
-                <p>Desarrollado por Jhosef Alejandro y Juanangel Alvarado</p>
-            </footer>
+      <header>
+        <div class="barra_nav_principal">
+          <div class="izquierda">
+            <a href="/QuickRecipe"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                viewBox="0 0 16 16"
+                fill="#D8AA6F"
+              >
+                <path
+                  fill="#D8AA6F"
+                  fill-rule="evenodd"
+                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m10.25.75a.75.75 0 0 0 0-1.5H6.56l1.22-1.22a.75.75 0 0 0-1.06-1.06l-2.5 2.5a.75.75 0 0 0 0 1.06l2.5 2.5a.75.75 0 1 0 1.06-1.06L6.56 8.75z"
+                  clip-rule="evenodd"
+                /></svg></a>
+          </div>
         </div>
+      </header>
 
+      <main>
+        <div class="cuadro-sugerencias">
+          <form action="/sugerencias" method="POST">
+            <div>
+              <label for="nombre">Nombre de tu Receta</label><br>
+              <input
+                type="text"
+                name="nombre"
+                placeholder="Nombre de tu Receta"
+                required
+              />
+            </div>
 
+            <div>
+              <label for="img">Dirección web de la IMG</label>
+              <input
+                type="text"
+                name="img"
+                placeholder="url de la imagen"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="instrucciones">Instrucciones</label><br><br>
+              <textarea
+                name="instrucciones"
+                placeholder="Instrucciones claras"
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="categoria">Categoría</label><br><br><br>
+              <input
+                type="text"
+                name="categoria"
+                placeholder="Categoría de la receta"
+              />
+            </div>
+
+            <div>
+              <label for="video">Video</label><br>
+              <input
+                type="text"
+                name="video"
+                placeholder="video (URL de Youtube)"
+              />
+            </div>
+
+            <!-- Ingredientes -->
+            <div>
+              <label for="ingrediente1">Ingrediente 1</label>
+              <input
+                type="text"
+                name="ingrediente1"
+                placeholder="Ingrediente 1"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente2">Ingrediente 2</label>
+              <input
+                type="text"
+                name="ingrediente2"
+                placeholder="Ingrediente 2"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente3">Ingrediente 3</label>
+              <input
+                type="text"
+                name="ingrediente3"
+                placeholder="Ingrediente 3"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente4">Ingrediente 4</label>
+              <input
+                type="text"
+                name="ingrediente4"
+                placeholder="Ingrediente 4"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente5">Ingrediente 5</label>
+              <input
+                type="text"
+                name="ingrediente5"
+                placeholder="Ingrediente 5"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente6">Ingrediente 6</label>
+              <input
+                type="text"
+                name="ingrediente6"
+                placeholder="Ingrediente 6"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente7">Ingrediente 7</label>
+              <input
+                type="text"
+                name="ingrediente7"
+                placeholder="Ingrediente 7"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente8">Ingrediente 8</label>
+              <input
+                type="text"
+                name="ingrediente8"
+                placeholder="Ingrediente 8"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente9">Ingrediente 9</label>
+              <input
+                type="text"
+                name="ingrediente9"
+                placeholder="Ingrediente 9"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente10">Ingrediente 10</label>
+              <input
+                type="text"
+                name="ingrediente10"
+                placeholder="Ingrediente 10"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente11">Ingrediente 11</label>
+              <input
+                type="text"
+                name="ingrediente11"
+                placeholder="Ingrediente 11"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente12">Ingrediente 12</label>
+              <input
+                type="text"
+                name="ingrediente12"
+                placeholder="Ingrediente 12"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente13">Ingrediente 13</label>
+              <input
+                type="text"
+                name="ingrediente13"
+                placeholder="Ingrediente 13"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente14">Ingrediente 14</label>
+              <input
+                type="text"
+                name="ingrediente14"
+                placeholder="Ingrediente 14"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente15">Ingrediente 15</label>
+              <input
+                type="text"
+                name="ingrediente15"
+                placeholder="Ingrediente 15"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente16">Ingrediente 16</label>
+              <input
+                type="text"
+                name="ingrediente16"
+                placeholder="Ingrediente 16"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente17">Ingrediente 17</label>
+              <input
+                type="text"
+                name="ingrediente17"
+                placeholder="Ingrediente 17"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente18">Ingrediente 18</label>
+              <input
+                type="text"
+                name="ingrediente18"
+                placeholder="Ingrediente 18"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente19">Ingrediente 19</label>
+              <input
+                type="text"
+                name="ingrediente19"
+                placeholder="Ingrediente 19"
+              />
+            </div>
+
+            <div>
+              <label for="ingrediente20">Ingrediente 20</label>
+              <input
+                type="text"
+                name="ingrediente20"
+                placeholder="Ingrediente 20"
+              />
+            </div>
+
+            <div class="div5">
+              <button type="submit" class="REGISTRAR">Subir</button>
+            </div>
+          </form>
+        </div>
+      </main>
+
+      <div clas="footer-container">
+        <footer class="footer">
+          <p>© 2025 QuickRecipe. Todos los derechos reservados.</p>
+          <p>Desarrollado por Jhosef Alejandro y Juanangel Alvarado</p>
+        </footer>
+      </div>
     </div>
-</body>
-<script src="/static/js/script.js"></script>
-
+  </body>
+  <script src="/static/js/script.js"></script>
 </html>

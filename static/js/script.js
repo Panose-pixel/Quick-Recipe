@@ -118,6 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+
 window.addEventListener("scroll", function () {
   var header = document.querySelector(".header");
   header.classList.toggle("abajo", window.scrollY > 0);
@@ -139,4 +140,26 @@ window.addEventListener("scroll", function () {
         elemento.classList.add("navcoro");
       }
     });
-  }
+  };
+
+function mostrarModal(elemento) {
+  const id = elemento.closest(".item-receta").getAttribute("data-modal");
+  const modal = document.querySelector(`.ventana-modal[data-modal="${id}"]`);
+  const cerrarModal = modal.querySelector(".cerrar-modal");
+
+
+  modal.classList.add("modal--show");
+
+
+  cerrarModal.addEventListener("click", function (e) {
+    e.preventDefault();
+    modal.classList.remove("modal--show");
+  });
+
+  window.addEventListener("click", function (e) {
+    if (e.target === modal) {
+      modal.classList.remove("modal--show");
+    }
+  });
+}
+

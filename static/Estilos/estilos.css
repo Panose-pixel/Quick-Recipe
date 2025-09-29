@@ -12,7 +12,6 @@ body {
   background-color: #111;
   background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.8) 100%);
   overflow-x: hidden;
-  /* oculta la barra de desplazamiento de abajito*/
 }
 
 .contenedor_principal {
@@ -225,8 +224,8 @@ nav {
 
 /* Recetas */
 .ordenRecetas {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   padding: 20px;
   text-align: center;
@@ -248,6 +247,7 @@ nav {
   overflow: visible;
   position: relative;
   border: 6px solid #3a0b0b00;
+  border-radius: 6px;
 }
 
 .contenido {
@@ -263,40 +263,7 @@ nav {
   margin-left: 0%;
 }
 
-.instrucciones {
-  background-color: #2f0b0b;
-  color: #d8aa6f;
-  border-radius: 12px;
-  padding: 15px;
-  margin-left: 15px;
-  width: 300px;
-  opacity: 1;
-  max-height: 400px;
-  overflow-y: auto;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-  animation: slideIn 0.3s ease forwards;
-}
 
-.scroll-texto {
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.oculto {
-  display: none;
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(-40px);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
 
 .receta.activa .instrucciones {
   display: block;
@@ -628,7 +595,6 @@ footer {
 
 .Contenedor_enlace_mis_recetas {
   margin-right: 1.5rem;
-  margin-top: 20px;
 }
 
 .recetas_guadadas {

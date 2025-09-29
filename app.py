@@ -6,13 +6,6 @@ from functools import wraps
 import datetime
 
 
-import requests # esto de de Jhosep
-from deep_translator import GoogleTranslator
-
-
-
-
-
 
 app = Flask(__name__)
 
@@ -185,7 +178,7 @@ def crear_registro():
 @login_requerido
 def QuickRecipe():
     cur = mysql.connection.cursor()
-    ingrediente = (request.args.get("ingrediente") or "").strip()
+    ingrediente = (request.args.get("ingrediente") or "")
     recetas = []
     if ingrediente:
         cur.execute('''
@@ -213,6 +206,7 @@ def QuickRecipe():
             OR ingrediente20 LIKE %s
         ''', (f"%{ingrediente}%",)*21)
         recetas = cur.fetchall()
+        print(recetas)
     cur.close()
     return render_template("Mipgn.html", recetas=recetas, ingrediente=ingrediente)
 
