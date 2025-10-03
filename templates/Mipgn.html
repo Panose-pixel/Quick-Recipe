@@ -13,280 +13,293 @@
     <link rel="stylesheet" href="/static/estilos/corazon.css">
     <link rel="stylesheet" href="/static/estilos/modal.css">
 
-    {% if session.get('admin?') %}
-    <style>
-        .margen_sugerencia {
-            margin-top: 160%;
-            margin-bottom: 0%;
-        }
-    </style>
-    {% endif %}
-
 </head>
 
 <body>
     <div class="contenedor_principal">
         <header class="header">
-            <!-- Logo circular -->
-            <div>
+            <div class="navbar_responsivo"></div>
                 <div>
-                    <p class="logo">QuickRecipe</p>
-                </div>
-            </div>
-
-            <!-- Navegación central -->
-            <nav>
-                <ul>
-                    <li>
-                        <form method="POST" action="/QuickRecipe">
-                            <select class="Descubre" name="ingrediente" onchange="this.form.submit()">
-                                <option value="" disabled selected>Descubre</option>
-                                <option value="Carne">Carne</option>
-                                <option value="Pollo">Pollo</option>
-                                <option value="Pescado">Pescado</option>
-                                <option value="Cerdo">Cerdo</option>
-                                <option value="Arroces">Arroces</option>
-                                <option value="Sopas">Sopas</option>
-                            </select>
-                        </form>
-                    </li>
-                    <li>
-                        <form method="GET" action="/QuickRecipe">
-                            <input class="barrabusqueda" type="text" name="ingrediente" value="{{ ingrediente or '' }}"
-                                placeholder="Escribe un ingrediente" />
-                        </form>
-                    </li>
-                </ul>
-            </nav>
-
-            <div>
-                <button class="btnMenu" id="btnMenu">
                     <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 20 20">
-                            <path fill="#d8aa6f" d="M1 3v2h18V3zm0 8h18V9H1zm0 6h18v-2H1z" />
-                        </svg>
+                        <p class="logo">QuickRecipe</p>
                     </div>
-                </button>
+                </div>
 
-
+                <!-- Navegación central -->
+                <nav>
+                    <ul>
+                        <li>
+                            <form method="GET" action="/QuickRecipe">
+                                <select class="Descubre" name="ingrediente" onchange="this.form.submit()">
+                                    <option value="" disabled selected>Descubre</option>
+                                    <option value="Carne">Carne</option>
+                                    <option value="Pollo">Pollo</option>
+                                    <option value="Pescado">Pescado</option>
+                                    <option value="Cerdo">Cerdo</option>
+                                    <option value="Arroces">Arroces</option>
+                                    <option value="Sopas">Sopas</option>
+                                </select>
+                            </form>
+                        </li>
+                        <li>
+                            <form method="GET" action="/QuickRecipe">
+                                <input class="barrabusqueda" type="text" name="ingrediente"
+                                    value="{{ ingrediente or '' }}" placeholder="Escribe un ingrediente" />
+                            </form>
+                        </li>
+                    </ul>
+                </nav>
 
                 <div>
-                    <!-- Usuario y cerrar sesión -->
-                    <div class="usuario-info">
-                        <h2 class="mensaje_de_bienvenida">
-                            Bienvenido {{ session['usuario'] }} {% if session.get('admin?') %}
-                            <span style="color: white">(</span><span style="color: #00ff00">A</span><span
-                                style="color: #1be7ff">D</span><span style="color: #f3ff0b">M</span><span
-                                style="color: #ffbb16">I</span><span style="color: #ff5714">N</span><span
-                                style="color: white">)</span>
-                            {% endif %}
-                        </h2>
-                    </div>
-                    {% if mensaje_de_duplicacion %}
-                    <h3 class="alerta">
-                        <strong>¡{{ mensaje_de_duplicacion }}!</strong>
-                    </h3>
-                    {% endif %}
+                    <button class="btnMenu" id="btnMenu">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 20 20">
+                                <path fill="#d8aa6f" d="M1 3v2h18V3zm0 8h18V9H1zm0 6h18v-2H1z" />
+                            </svg>
+                        </div>
+                    </button>
                 </div>
             </div>
 
 
+
+
+
+            <!--Botón de navegacion oculto-->
 
             <div class="no_navbar" id="navbar">
                 <div class="Ordenbarrahorizontal">
-                    <div class="usuario-info">
-                        <a href="/login" class="cerrar_sesion">
-                            <h2>Cerrar Sesión</h2>
-                        </a>
-                    </div>
+
+                    <div class="alineador_navbar">
 
 
-                    <div class="Contenedor_enlace_mis_recetas">
-                        <div style="margin: auto auto">
-                            <a class="recetas_guadadas" href="/Mis_Recetas">Recetas Guardadas</a>
-                        </div>
-                    </div>
 
 
-                    <div class="margen_sugerencia">
-                        {% if session.get('admin?') %}
-                        <div style="margin-bottom: 2rem;">
-                            <a class="administracion" href="/sugerencias">
-                                <h3>SUGERIR UNA RECETA</h3>
-                            </a>
-                        </div>
+
 
                         <div>
-                            <a class="administracion" href="/administracion">
-                                <h3>ADMINISTRACION</h3>
-                            </a>
-                        </div>
+                            <!-- Usuario y cerrar sesión -->
+                            <div class="usuario-info">
+                                <h2 class="mensaje_de_bienvenida">
+                                    Bienvenido {{ session['usuario'] }} {% if session.get('admin?') %}
+                                    <span style="color: white">(</span><span style="color: #00ff00">A</span><span
+                                        style="color: #1be7ff">D</span><span style="color: #f3ff0b">M</span><span
+                                        style="color: #ffbb16">I</span><span style="color: #ff5714">N</span><span
+                                        style="color: white">)</span>
+                                    {% endif %}
+                                </h2>
+                            </div>
+                            <br>
+                            {% if mensaje_de_duplicacion %}
+                            <h3 class="alerta">
+                                <strong>¡{{ mensaje_de_duplicacion }}!</strong>
+                            </h3>
+                            {% endif %}
+                            <div class="usuario-info">
+                                <a href="/login" class="cerrar_sesion">
+                                    <h2>Cerrar Sesión</h2>
+                                </a>
+                            </div>
 
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-    </div>
-
-
-    <main>
-        <div style="position: relative;">
-            <img class="imagenfondoprincipal" src="/static/IMAGENES/FONDOS/FONDOPRINCIPAL.webp" alt="">
-            <div class="cuadrologo">
-                <h1 class="Rotacion">
-                    <span class="quick">Quick</span>
-                    <span class="recipe">Recipe</span>
-                </h1>
-            </div>
-        </div>
-
-
-
-        {% if recetas %}
-        <div class="ordenRecetas">
-            {% for receta in recetas %}
-            <div class="item-receta" id="{{receta.id}}" data-modal="{{ receta.id }}">
-
-                <button class="VerInstrucciones" onclick=" mostrarModal(this)">
-                    <div class="receta">
-                        <div class="contenido">
-                            <h2>{{ receta.nombre }}</h2>
-                            <img class="imgRecetas" src="{{ receta.img }}" alt="{{ receta.nombre }}" />
-                            <p>Categoría: {{ receta.categoria }}</p>
-                        </div>
-                    </div>
-                </button>
-
-
-                <section class="ventana-modal" data-modal="{{ receta.id }}">
-
-                    <div class="contenedormodal">
-                        <div class="TITULOcorazon">
-                            <h2 class="modal-titulo">{{ receta.nombre }}</h2>
-                            <form action="{{ url_for('procesador') }}" method="POST">
-                                <input type="hidden" name="nombre" value="{{ receta.nombre }}">
-                                <input type="hidden" name="img" value="{{ receta.img }}">
-                                <input type="hidden" name="categoria" value="{{ receta.categoria }}">
-                                <input type="hidden" name="instrucciones" value="{{ receta.instrucciones }}">
-                                <input type="hidden" name="video" value="{{ receta.video }}">
-                                <input type="hidden" name="ingrediente" value="{{ ingrediente or '' }}">
-                                <div clacss="divcorazon">
-                                    <button class="btnCorazon" id="btnCorazon" type="submit"
-                                        aria-label="Guardar receta">
-                                        <div
-                                            class="{% if receta.id in recetas_guardadas %}navcoro{% else %}no_navcoro{% endif %}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
-                                                viewBox="0 0 1024 1024" aria-hidden="true">
-                                                <path fill="#d60000"
-                                                    d="M287.984 114.16c31.376 0 88.094 15.008 ... 50.16z" />
-                                            </svg>
-                                        </div>
-                                    </button>
+                            <div class="Contenedor_enlace_mis_recetas">
+                                <div style="margin: 2.5rem auto auto auto"> <!-- el 2.5rem es el margen de arriba-->
+                                    <a class="recetas_guadadas" href="/Mis_Recetas">Recetas Guardadas</a>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="ColumnaModal">
-                            <div>
-                                <img class="modalimagen" src="{{ receta.img }}" alt="{{ receta.nombre }}" />
-                            </div>
-                            <div class="instrucciones">
-                                <strong>Instrucciones:</strong><br><br>
-                                <p class="modal-texto">{{ receta.instrucciones }}</p>
-                            </div>
-
-                            <div class="video">
-                                <iframe width="320" height="180"
-                                    src="{{ receta.video | replace('watch?v=', 'embed/') }}"
-                                    title="Video de {{ receta.nombre }}" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                            <div>
-                                <button class="cerrar-modal">cerrar</button>
                             </div>
                         </div>
-                </section>
+
+
+
+
+
+
+                        {% if session.get('admin?') %}
+                        <div>
+                            <div class="margen_sugerencia">
+                                <div style="margin-bottom: 2rem;">
+                                    <a class="administracion" href="/sugerencias">
+                                        <h3>SUGERIR UNA RECETA</h3>
+                                    </a>
+                                </div>
+
+                                <div>
+                                    <a class="administracion" href="/administracion">
+                                        <h3>ADMINISTRACION</h3>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        {% endif %}
+
+
+
+                    </div>
+
+                </div>
             </div>
-            {% endfor %}
+        </header>
+
+
+
+        <main>
+            <div style="position: relative;">
+                <img class="imagenfondoprincipal" src="/static/IMAGENES/FONDOS/FONDOPRINCIPAL.webp" alt="">
+                <div class="cuadrologo">
+                    <h1 class="Rotacion">
+                        <span class="quick">Quick</span>
+                        <span class="recipe">Recipe</span>
+                    </h1>
+                </div>
+            </div>
+
+
+
+            {% if recetas %}
+            <div class="ordenRecetas">
+                {% for receta in recetas %}
+                <div class="item-receta" id="{{receta.id}}" data-modal="{{ receta.id }}">
+
+                    <button class="VerInstrucciones" onclick=" mostrarModal(this)">
+                        <div class="receta">
+                            <div class="contenido">
+                                <h2>{{ receta.nombre }}</h2>
+                                <img class="imgRecetas" src="{{ receta.img }}" alt="{{ receta.nombre }}" />
+                                <p>Categoría: {{ receta.categoria }}</p>
+                            </div>
+                        </div>
+                    </button>
+
+
+                    <section class="ventana-modal" data-modal="{{ receta.id }}">
+
+                        <div class="contenedormodal">
+                            <div class="TITULOcorazon">
+                                <h2 class="modal-titulo">{{ receta.nombre }}</h2>
+                                <form action="{{ url_for('procesador') }}" method="POST">
+                                    <input type="hidden" name="nombre" value="{{ receta.nombre }}">
+                                    <input type="hidden" name="img" value="{{ receta.img }}">
+                                    <input type="hidden" name="categoria" value="{{ receta.categoria }}">
+                                    <input type="hidden" name="instrucciones" value="{{ receta.instrucciones }}">
+                                    <input type="hidden" name="video" value="{{ receta.video }}">
+                                    <input type="hidden" name="ingrediente" value="{{ ingrediente or '' }}">
+                                    <div clacss="divcorazon">
+                                        <button class="btnCorazon" id="btnCorazon" type="submit"
+                                            aria-label="Guardar receta">
+                                            <div
+                                                class="{% if receta.id in recetas_guardadas %}navcoro{% else %}no_navcoro{% endif %}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35"
+                                                    viewBox="0 0 1024 1024" aria-hidden="true">
+                                                    <path fill="#d60000"
+                                                        d="M287.984 114.16c31.376 0 88.094 15.008 ... 50.16z" />
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="ColumnaModal">
+                                <div>
+                                    <img class="modalimagen" src="{{ receta.img }}" alt="{{ receta.nombre }}" />
+                                </div>
+                                <div class="instrucciones">
+                                    <strong>Instrucciones:</strong><br><br>
+                                    <p class="modal-texto">{{ receta.instrucciones }}</p>
+                                </div>
+
+                                <div class="video">
+                                    <iframe width="320" height="180"
+                                        src="{{ receta.video | replace('watch?v=', 'embed/') }}"
+                                        title="Video de {{ receta.nombre }}" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                                <div>
+                                    <button class="cerrar-modal">cerrar</button>
+                                </div>
+                            </div>
+                    </section>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>No se encontraron recetas.</p>
+            {% endif %}
+
+
+        </main>
+
+        <div class="div1">
+            <div class="carrusel">
+                <div class="atras">
+                    <img id="atras" src="{{ url_for('static', filename='imagenes/atras.svg') }}" alt="atras"
+                        loading="lazy" />
+                </div>
+                <div class="imagenes">
+                    <div id="img"></div>
+                    <div id="texto" class="texto"></div>
+                </div>
+                <div class="adelante">
+                    <img id="adelante" src="{{ url_for('static', filename='imagenes/adelante.svg') }}" alt="adelante"
+                        loading="lazy" />
+                </div>
+            </div>
+            <div class="puntos" id="puntos"></div>
         </div>
-        {% else %}
-        <p>No se encontraron recetas.</p>
-        {% endif %}
 
-
-    </main>
-
-    <div class="div1">
-        <div class="carrusel">
-            <div class="atras">
-                <img id="atras" src="{{ url_for('static', filename='imagenes/atras.svg') }}" alt="atras"
-                    loading="lazy" />
-            </div>
-            <div class="imagenes">
-                <div id="img"></div>
-                <div id="texto" class="texto"></div>
-            </div>
-            <div class="adelante">
-                <img id="adelante" src="{{ url_for('static', filename='imagenes/adelante.svg') }}" alt="adelante"
-                    loading="lazy" />
-            </div>
-        </div>
-        <div class="puntos" id="puntos"></div>
-    </div>
-
-    <div class="apartado-informacion">
-        <div class="detalles-Programadores">
-            <div class="descripcion-Programadores">
-                <h2 class="titulo-Programadores">Programadores</h2>
-                <p class="texto-Programadores">
-                    Somos dos estudiantes del SENA en programación apasionados por la
-                    tecnología y el desarrollo web. Este proyecto es una muestra de
-                    nuestras habilidades y dedicación en el campo de la programación.
-                </p>
-                <p class="texto-Programadores">
-                    Creo en el poder del código como herramienta para transformar
-                    ideas en soluciones reales. Cada reto es una oportunidad para
-                    crecer, innovar y aportar valor. Mi objetivo no es solo
-                    desarrollar software, sino también construir experiencias que
-                    impacten positivamente a las personas. La motivación, disciplina y
-                    creatividad son la base de cada línea que escribo. "El futuro se
-                    crea, no se espera. Y el mejor momento para empezar a construirlo
-                    es ahora."
-                </p>
-            </div>
-            <div class="container">
-                <div class="card">
-                    <h3 class="title">Jhosef Alejandro</h3>
-                    <div class="bar">
-                        <div class="emptybar"></div>
-                        <div class="filledbar">
-                            <img src="{{ url_for('static', filename='IMAGENES/Jhosep.jpg')}}" alt=""
+        <div class="apartado-informacion">
+            <div class="detalles-Programadores">
+                <div class="descripcion-Programadores">
+                    <h2 class="titulo-Programadores">Programadores</h2>
+                    <p class="texto-Programadores">
+                        Somos dos estudiantes del SENA en programación apasionados por la
+                        tecnología y el desarrollo web. Este proyecto es una muestra de
+                        nuestras habilidades y dedicación en el campo de la programación.
+                    </p>
+                    <p class="texto-Programadores">
+                        Creo en el poder del código como herramienta para transformar
+                        ideas en soluciones reales. Cada reto es una oportunidad para
+                        crecer, innovar y aportar valor. Mi objetivo no es solo
+                        desarrollar software, sino también construir experiencias que
+                        impacten positivamente a las personas. La motivación, disciplina y
+                        creatividad son la base de cada línea que escribo. "El futuro se
+                        crea, no se espera. Y el mejor momento para empezar a construirlo
+                        es ahora."
+                    </p>
+                </div>
+                <div class="container">
+                    <div class="card">
+                        <h3 class="title">Jhosef Alejandro</h3>
+                        <div class="bar">
+                            <div class="emptybar"></div>
+                            <div class="filledbar">
+                                <img src="{{ url_for('static', filename='IMAGENES/Jhosep.jpg')}}" alt=""
+                                    class="fotos_programadores" />
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="circle"></div>
+                    </div>
+                    <div class="card">
+                        <h3 class="title">Juanangel Alvarado</h3>
+                        <div class="bar">
+                            <div class="emptybar"></div>
+                            <div class="filledbar"></div>
+                            <img src="{{ url_for('static', filename='IMAGENES/Juancho.jpg') }}" alt=""
                                 class="fotos_programadores" />
-                            <p></p>
                         </div>
+                        <div class="circle"></div>
                     </div>
-                    <div class="circle"></div>
-                </div>
-                <div class="card">
-                    <h3 class="title">Juanangel Alvarado</h3>
-                    <div class="bar">
-                        <div class="emptybar"></div>
-                        <div class="filledbar"></div>
-                        <img src="{{ url_for('static', filename='IMAGENES/Juancho.jpg') }}" alt=""
-                            class="fotos_programadores" />
-                    </div>
-                    <div class="circle"></div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="comentarios">
-        <a href="/comentarios">
-            <button class="button-56" role="button">
-                <h3>Déjanos un comentario AQUÍ para ayudarnos a mejorar</h3>
-            </button>
-        </a>
-    </div>
+        <div class="comentarios">
+            <a href="/comentarios">
+                <button class="button-56" role="button">
+                    <h3>Déjanos un comentario AQUÍ para ayudarnos a mejorar</h3>
+                </button>
+            </a>
+        </div>
     </div>
 
     <div clas="footer-container">
@@ -296,6 +309,7 @@
                 <p>Desarrollado por Jhosef Alejandro y Juanangel Alvarado</p>
             </footer>
         </div>
+    </div>
     </div>
 
 

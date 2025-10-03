@@ -70,7 +70,7 @@ body {
   position: fixed;
   top: 0;
   right: 0;
-  width: 300px;
+  width: 500px;
   height: 100vh;
   background: #2b2b2b;
   color: #fff;
@@ -97,10 +97,19 @@ body {
   overflow-y: auto;
 }
 
+
+.alineador_navbar{
+  height: 100%;
+  display: grid;
+  grid-template-rows: 80% 20%;
+}
+
+
 .Ordenbarrahorizontal {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+    pointer-events: unset;
 }
 
 /*MINILOGO*/
@@ -154,6 +163,9 @@ body {
   font-family: "Great Vibes", cursive;
   font-size: 42px;
   color: #fff;
+  text-shadow: 0 0 1px rgb(255, 255, 255), /* Un halo de brillo rosa */
+               0 0 2px rgb(255, 255, 255), /* Otro halo azul más grande */
+               0 0 12px rgb(255, 255, 255); /* Un tercer halo azul aún más grande */
 }
 
 .circulodellogo {
@@ -208,6 +220,10 @@ nav {
   transition: 0.3s ease;
 }
 
+.Descubre option, select {
+  background-color: black;
+}
+
 .Descubre:hover,
 .barrabusqueda:focus {
   border-color: #fff;
@@ -224,12 +240,11 @@ nav {
 
 /* Recetas */
 .ordenRecetas {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  padding: 20px;
-  text-align: center;
-  font-size: 20px;
+  justify-content: center;
+  display: flex;
+  gap: 40px;
+  padding: 40px;
+  flex-wrap: wrap;
 }
 
 .receta {
@@ -604,4 +619,392 @@ footer {
   color: white;
   font-family: serif;
   font-size: 30px;
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
+
+
+
+/* DISEÑO RESPONSIVO PARA CELULARES*/
+
+@media (max-width: 760px) {
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 10px;
+    flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+    gap: 10px;
+  }
+
+
+  .logo {
+    font-size: 32px;
+  }
+
+  /* Navegación reorganizada */
+  nav {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .header ul {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+
+
+  .Descubre,
+  .barrabusqueda {
+    width: 100%;
+    padding: 11px 14px;
+    font-size: 15px;
+    border-width: 1.5px;
+  }
+
+  /* Mensaje de bienvenida más compacto */
+  .mensaje_de_bienvenida {
+    margin-top: 3rem;
+    margin-right: 1rem;
+    font-size: 18px;
+  }
+
+  .alerta {
+    font-size: 13px;
+    padding: 8px 12px;
+    margin-top: 2rem;
+  }
+
+  /* Botón menú */
+  .btnMenu {
+    top: 14px;
+    right: 14px;
+  }
+
+  .btnMenu svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  /* Menú lateral */
+  .navbar,
+  .no_navbar {
+    width: 320px;
+    padding: 65px 25px 25px;
+  }
+
+  /* Logo principal centrado */
+  .cuadrologo {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .recipe {
+    font-size: 140px;
+  }
+
+  .quick {
+    font-size: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 105px;
+  }
+
+  /* Imagen de fondo más visible */
+  .imagenfondoprincipal {
+    filter: brightness(0.9);
+  }
+
+  /* Elementos del menú lateral */
+  .Ordenbarrahorizontal {
+    margin-top: 25px;
+  }
+
+  .recetas_guadadas {
+    font-size: 28px;
+  }
+
+  .cerrar_sesion h2 {
+    font-size: 22px;
+  }
+
+  .administracion h3 {
+    font-size: 18px;
+  }
+
+  /* Menú lateral */
+  .navbar,
+  .no_navbar {
+    width: 100%;
+    right: -100%;
+  }
+
+  .navbar {
+    right: 0;
+  }
+
+  /* Logo principal */
+  .cuadrologo {
+    left: 50%;
+    top: 50%;
+  }
+
+  .recipe {
+    font-size: 80px;
+  }
+
+  .quick {
+    font-size: 50px;
+    left: 100px;
+    bottom: 70px;
+  }
+
+
+  main{
+    margin-top: 7rem;
+  }
+
+  /* Grid de recetas */
+  .ordenRecetas {
+    padding: 20px 10px;
+    gap: 20px;
+  }
+
+  .receta {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .contenido {
+    width: 100%;
+  }
+
+  .imgRecetas {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: cover;
+    margin: 10px 0;
+  }
+
+  .receta h2 {
+    font-size: 18px;
+  }
+
+  .receta p {
+    font-size: 14px;
+  }
+
+  /* Modal adaptado */
+  .ventana-modal {
+    padding: 10px;
+  }
+
+  .contenedormodal {
+    width: 95%;
+    max-width: 100%;
+    margin: 10px auto;
+  }
+
+  .ColumnaModal {
+    flex-direction: column;
+  }
+
+  .modalimagen {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+  }
+
+  .instrucciones {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .video iframe {
+    width: 100%;
+    height: 200px;
+  }
+
+  .modal-titulo {
+    font-size: 20px;
+  }
+
+  .cerrar-modal {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+  }
+
+  /* Carrusel */
+  .div1 {
+    height: auto;
+    min-height: 400px;
+    padding: 20px 10px;
+  }
+
+  .carrusel {
+    flex-direction: column;
+    padding: 20px 15px;
+    gap: 15px;
+  }
+
+  .imagenes {
+    width: 100%;
+  }
+
+  .img {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: cover;
+  }
+
+  .atras img,
+  .adelante img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .puntos {
+    font-size: 1.5rem;
+    margin-top: 10px;
+  }
+
+  /* Sección de programadores */
+  .apartado-informacion {
+    padding: 20px 10px;
+  }
+
+  .detalles-Programadores {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .descripcion-Programadores {
+    margin-left: 0;
+    padding: 0 15px;
+  }
+
+  .titulo-Programadores {
+    font-size: 24px;
+    margin-top: 30px;
+  }
+
+  .texto-Programadores {
+    font-size: 16px;
+    text-align: justify;
+    padding: 0 10px;
+  }
+
+  /* Cards de programadores */
+  .container {
+    width: 100%;
+    height: auto;
+    margin: 30px 0;
+    flex-direction: column;
+    gap: 30px;
+    padding: 0 15px;
+  }
+
+  .card {
+    width: 100%;
+    height: 250px;
+    margin-left: 0 !important;
+    left: 0 !important;
+  }
+
+  .card:hover {
+    transform: translateY(-10px);
+  }
+
+  .card:hover~.card {
+    left: 0 !important;
+  }
+
+  .title {
+    font-size: 18px;
+    left: 15px;
+    top: 15px;
+  }
+
+  .bar {
+    top: 80px;
+    left: 15px;
+    width: 100px;
+  }
+
+  .circle {
+    top: 120px;
+    left: calc(50% - 50px);
+  }
+
+  .fotos_programadores {
+    width: 120px;
+    height: 120px;
+  }
+
+  /* Botón de comentarios */
+  .comentarios {
+    padding: 0 15px;
+  }
+
+  .button-56 {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 15px;
+    height: auto;
+    min-height: 48px;
+  }
+
+  .button-56 h3 {
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 10px 0;
+  }
+
+  /* Footer */
+  footer {
+    font-size: 14px;
+    padding: 15px 10px;
+  }
+
+  footer p {
+    margin: 5px 0;
+  }
+
+  /* Barra lateral de navegación */
+  .Ordenbarrahorizontal {
+    margin-top: 60px;
+  }
+
+  .recetas_guadadas {
+    font-size: 24px;
+  }
+
+  .margen_sugerencia {
+    margin-top: 50px !important;
+  }
+
+  .administracion h3 {
+    font-size: 16px;
+  }
+
+
+  /* Ajuste para evitar scroll horizontal */
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  * {
+    max-width: 100%;
+  }
 }

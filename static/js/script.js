@@ -48,13 +48,13 @@ document.addEventListener("DOMContentLoaded", function () {
         "De la cocina a tu mesa: experiencias culinarias que despiertan los sentidos.",
     },
     {
-      url: "/static/imagenes/plato.webp",
+      url: "/static/imagenes/image.png",
       nombre: "",
       descripcion:
         "Sabores que conquistan tu paladar: platos únicos preparados con pasión y frescura.",
     },
     {
-      url: "/static/imagenes/comida.jpg",
+      url: "/static/imagenes/image.webp",
       nombre: "",
       descripcion:
         "Explora nuestra selección gastronómica: tradición, creatividad y mucho sabor en cada bocado.",
