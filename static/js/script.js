@@ -127,20 +127,36 @@ window.addEventListener("scroll", function () {
 
 
   // Corazon
-  
-  const btnCorazon = document.getElementById("btnCorazon");
-  if (btnCorazon) {
-    btnCorazon.addEventListener("click", function () {
-      let elemento = document.getElementById("navcoro");
-      if (elemento.classList.contains("navcoro")) {
-        elemento.classList.remove("navcoro");
-        elemento.classList.add("no_navcoro");
-      } else {
-        elemento.classList.remove("no_navcoro");
-        elemento.classList.add("navcoro");
-      }
+  // Corazon: hay varios botones repetidos en el loop, usar selector por clase
+  const corazones = document.querySelectorAll('.btnCorazon');
+  if (corazones && corazones.length) {
+    corazones.forEach((btn) => {
+      btn.addEventListener('click', function (e) {
+        // el div que contiene la clase navcoro/no_navcoro está dentro del botón
+        // o inmediatamente en el formulario; buscamos primero dentro del botón
+        let elemento = btn.querySelector('.navcoro, .no_navcoro');
+        if (!elemento) {
+          // fallback: buscar en el formulario padre
+          const form = btn.closest('form');
+          if (form) elemento = form.querySelector('.navcoro, .no_navcoro');
+        }
+        if (!elemento) return; // nada que alternar
+
+        if (elemento.classList.contains('navcoro')) {
+          elemento.classList.remove('navcoro');
+          elemento.classList.add('no_navcoro');
+        } else {
+          elemento.classList.remove('no_navcoro');
+          elemento.classList.add('navcoro');
+        }
+
+        // Nota: el botón es de tipo submit en la plantilla. Si quieres que la
+        // acción sea solo visual (sin enviar el formulario), descomenta la
+        // siguiente línea:
+        // e.preventDefault();
+      });
     });
-  };
+  }
 
 function mostrarModal(elemento) {
   const id = elemento.closest(".item-receta").getAttribute("data-modal");
@@ -163,3 +179,46 @@ function mostrarModal(elemento) {
   });
 }
 
+
+// Manejo del botón responsivo btnMenu3: abre/cierra navbar3
+const btnMenu3 = document.getElementById('btnMenu3');
+const navbar3 = document.getElementById('navbar3');
+if (btnMenu3 && navbar3) {
+  btnMenu3.addEventListener('click', function (e) {
+    // evitar que el click burbujee al listener global de document
+    e.stopPropagation();
+    if (navbar3.classList.contains('navbar3')) {
+      navbar3.classList.remove('navbar3');
+      navbar3.classList.add('no_navbar3');
+    } else {
+      navbar3.classList.remove('no_navbar3');
+      navbar3.classList.add('navbar3');
+    }
+  });
+}
+
+
+document.addEventListener('click', function (e) {
+  const menu = document.getElementById('navbar3');
+  const btn  = document.getElementById('btnMenu3');
+  if (!menu || !btn) return;
+
+  const abierto       = menu.classList.contains('navbar3');
+  const clickEnMenu   = menu.contains(e.target);
+  const clickEnBoton  = btn.contains(e.target);  
+
+  if (abierto && !clickEnMenu && !clickEnBoton) {
+    menu.classList.remove('navbar3');
+    menu.classList.add('no_navbar3'); 
+  }
+});
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    const menu = document.getElementById('navbar3');
+    if (menu && menu.classList.contains('navbar3')) {
+      menu.classList.remove('navbar3');
+      menu.classList.add('no_navbar3');
+    }
+  }
+});
