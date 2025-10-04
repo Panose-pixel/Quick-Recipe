@@ -1,0 +1,128 @@
+
+
+.T1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin-top: 50px;
+} 
+
+.T1-cuentanos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin-top: 20px;
+}
+
+.contacto-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: rgba(0, 0, 0, 0.641);
+    backdrop-filter: blur(10px);
+    padding: 50px;
+    margin: 80px;
+}
+
+.contacto-imagen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagenc{
+    width: 500px;
+    height: 500px;
+    border-radius: 10px;
+    border: 5px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.contacto-formulario{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    backdrop-filter: blur(10px);
+    border: solid white 3px;
+    flex-direction: column;
+}
+
+.contacto-formulario form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.contacto-formulario h2, label{
+    color: white;
+    margin-bottom: 20px;
+}
+
+.contacto-formulario input, .contacto-formulario textarea{
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.contacto-formulario button{
+    background-color: #92571f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    &:hover{
+        background-color: #e65c00;
+    }
+}
+
+.desarrolladores-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.641);
+    backdrop-filter: blur(10px);
+    padding: 50px;
+    margin: 80px;
+}
+
+.texto-desarrolladores{
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    max-width: 800px;
+    margin-top: 20px;
+}
+
+.imagen-desarrolladores{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 400px;
+    margin-left: 10px;
+}
+
+.imagen-Nosotros{
+    width: 200px;
+    height: 200px;
+    margin-left: 70px;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.imagen-Nosotros:hover{
+    transform: scale(1.05);
+}

@@ -53,63 +53,110 @@ body {
 
 /* PAGINA PRINCIPAL */
 
-.btnMenu {
-  text-decoration: none;
-  background-color: transparent;
-  border: none;
-  margin: 10px;
-  position: fixed;
-  top: 16px;
-  right: 16px;
-  z-index: 3000;
+.navbar3 {
+
+    display: end;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 450px;
+    height: 100vh;
+    background: #2b2b2b;
+    color: #fff;
+    padding: 20px;
+    box-shadow: -2px 0 12px rgba(0, 0, 0, 0.35);
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    overflow-y: auto;
+    animation: moverYColorear 1s;
+}
+
+@keyframes moverYColorear {
+    0% {
+        background-color: #2b2b2b;
+        transform: translateX(100%);
+    }
+
+    100% {
+        background-color: #2b2b2b;
+        transform: translateX(0);
+    }
 }
 
 
-.navbar {
-  display: flex;
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 500px;
-  height: 100vh;
-  background: #2b2b2b;
-  color: #fff;
-  padding: 20px;
-  box-shadow: -2px 0 12px rgba(0, 0, 0, 0.35);
-  transition: right 0.3s ease-in-out;
-  z-index: 2000;
-  overflow-y: auto;
+
+.no_navbar3 {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 400px;
+    height: 100vh;
+    background: #2b2b2b;
+    color: #fff;
+    padding: 20px;
+    box-shadow: -2px 0 12px rgba(0, 0, 0, 0.35);
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    overflow-y: auto;
+    animation: moverYColorear2 2s;
 }
 
-.no_navbar {
-  display: none;
-  position: fixed;
-  top: 0;
-  right: -300px;
-  width: 300px;
-  height: 100vh;
-  background: #2b2b2b;
-  color: #fff;
-  padding: 20px;
-  box-shadow: -2px 0 12px rgba(0, 0, 0, 0.35);
-  transition: right 0.3s ease-in-out;
-  z-index: 2000;
-  overflow-y: auto;
-}
+@keyframes moverYColorear2 {
+    0% {
+        background-color: #2b2b2b;
+        transform: translateX(0);
+    }
 
-
-.alineador_navbar{
-  height: 100%;
-  display: grid;
-  grid-template-rows: 80% 20%;
+    100% {
+        background-color: #2b2b2b;
+        transform: translateX(100%);
+    }
 }
 
 
 .Ordenbarrahorizontal {
-  display: flex;
-  flex-direction: column;
-  margin-top: 20px;
-    pointer-events: unset;
+    display: flex;
+    flex-direction: column;
+    align-items: first baseline;
+    margin-top: 20px;
+}
+
+.Sugerencia_administracion {
+    margin-top: 380px;
+}
+
+.Ordenbarrahorizontal nav ul,
+.cerrarsesion {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    font-size: 15px;
+}
+
+.Ordenbarrahorizontal a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #ffffff;
+    border-radius: 8px;
+}
+
+.Ordenbarrahorizontal a:hover {
+    background: rgba(250, 204, 21, .15);
+}
+
+.btnMenu3 {
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    margin: 10px;
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 3000;
 }
 
 /*MINILOGO*/
@@ -533,7 +580,7 @@ footer {
 
 /* Carrusel */
 .div1 {
-  background-image: url(../IMAGENES/FONDO.webp);
+  background-image: url(../IMAGENES/FONDOS/FONDOCARRUSEL.webp);
   width: 100%;
   height: 600px;
   background-size: cover;
@@ -544,7 +591,7 @@ footer {
   background-color: #000000;
   font-family: "Roboto", sans-serif;
   padding: 5px;
-  color: #ca9a5c;
+  color: #ffffff;
 
   /* Contenedor */
   display: flex;
@@ -561,18 +608,19 @@ footer {
   justify-content: center;
   gap: 20px;
   margin: 30px 0;
-  background-color: rgb(29, 5, 5);
+  background-color: rgba(0, 0, 0, 0.799);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding: 50px;
   border-radius: 20px;
-  border: 5px solid #ca9a5c;
+  border: 3px solid #ffffff;
 }
 
 .imagenes {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 10px;
 }
 
 .img {
@@ -583,11 +631,18 @@ footer {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
+.texto{
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
 .atras img,
 .adelante img {
   cursor: pointer;
   width: 40px;
   height: 40px;
+  color: white;
   transition: transform 0.2s;
 }
 
@@ -604,7 +659,7 @@ footer {
 }
 
 .bold {
-  color: white;
+  color: rgb(255, 255, 255);
   font-weight: bold;
 }
 
