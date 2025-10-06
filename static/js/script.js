@@ -42,19 +42,19 @@ document.addEventListener("DOMContentLoaded", function () {
   // Carrusel
   let imagenes = [
     {
-      url: "/static/imagenes/lasaña.jpg",
+      url: "/static/IMAGENES/lasaña.jpg",
       nombre: "",
       descripcion:
         "De la cocina a tu mesa: experiencias culinarias que despiertan los sentidos.",
     },
     {
-      url: "/static/imagenes/image.png",
+      url: "/static/IMAGENES/image.png",
       nombre: "",
       descripcion:
         "Sabores que conquistan tu paladar: platos únicos preparados con pasión y frescura.",
     },
     {
-      url: "/static/imagenes/image.webp",
+      url: "/static/IMAGENES/image.webp",
       nombre: "",
       descripcion:
         "Explora nuestra selección gastronómica: tradición, creatividad y mucho sabor en cada bocado.",
@@ -205,11 +205,11 @@ document.addEventListener('click', function (e) {
 
   const abierto       = menu.classList.contains('navbar3');
   const clickEnMenu   = menu.contains(e.target);
-  const clickEnBoton  = btn.contains(e.target);  
+  const clickEnBoton  = btn.contains(e.target);
 
   if (abierto && !clickEnMenu && !clickEnBoton) {
     menu.classList.remove('navbar3');
-    menu.classList.add('no_navbar3'); 
+    menu.classList.add('no_navbar3');
   }
 });
 

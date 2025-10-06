@@ -45,118 +45,119 @@ body {
   color: #d8aa6f;
   font-family: serif;
   text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 /* PAGINA PRINCIPAL */
 
 .navbar3 {
 
-    display: end;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 450px;
-    height: 100vh;
-    background: #2b2b2b;
-    color: #fff;
-    padding: 20px;
-    box-shadow: -2px 0 12px rgba(0, 0, 0, 0.35);
-    transition: right 0.3s ease-in-out;
-    z-index: 1000;
-    overflow-y: auto;
-    animation: moverYColorear 1s;
+  display: end;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 450px;
+  height: 100vh;
+  background: #2b2b2b;
+  color: #fff;
+  padding: 20px;
+  box-shadow: -2px 0 12px rgba(0, 0, 0, 0.35);
+  transition: right 0.3s ease-in-out;
+  z-index: 100;
+  overflow-y: auto;
+  animation: moverYColorear 1s;
 }
 
 @keyframes moverYColorear {
-    0% {
-        background-color: #2b2b2b;
-        transform: translateX(100%);
-    }
+  0% {
+    background-color: #2b2b2b;
+    transform: translateX(100%);
+  }
 
-    100% {
-        background-color: #2b2b2b;
-        transform: translateX(0);
-    }
+  100% {
+    background-color: #2b2b2b;
+    transform: translateX(0);
+  }
 }
 
 
 
 .no_navbar3 {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: -300px;
-    width: 400px;
-    height: 100vh;
-    background: #2b2b2b;
-    color: #fff;
-    padding: 20px;
-    box-shadow: -2px 0 12px rgba(0, 0, 0, 0.35);
-    transition: right 0.3s ease-in-out;
-    z-index: 1000;
-    overflow-y: auto;
-    animation: moverYColorear2 2s;
+  display: none;
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 400px;
+  height: 100vh;
+  background: #2b2b2b;
+  color: #fff;
+  padding: 20px;
+  box-shadow: -2px 0 12px rgba(0, 0, 0, 0.35);
+  transition: right 0.3s ease-in-out;
+  z-index: 100;
+  overflow-y: auto;
+  animation: moverYColorear2 2s;
 }
 
 @keyframes moverYColorear2 {
-    0% {
-        background-color: #2b2b2b;
-        transform: translateX(0);
-    }
+  0% {
+    background-color: #2b2b2b;
+    transform: translateX(0);
+  }
 
-    100% {
-        background-color: #2b2b2b;
-        transform: translateX(100%);
-    }
+  100% {
+    background-color: #2b2b2b;
+    transform: translateX(100%);
+  }
 }
 
 
+.alineador-navbar {
+  display: grid;
+  grid-template-rows: 30% 70%;
+}
+
 .Ordenbarrahorizontal {
-    display: flex;
-    flex-direction: column;
-    align-items: first baseline;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: first baseline;
+  margin-top: 20px;
 }
 
 .Sugerencia_administracion {
-    margin-top: 380px;
+  margin-top: 380px;
 }
 
 .Ordenbarrahorizontal nav ul,
 .cerrarsesion {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    list-style: none;
-    padding: 0;
-    font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  font-size: 15px;
 }
 
 .Ordenbarrahorizontal a {
-    display: block;
-    padding: 8px 12px;
-    text-decoration: none;
-    color: #ffffff;
-    border-radius: 8px;
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #ffffff;
+  border-radius: 8px;
 }
 
 .Ordenbarrahorizontal a:hover {
-    background: rgba(250, 204, 21, .15);
+  background: rgba(250, 204, 21, .15);
 }
 
 .btnMenu3 {
-    text-decoration: none;
-    background-color: transparent;
-    border: none;
-    margin: 10px;
-    position: fixed;
-    top: 16px;
-    right: 16px;
-    z-index: 3000;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  margin: 10px;
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 101;
 }
 
 /*MINILOGO*/
@@ -179,12 +180,9 @@ body {
   text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.2), -1px -1px 0 #999;
 }
 
-.administracion{
+.administracion {
   color: white;
   text-decoration: none;
-  &:hover{
-    text-decoration: underline;
-  }
 }
 
 /* BOTON DESCUBRE ESTILO */
@@ -210,9 +208,12 @@ body {
   font-family: "Great Vibes", cursive;
   font-size: 42px;
   color: #fff;
-  text-shadow: 0 0 1px rgb(255, 255, 255), /* Un halo de brillo rosa */
-               0 0 2px rgb(255, 255, 255), /* Otro halo azul más grande */
-               0 0 12px rgb(255, 255, 255); /* Un tercer halo azul aún más grande */
+  text-shadow: 0 0 1px rgb(255, 255, 255),
+    /* Un halo de brillo rosa */
+    0 0 2px rgb(255, 255, 255),
+    /* Otro halo azul más grande */
+    0 0 12px rgb(255, 255, 255);
+  /* Un tercer halo azul aún más grande */
 }
 
 .circulodellogo {
@@ -246,7 +247,7 @@ nav {
   align-items: center;
 }
 
-.alerta{
+.alerta {
   margin-top: 4rem;
   text-align: center;
   color: white;
@@ -267,7 +268,8 @@ nav {
   transition: 0.3s ease;
 }
 
-.Descubre option, select {
+.Descubre option,
+select {
   background-color: black;
 }
 
@@ -631,7 +633,7 @@ footer {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.texto{
+.texto {
   margin-top: 15px;
   font-size: 1.2rem;
   color: #fff;
@@ -674,9 +676,6 @@ footer {
   color: white;
   font-family: serif;
   font-size: 30px;
-  &:hover{
-    text-decoration: underline;
-  }
 }
 
 
@@ -713,10 +712,15 @@ footer {
   }
 
 
+  .Descubre {
+    width: 7.5rem;
+    padding: 11px 14px;
+    font-size: 15px;
+    border-width: 1.5px;
+  }
 
-  .Descubre,
   .barrabusqueda {
-    width: 100%;
+    width: 110%;
     padding: 11px 14px;
     font-size: 15px;
     border-width: 1.5px;
@@ -812,6 +816,7 @@ footer {
 
   .recipe {
     font-size: 80px;
+    margin-top: 10rem;
   }
 
   .quick {
@@ -820,10 +825,14 @@ footer {
     bottom: 70px;
   }
 
-
-  main{
-    margin-top: 7rem;
+  main {
+    margin-top: 8rem;
   }
+
+  .espacio_imagen {
+    margin-top: 8rem;
+  }
+
 
   /* Grid de recetas */
   .ordenRecetas {
@@ -856,47 +865,193 @@ footer {
     font-size: 14px;
   }
 
-  /* Modal adaptado */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* Estilos base del modal */
   .ventana-modal {
-    padding: 10px;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    z-index: 2147483647 !important;
+    isolation: isolate;
+  }
+
+  .ventana-modal.modal--show {
+    display: flex;
   }
 
   .contenedormodal {
-    width: 95%;
-    max-width: 100%;
-    margin: 10px auto;
+    width: 90%;
+    max-width: 500px;
+    margin: 20px auto;
+    background: #1a1a1a;
+    border-radius: 15px;
+    padding: 0;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
   }
 
+  .TITULOcorazon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    gap: 15px;
+    border-bottom: 2px solid #d60000;
+    background: #1a1a1a;
+  }
+
+  .modal-titulo {
+    font-size: 24px;
+    margin: 0;
+    margin-left: 0;
+    flex: 1;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .divcorazon {
+    flex-shrink: 0;
+  }
+
+  .btnCorazon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  /* FORZAR UNA SOLA COLUMNA */
   .ColumnaModal {
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    padding: 20px !important;
+  }
+
+  .ColumnaModal>div {
+    width: 100% !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
   }
 
   .modalimagen {
     width: 100%;
     height: auto;
-    max-height: 300px;
+    max-height: 280px;
     object-fit: cover;
+    border-radius: 10px;
+    display: block;
   }
 
-  .instrucciones {
-    padding: 15px;
-    font-size: 14px;
+  .video {
+    width: 100%;
   }
 
   .video iframe {
     width: 100%;
-    height: 200px;
+    height: 220px;
+    border-radius: 10px;
+    border: none;
+    display: block;
   }
 
-  .modal-titulo {
-    font-size: 20px;
+  .instrucciones {
+    padding: 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #e0e0e0;
+    text-align: left;
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
+
+  .instrucciones strong {
+    font-size: 18px;
+    color: #fff;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .modal-texto {
+    margin: 0;
+    color: #d0d0d0;
   }
 
   .cerrar-modal {
     width: 100%;
-    padding: 12px;
-    margin-top: 15px;
+    padding: 15px;
+    background: #d60000;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
   }
+
+  .cerrar-modal:hover {
+    background: #ff0000;
+  }
+
+  .contenedormodal::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .contenedormodal::-webkit-scrollbar-track {
+    background: #0a0a0a;
+    border-radius: 10px;
+  }
+
+  .contenedormodal::-webkit-scrollbar-thumb {
+    background: #d60000;
+    border-radius: 10px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   /* Carrusel */
   .div1 {
@@ -1062,4 +1217,337 @@ footer {
   * {
     max-width: 100%;
   }
+
+
+
+
+
+
+
+
+
+
+
+  /* Contenedor principal de contacto */
+  .contacto-container {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* OCULTAR la imagen lateral */
+  .contacto-imagen {
+    display: none !important;
+  }
+
+  .imagenc {
+    display: none !important;
+  }
+
+  /* Formulario ocupa todo el ancho */
+  .contacto-formulario {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 2rem 1.5rem !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    border: 2px solid white !important;
+    border-radius: 0 !important;
+  }
+
+  /* Títulos */
+  .T1 {
+    font-size: 2rem !important;
+    text-align: center !important;
+    padding: 2rem 1rem 1rem !important;
+    margin: 0 !important;
+  }
+
+  .T1-cuentanos {
+    font-size: 1.5rem !important;
+    text-align: center !important;
+    margin: 0 0 1.5rem 0 !important;
+  }
+
+  /* Formulario */
+  .formulario {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .formulario label {
+    display: block !important;
+    margin: 0.5rem 0 0.3rem 0 !important;
+    font-size: 0.9rem !important;
+    text-align: left !important;
+  }
+
+  .formulario input[type="text"],
+  .formulario input[type="email"],
+  .formulario textarea {
+    width: 100% !important;
+    padding: 0.75rem !important;
+    margin: 0 0 1rem 0 !important;
+    box-sizing: border-box !important;
+    font-size: 1rem !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+  }
+
+  .formulario textarea {
+    min-height: 100px !important;
+    resize: vertical !important;
+  }
+
+  .boton-enviar {
+    width: 100% !important;
+    padding: 1rem !important;
+    margin: 1rem 0 0 0 !important;
+    font-size: 1rem !important;
+    background-color: #8B6F47 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 4px !important;
+  }
+
+  /* SECCIÓN DESARROLLADORES */
+  .desarrolladores-container {
+    width: 100% !important;
+    padding: 2rem 1.5rem !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Título DESARROLLADORES alineado a la izquierda */
+  .desarrolladores-container>h1 {
+    font-size: 1.3rem !important;
+    margin: 0 0 2rem 0 !important;
+    text-align: left !important;
+    order: 1 !important;
+  }
+
+  /* Primer div - Nombres y párrafo inicial */
+  .desarrolladores-container>div:nth-child(2) {
+    order: 4 !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  /* Nombres de los desarrolladores - alineado a la derecha */
+  .desarrolladores-container>div:nth-child(2)>h2 {
+    font-size: 1rem !important;
+    margin: 0 0 1rem 0 !important;
+    text-align: right !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Párrafo debajo de los nombres */
+  .desarrolladores-container>div:nth-child(2)>p {
+    font-size: 0.85rem !important;
+    line-height: 1.6 !important;
+    text-align: justify !important;
+    margin: 0 0 1.5rem 0 !important;
+  }
+
+  /* Segundo div - Imagen de comida */
+  .desarrolladores-container>div:nth-child(3) {
+    order: 2 !important;
+    width: 100% !important;
+    margin: 1.5rem 0 !important;
+  }
+
+  .imagen-desarrolladores {
+    width: 100% !important;
+    max-width: 280px !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0 0 0 auto !important;
+    border-radius: 8px !important;
+  }
+
+  /* Tercer div - Fotos y textos finales */
+  .desarrolladores-container>div:nth-child(4) {
+    order: 3 !important;
+    width: 100% !important;
+  }
+
+  /* Contenedor de las fotos circulares */
+  .desarrolladores-container>div:nth-child(4)>div {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    margin: 1.5rem 0 !important;
+  }
+
+  .imagen-Nosotros {
+    width: 90px !important;
+    height: 90px !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    border: 2px solid #8B6F47 !important;
+  }
+
+  /* Párrafos con las citas */
+  .desarrolladores-container>div:nth-child(4)>p {
+    font-size: 0.85rem !important;
+    line-height: 1.6 !important;
+    text-align: justify !important;
+    margin: 1rem 0 !important;
+  }
+
+  /* Texto general de desarrolladores */
+  .texto-desarrolladores {
+    font-size: 0.85rem !important;
+    line-height: 1.6 !important;
+    text-align: justify !important;
+    margin: 1rem 0 !important;
+  }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilos base del modal */
+.ventana-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  z-index: 2147483647 !important;
+  isolation: isolate;
+}
+
+.ventana-modal.modal--show {
+  display: flex;
+}
+
+.contenedormodal {
+  width: 90%;
+  max-width: 500px;
+  margin: 20px auto;
+  background: #1a1a1a;
+  border-radius: 15px;
+  padding: 0;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+}
+
+.TITULOcorazon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  gap: 15px;
+  border-bottom: 2px solid #d60000;
+  background: #1a1a1a;
+}
+
+.modal-titulo {
+  font-size: 24px;
+  margin: 0;
+  flex: 1;
+  color: #fff;
+  font-weight: bold;
+}
+
+.divcorazon {
+  flex-shrink: 0;
+}
+
+.btnCorazon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.ColumnaModal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.modalimagen {
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.video {
+  width: 100%;
+}
+
+.video iframe {
+  width: 100%;
+  height: 220px;
+  border-radius: 10px;
+  border: none;
+}
+
+.instrucciones {
+  padding: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #e0e0e0;
+  text-align: left;
+}
+
+.instrucciones strong {
+  font-size: 18px;
+  color: #fff;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.modal-texto {
+  margin: 0;
+  color: #d0d0d0;
+}
+
+.cerrar-modal {
+  width: 100%;
+  padding: 15px;
+  background: #d60000;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.cerrar-modal:hover {
+  background: #ff0000;
 }

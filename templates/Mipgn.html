@@ -6,13 +6,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QUICK RECIPE</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='estilos/estilos.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='estilos/Desarrolladores.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='Estilos/estilos.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='Estilos/Desarrolladores.css') }}" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300i,400" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/static/estilos/corazon.css">
-    <link rel="stylesheet" href="/static/estilos/modal.css">
+    <link rel="stylesheet" href="/static/Estilos/corazon.css">
+    <link rel="stylesheet" href="/static/Estilos/modal.css">
 
 </head>
 
@@ -68,59 +68,64 @@
         <div class="Ordenbarrahorizontal">
             <div class="alineador_navbar">
 
-                <div>
-                    <div class="usuario-info">
-                        <h2 class="mensaje_de_bienvenida">
-                            Bienvenido {{ session['usuario'] }} {% if session.get('admin?') %}
-                            <span style="color: white">(</span><span style="color: #00ff00">A</span><span
-                                style="color: #1be7ff">D</span><span style="color: #f3ff0b">M</span><span
-                                style="color: #ffbb16">I</span><span style="color: #ff5714">N</span><span
-                                style="color: white">)
-                            </span>
-                            {% endif %}
-                        </h2>
-                    </div>
-                    <br>
+                <div class="alineador-navbar">
                     <div>
-                        {% if mensaje_de_duplicacion %}
-                        <h3 class="alerta">
-                            <strong>¡{{ mensaje_de_duplicacion }}!</strong>
-                        </h3>
-                        {% endif %}
                         <div class="usuario-info">
-                            <a href="/login" class="cerrar_sesion">
-                                <h2>Cerrar Sesión</h2>
-                            </a>
+                            <h2 class="mensaje_de_bienvenida">
+                                Bienvenido {{ session['usuario'] }} {% if session.get('admin?') %}
+                                <span style="color: white">(</span><span style="color: #00ff00">A</span><span
+                                    style="color: #1be7ff">D</span><span style="color: #f3ff0b">M</span><span
+                                    style="color: #ffbb16">I</span><span style="color: #ff5714">N</span><span
+                                    style="color: white">)
+                                </span>
+                                {% endif %}
+                            </h2>
+                            <br>
                         </div>
+                        <div>
+                            {% if mensaje_de_duplicacion %}
+                            <h3 class="alerta">
+                                <strong>¡{{ mensaje_de_duplicacion }}!</strong>
+                            </h3>
+                            {% endif %}
+                            <div class="usuario-info">
+                                <a href="/login" class="cerrar_sesion">
+                                    <h2>Cerrar Sesión</h2>
+                                </a>
+                            </div>
 
-                        <div class="Contenedor_enlace_mis_recetas">
-                            <div style="margin: 2.5rem auto auto auto"> <!-- el 2.5rem es el margen de arriba-->
-                                <a class="recetas_guadadas" href="/Mis_Recetas">Recetas Guardadas</a>
+                            <div class="Contenedor_enlace_mis_recetas">
+                                <div style="margin: 2.5rem auto auto auto"> <!-- el 2.5rem es el margen de arriba-->
+                                    <a class="recetas_guadadas" href="/Mis_Recetas">Recetas Guardadas</a>
+                                </div>
                             </div>
                         </div>
                     </div>
 
 
 
-                    {% if session.get('admin?') %}
+                    <div>
+                        {% if session.get('admin?') %}
 
-                    <div class="Sugerencia_administracion">
-                        <div class="margen_sugerencia">
-                            <div style="margin-bottom: 2rem;">
-                                <a class="administracion" href="/sugerencias">
-                                    <h3>SUGERIR UNA RECETA</h3>
-                                </a>
-                            </div>
+                        <div class="Sugerencia_administracion">
+                            <div class="margen_sugerencia">
+                                <div style="margin-bottom: 2rem;">
+                                    <a class="administracion" href="/sugerencias">
+                                        <h3>SUGERIR UNA RECETA</h3>
+                                    </a>
+                                </div>
 
-                            <div>
-                                <a class="administracion" href="/administracion">
-                                    <h3>ADMINISTRACION</h3>
-                                </a>
+                                <div>
+                                    <a class="administracion" href="/administracion">
+                                        <h3>ADMINISTRACION</h3>
+                                    </a>
+                                </div>
                             </div>
                         </div>
+
+                        {% endif %}
                     </div>
 
-                    {% endif %}
                 </div>
             </div>
         </div>
@@ -130,7 +135,7 @@
 
     <main>
         <div style="position: relative;">
-            <img class="imagenfondoprincipal" src="/static/IMAGENES/FONDOS/FONDOPRINCIPAL.webp" alt="">
+            <img class="imagenfondoprincipal" src="/static/IMAGENES/FONDOPRINCIPAL.webp" alt="">
             <div class="cuadrologo">
                 <h1 class="Rotacion">
                     <span class="quick">Quick</span>
@@ -160,7 +165,7 @@
                 <section class="ventana-modal" data-modal="{{ receta.id }}">
 
                     <div class="contenedormodal">
-                        <div class="TITULOcorazon">
+                        <div style="display: flex; align-items: center;">
                             <h2 class="modal-titulo">{{ receta.nombre }}</h2>
                             <form action="{{ url_for('procesador') }}" method="POST">
                                 <input type="hidden" name="nombre" value="{{ receta.nombre }}">
@@ -218,7 +223,7 @@
     <div class="div1">
         <div class="carrusel">
             <div class="atras">
-                <img id="atras" src="{{ url_for('static', filename='imagenes/atras.svg') }}" alt="atras"
+                <img id="atras" src="{{ url_for('static', filename='IMAGENES/atras.svg') }}" alt="atras"
                     loading="lazy" />
             </div>
             <div class="imagenes">
@@ -226,7 +231,7 @@
                 <div id="texto" class="texto"></div>
             </div>
             <div class="adelante">
-                <img id="adelante" src="{{ url_for('static', filename='imagenes/adelante.svg') }}" alt="adelante"
+                <img id="adelante" src="{{ url_for('static', filename='IMAGENES/adelante.svg') }}" alt="adelante"
                     loading="lazy" />
             </div>
         </div>
@@ -235,7 +240,7 @@
     <div>
 
         <div>
-            <h1 class="T1">CONTACTANOS</h1>
+            <h1 class="T1">CONTÁCTANOS</h1>
         </div>
 
         <div class="contacto-container">
@@ -279,21 +284,30 @@
                     <img class="imagen-Nosotros" src="/static/IMAGENES/Juancho.jpg" alt="">
                 </div>
                 <p class="texto-desarrolladores">
-                    "La cocina es el arte más antiguo y universal, y a través de QuickRecipe, queremos compartir ese arte
+                    "La cocina es el arte más antiguo y universal, y a través de QuickRecipe, queremos compartir ese
+                    arte
                     con el mundo."
                 </p>
                 <p class="texto-desarrolladores">
-                    Este proyecto fue algo que hicimos con mucho cariño y dedicación, y estamos emocionados de compartirlo con ustedes.
+                    Este proyecto fue algo que hicimos con mucho cariño y dedicación, y estamos emocionados de
+                    compartirlo con ustedes.
                 </p>
             </div>
         </div>
         <div>
 
         </div>
+        <div class="comentarios">
+            <a href="/comentarios">
+                <button type="button" href="/comentarios" class="button-56" role="button">
+                    <h3>Déjanos un comentario AQUÍ para ayudarnos a mejorar</h3>
+                </button>
+            </a>
+        </div>
     </div>
 
 
-    <div clas="footer-container">
+    <div>
         <div clas="footer-container">
             <footer class="footer">
                 <p>© 2025 QuickRecipe. Todos los derechos reservados.</p>
