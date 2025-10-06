@@ -88,6 +88,7 @@
                                 <strong>¡{{ mensaje_de_duplicacion }}!</strong>
                             </h3>
                             {% endif %}
+
                             <div class="usuario-info">
                                 <a href="/login" class="cerrar_sesion">
                                     <h2>Cerrar Sesión</h2>
@@ -95,7 +96,7 @@
                             </div>
 
                             <div class="Contenedor_enlace_mis_recetas">
-                                <div style="margin: 2.5rem auto auto auto"> <!-- el 2.5rem es el margen de arriba-->
+                                <div style="margin: 2.5rem auto 0 auto"> <!-- el 2.5rem es el margen de arriba el 0 abajo-->
                                     <a class="recetas_guadadas" href="/Mis_Recetas">Recetas Guardadas</a>
                                 </div>
                             </div>
@@ -105,6 +106,7 @@
 
 
                     <div>
+                        <br>
                         {% if session.get('admin?') %}
 
                         <div class="Sugerencia_administracion">

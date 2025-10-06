@@ -111,10 +111,7 @@ body {
 }
 
 
-.alineador-navbar {
-  display: grid;
-  grid-template-rows: 30% 70%;
-}
+
 
 .Ordenbarrahorizontal {
   display: flex;
@@ -124,7 +121,7 @@ body {
 }
 
 .Sugerencia_administracion {
-  margin-top: 380px;
+  margin-top: 7rem;
 }
 
 .Ordenbarrahorizontal nav ul,
@@ -728,7 +725,7 @@ footer {
 
   /* Mensaje de bienvenida más compacto */
   .mensaje_de_bienvenida {
-    margin-top: 3rem;
+    margin-top: 0;
     margin-right: 1rem;
     font-size: 18px;
   }
