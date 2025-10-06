@@ -96,7 +96,8 @@
                             </div>
 
                             <div class="Contenedor_enlace_mis_recetas">
-                                <div style="margin: 2.5rem auto 0 auto"> <!-- el 2.5rem es el margen de arriba el 0 abajo-->
+                                <div style="margin: 2.5rem auto 0 auto">
+                                    <!-- el 2.5rem es el margen de arriba el 0 abajo-->
                                     <a class="recetas_guadadas" href="/Mis_Recetas">Recetas Guardadas</a>
                                 </div>
                             </div>
@@ -195,6 +196,17 @@
                             <div>
                                 <img class="modalimagen" src="{{ receta.img }}" alt="{{ receta.nombre }}" />
                             </div>
+
+                            <div class="video_celulares" style="display: none;">
+                                <iframe width="320" height="180"
+                                    src="{{ receta.video | replace('watch?v=', 'embed/') }}"
+                                    title="Video de {{ receta.nombre }}" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                </iframe>
+                            </div>
+
+
                             <div class="instrucciones">
                                 <strong>Instrucciones:</strong><br><br>
                                 <p class="modal-texto">{{ receta.instrucciones }}</p>

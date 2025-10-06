@@ -971,7 +971,6 @@ footer {
     height: 220px;
     border-radius: 10px;
     border: none;
-    display: block;
   }
 
   .instrucciones {
@@ -1405,10 +1404,30 @@ footer {
     margin: 1rem 0 !important;
   }
 
+  .video_celulares {
+    display: block;
+  }
+
+  .video_celulares * {
+    display: block;
 
 
+
+  }
+
+  .video_celulares {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .video_celulares iframe {
+    display: block !important;
+    width: 100% !important;
+    height: 220px !important;
+    border-radius: 10px !important;
+    border: none !important;
+  }
 }
-
 
 
 
