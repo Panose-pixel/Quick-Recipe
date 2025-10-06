@@ -199,7 +199,7 @@
 
                             <div class="video_celulares" style="display: none;">
                                 <iframe width="320" height="180"
-                                    src="{{ receta.video | replace('watch?v=', 'embed/') }}"
+                                    data-src="{{ receta.video | replace('watch?v=', 'embed/') }}"
                                     title="Video de {{ receta.nombre }}" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
@@ -214,10 +214,11 @@
 
                             <div class="video">
                                 <iframe width="320" height="180"
-                                    src="{{ receta.video | replace('watch?v=', 'embed/') }}"
+                                    data-src="{{ receta.video | replace('watch?v=', 'embed/') }}"
                                     title="Video de {{ receta.nombre }}" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                                </iframe>
                             </div>
                             <div>
                                 <button class="cerrar-modal">cerrar</button>

@@ -161,22 +161,51 @@ window.addEventListener("scroll", function () {
 function mostrarModal(elemento) {
   const id = elemento.closest(".item-receta").getAttribute("data-modal");
   const modal = document.querySelector(`.ventana-modal[data-modal="${id}"]`);
-  const cerrarModal = modal.querySelector(".cerrar-modal");
+  if (!modal) return; // seguridad
 
+  // Buscar iframes (celular + escritorio)
+  const iframes = modal.querySelectorAll("iframe[data-src]");
 
-  modal.classList.add("modal--show");
-
-
-  cerrarModal.addEventListener("click", function (e) {
-    e.preventDefault();
-    modal.classList.remove("modal--show");
-  });
-
-  window.addEventListener("click", function (e) {
-    if (e.target === modal) {
-      modal.classList.remove("modal--show");
+  // Cargar los iframes solo si no tienen atributo src
+  iframes.forEach(iframe => {
+    if (!iframe.getAttribute('src')) {
+      iframe.setAttribute('src', iframe.dataset.src);
     }
   });
+
+  // Mostrar modal
+  modal.classList.add("modal--show");
+
+  // función de limpieza (cierra y elimina src)
+  const cleanup = () => {
+    modal.classList.remove("modal--show");
+    iframes.forEach(iframe => {
+      // eliminamos el atributo src para que pueda recargarse luego
+      iframe.removeAttribute("src");
+    });
+  };
+
+  // Cerrar con el botón (listener se ejecuta solo una vez)
+  const cerrarModal = modal.querySelector(".cerrar-modal");
+  if (cerrarModal) {
+    cerrarModal.addEventListener("click", function (e) {
+      e.preventDefault();
+      cleanup();
+    }, { once: true });
+  }
+
+  // Cerrar al hacer click fuera del contenido (solo una vez)
+  modal.addEventListener("click", function handler(e) {
+    if (e.target === modal) {
+      cleanup();
+    }
+  }, { once: true });
+
+  // Cerrar con Escape (listener solo para esta apertura)
+  const escHandler = function(e) {
+    if (e.key === "Escape") cleanup();
+  };
+  document.addEventListener("keydown", escHandler, { once: true });
 }
 
 
