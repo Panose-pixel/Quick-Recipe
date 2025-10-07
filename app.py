@@ -46,8 +46,6 @@ def eliminador_recetas_totales():
         nombre_receta_eliminiar = request.form.get('nombre')
         instrucciones_receta_eliminiar = request.form.get('instrucciones')
 
-        print(nombre_receta_eliminiar, instrucciones_receta_eliminiar)
-
         cur.execute('DELETE FROM recetas_totales WHERE nombre = (%s) and instrucciones = (%s)', (nombre_receta_eliminiar, instrucciones_receta_eliminiar))
         mysql.connection.commit()
         cur.close()
@@ -126,13 +124,12 @@ def login():
             session['usuario'] = nombre
 
             rol = account['rol'] #captura el rol del ususario (si es admin o usuario corriente)
-            print(rol)
+
 
             if rol == 'admin':
                 session['admin?'] = True #si el rol del usuario es admin, se almacenará en caché que su rol es admin y será usado
                 #en el decorador para entrar a la página administracion 
-                print(session['admin?'])
-                print(session.get('admin'))
+
 
             return redirect(url_for('QuickRecipe'))
         
@@ -206,7 +203,6 @@ def QuickRecipe():
             OR ingrediente20 LIKE %s
         ''', (f"%{ingrediente}%",)*21)
         recetas = cur.fetchall()
-        print(recetas)
     cur.close()
     return render_template("Mipgn.html", recetas=recetas, ingrediente=ingrediente)
 
@@ -285,7 +281,6 @@ def sugerencias():
 
         ingredientes_texto = ingredientes_texto + ', '+ str(request.form.get(f"ingrediente{i}"))
         
-    print(ingredientes_texto)
 
     
 
@@ -379,16 +374,14 @@ def comentarios():
         media_app = cur.execute('SELECT estrellas FROM comentarios')
         media_app = cur.fetchall()
 
-        print(media_app)
     
         cantidad_de_comentarios = len(media_app)
 
         nota = 0
         for i in media_app:
             nota = nota + i['estrellas']
-            print(i)
 
-        print(nota)
+
         if nota and cantidad_de_comentarios:
             media = (nota/cantidad_de_comentarios)
             media = round(media, 2)

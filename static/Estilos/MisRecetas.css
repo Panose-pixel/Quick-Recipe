@@ -8,7 +8,7 @@
   --color-boton-hover: #bf9154;
 }
 
-input{
+input {
   color: black;
 }
 
@@ -28,7 +28,7 @@ body {
   background-size: cover;
 }
 
-.contenedor_principal{
+.contenedor_principal {
   min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
@@ -43,8 +43,8 @@ body {
   padding: 1rem 1rem;
 }
 
-main{
-    background-color:  rgba(60, 59, 59, 0.4);
+main {
+  background-color: rgba(60, 59, 59, 0.4);
 }
 
 .barra_nav_principal a:hover {
@@ -90,165 +90,124 @@ footer {
 p {
   margin: 0;
 }
+
 .subrayado {
   &:hover {
     text-decoration: underline
   }
 }
 
-.ordenRecetas {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
-  text-align: center;
-  font-size: 20px;
-}
 
-.receta {
-  display: flex;
-  flex-direction: row;
-  background-color: #d2984c;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
-  padding: 15px;
-  width: auto;
-  max-width: 100%;
-  transition: all 0.4s ease;
-  overflow: visible;
-  position: relative;
-  border: 6px solid #3a0b0b;
-}
 
-.contenido {
-  width: 300px;
-  flex-shrink: 0;
-}
 
-.imgRecetas {
-  border-radius: 8px;
-  margin: 10px;
-  height: 300px;
-  margin-right: 80px;
-  margin-left: 0%;
-}
 
-.form_eliminar{
+
+
+
+
+.form_eliminar {
   display: flex;
   margin: auto auto;
   justify-content: center;
 }
 
-.instrucciones {
-  background-color: #2f0b0b;
-  color: #d8aa6f;
-  border-radius: 12px;
-  padding: 15px;
-  margin-left: 15px;
-  width: 300px;
-  opacity: 1;
-  max-height: 400px;
-  overflow-y: auto;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
-  animation: slideIn 0.3s ease forwards;
-}
 
-.scroll-texto {
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-@media (max-width: 600px) {
+@media (max-width: 760px) {
   .registro-container {
     width: 95%;
     padding: 1rem;
     margin: 1rem auto;
     justify-items: center;
   }
+
   main {
     padding: 1rem;
   }
+
   form {
     padding: 1rem;
     width: 73%;
   }
-  h2{
+
+  h2 {
     font-size: 23px;
   }
+
   label {
     font-size: 0.9rem;
     width: 100%;
   }
+
   button {
     padding: 0.5rem;
     width: 100%;
   }
+
   input {
     padding: 0.5rem;
     width: 100%;
   }
+
   .subrayado {
     font-size: 1rem;
   }
-  .contenedor_footer{
+
+  .contenedor_footer {
     margin-top: 1rem;
     padding: 0;
   }
+
   footer {
     font-size: 12px;
   }
-    /* RECETAS */
+
+  /* Grid de recetas */
   .ordenRecetas {
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-    gap: 15px;
+    padding: 20px 10px;
+    gap: 20px;
   }
 
   .receta {
-    flex-direction: column;
-    align-items: center;
-    width: 95%;
-    max-width: 350px;
-    padding: 15px;
-    border: 4px solid #3a0b0b;
+    width: 100%;
+    padding: 10px;
   }
 
   .contenido {
     width: 100%;
-    text-align: center;
-  }
-
-  .contenido h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
   }
 
   .imgRecetas {
     width: 100%;
-    max-width: 280px;
-    height: 200px;
+    height: auto;
+    max-height: 250px;
     object-fit: cover;
-    margin: 10px auto;
-    border-radius: 8px;
+    margin: 10px 0;
   }
 
-  .instrucciones {
-    width: 100%;
-    margin-left: 0;
-    margin-top: 15px;
-    padding: 15px;
+  .receta h2 {
+    font-size: 18px;
+  }
+
+  .receta p {
     font-size: 14px;
-    max-height: 300px;
   }
-
-  .scroll-texto {
-    max-height: 200px;
-  }
-
-  
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*DE AQUÍ PARA ABAJO ES EL APARTADO DE SUGERENCIAS*/
 .cuadro-sugerencias {
   display: flex;
   align-items: center;
@@ -302,7 +261,7 @@ textarea {
   padding-right: 200px;
   border-radius: 6px;
   border: none;
-  font-weight: bold;  
+  font-weight: bold;
   background: linear-gradient(135deg, #2b0e00, #000000);
   color: white;
   cursor: pointer;
@@ -317,4 +276,81 @@ textarea {
 
 .div5 {
   grid-column: span 3 / span 3;
+}
+
+
+@media (max-width: 760px) {
+  .cuadro-sugerencias {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 90%;
+    padding: 15px;
+    margin: 20px auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  form {
+    width: 100%;
+    margin: auto;
+
+  }
+
+  .cuadro-sugerencias form {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .cuadro-sugerencias label {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .cuadro-sugerencias input[type="text"],
+  textarea {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .cuadro-sugerencias .REGISTRAR {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+
+  .div5 {
+    grid-column: span 1 / span 1;
+  }
+
+  .margen_titulo {
+    margin-left: 0.8rem;
+    margin-top: 1rem;
+  }
+
+  .margen_titulo form {
+    width: 35%;
+  }
+
+  .margen_titulo h2 {
+    align-content: center; /*Alinea el alto para que quede en el medio*/
+  }
+
+}
+
+.margen_titulo {
+  margin-left: 0rem;
+  margin-top: 2rem;
+}
+
+.margen_titulo form {
+  width: 35%;
+  text-align: end;
+}
+
+.margen_titulo h2 {
+  align-content: center;
 }
