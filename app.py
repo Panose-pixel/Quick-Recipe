@@ -16,6 +16,10 @@ app.config['MYSQL_DB']='flask_app'
 app.config['MYSQL_CURSORCLASS']='DictCursor'
 mysql=MySQL(app)
 
+@app.route('/creditos')
+def creditos_api():
+    return redirect('https://www.themealdb.com')
+
 
 
 # Decorador para verificar si el usuario está logueado
@@ -89,6 +93,21 @@ def administracion():
 
     return render_template('administracion.html', Juanangel=Juanangel, Jhosep=Jhosep, comentarios=comentarios, recetas=recetas)
 
+
+@app.route('/contacto', methods=['POST'])
+def contacto():
+    if request.method == 'POST':
+        cur = mysql.connection.cursor()
+
+        nombre = request.form.get('nombre')
+        email = request.form.get('email')
+        mensaje = request.form.get('mensaje')
+
+        cur.execute('INSERT INTO contactos(nombre,email,mensaje) VALUES (%s,%s,%s)', (nombre,email,mensaje))
+        mysql.connection.commit()
+
+        mensaje = "Mensaje enviado exitosamente, trataremos de responderte luego"
+    return render_template('Mipgn.html', mensaje_contacto=mensaje)
 
 
 

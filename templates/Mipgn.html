@@ -24,6 +24,13 @@
                 <div>
                     <p class="logo">QuickRecipe</p>
                 </div>
+                {% if mensaje_contacto %}
+                <div>
+                    <strong style="color: white; font-size: large;">
+                        {{ mensaje_contacto}}
+                    </strong>
+                </div>
+                {% endif %}
             </div>
 
             <!-- Navegación central -->
@@ -37,8 +44,9 @@
                                 <option value="Pollo">Pollo</option>
                                 <option value="Pescado">Pescado</option>
                                 <option value="Cerdo">Cerdo</option>
-                                <option value="Arroces">Arroces</option>
-                                <option value="Sopas">Sopas</option>
+                                <option value="Leche">Leche</option>
+                                <option value="Cebolla">Cebolla</option>
+                                <option value="Huevo">Huevo</option>
                             </select>
                         </form>
                     </li>
@@ -306,6 +314,10 @@
                 <p class="texto-desarrolladores">
                     Este proyecto fue algo que hicimos con mucho cariño y dedicación, y estamos emocionados de
                     compartirlo con ustedes.
+                </p>
+                <p class="texto-desarrolladores">
+                    Créditos: Algunas de las recetas en esta aplicación web fueron sacadas de <a style="color: #00ff00;" href="/creditos">www.themealdb.com</a>.
+                    Agradecemos a esta página por darnos bocetos de las recetas en inglés.
                 </p>
             </div>
         </div>

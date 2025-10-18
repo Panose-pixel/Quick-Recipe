@@ -5,7 +5,7 @@
   --color-input: white;
   --color-texto: #D8AA6F;
   --color-boton: #D8AA6F;
-  --color-boton-hover: #bf9154;
+  --color-boton-hover: #c1883d;
 }
 
 input{
@@ -66,6 +66,7 @@ body {
   background-color: var(--color-panel);
   max-width: 400px;
   margin: 3rem auto;
+  margin-top: 10%;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 0 10px #00000088;
@@ -139,7 +140,21 @@ footer {
 p {
   margin: 0;
 }
+.cuenta{
+  display: flex;
+  margin: 20px;
+  justify-content: center;
+}
+
+.sincuenta{
+  display: flex;
+  margin-right: 5px;
+
+}
+
 .subrayado {
+   color: white;
+  text-decoration: none;
   &:hover {
     text-decoration: underline
   }
