@@ -1,5 +1,5 @@
 import pymysql
-pymysql.install_as_MySQLdb()
+pymysql.install_as_MySQLdb() #ayuda a la conección a la base de datos
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_mysqldb import MySQL
 from functools import wraps
@@ -40,7 +40,8 @@ def Admin_app(f):
         return f(*args, **kwargs)
     return verificador_admin
 
-
+#import pymysql
+#pymysql.install_as_MySQLdb() ayuda a la conección a la base de datos
 
 
 @app.route('/eliminador_recetas_totales', methods=['POST'])
@@ -238,9 +239,9 @@ def mis_recetas():
     cur = mysql.connection.cursor()
 
     cur.execute('SELECT id, titulo, img, categoria, instrucciones, video, nombre_usuario FROM recetas_guardadas where nombre_usuario = (%s)', (nombre_usuario))
-    
+
     recetas_guardadas = cur.fetchall()
-    
+
     return render_template('MisRecetas.html', nombre=nombre_usuario, recetas_guardadas=recetas_guardadas)
 
 
